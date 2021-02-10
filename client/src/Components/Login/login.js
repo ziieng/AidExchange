@@ -1,8 +1,5 @@
-
 import React from 'react'
 import { Link } from "react-router-dom";
-
-import "./style.css";
 
 export default function login() {
     return (
@@ -15,12 +12,12 @@ export default function login() {
 
                     <input type="text" className="form-control" id="username" placeholder="Email" />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
 
-                    <input type="password" class="form-control" id="password" placeholder="password" />
+                    <input type="password" className="form-control" id="password" placeholder="password" />
                 </div>
 
-                <a id="createBtn" type="submit" href="/" class="cardShadow btn btn-success justify-content-center">Login</a>
+                <a id="createBtn" type="submit" href="/" className="cardShadow btn btn-success justify-content-center">Login</a>
 
             </form>
             <br />
