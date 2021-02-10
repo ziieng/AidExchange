@@ -1,21 +1,18 @@
 
-import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Header from './Components/Jumbotron/header'
 import Footer from './Components/Footer/footer'
 import Login from "./Components/Login/login";
 import Signup from "./Components/SignUp/signup";
-import NavBar from "./Components/NavBar/navbar";
-import React, { Component } from "react";
+import React from "react";
 
 
-class App extends Component {
-  render() {
+function App() {
     return (
+      <Router>
       <div>
-        < Header />
-
+          < Header />
         <Switch>
           <Route exact path="/Signup"><Signup /></Route>
           <Route exact path="/Login"><Login /></Route>
@@ -24,8 +21,7 @@ class App extends Component {
       </div>
 
     </Router>
-  );
-}
-
+    );
+  }
 
 export default App;
