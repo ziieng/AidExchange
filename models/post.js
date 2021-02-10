@@ -33,6 +33,6 @@ const replySchema = new Schema({
   createDate: { type: Date, default: Date.now },
 })
 
-const User = mongoose.model("User", userSchema);
+const Post = mongoose.model("Post", postSchema);
 
-module.exports = User;
+module.exports = Post;
