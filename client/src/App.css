@@ -1,8 +1,8 @@
 /* START Jumbotron */
 .jumbotron {
   text-align: center;
-  background-color: #5C415D;
-  color: white
+  background-color: #5c415d !important;
+  color: white;
 }
 
 .underline {
@@ -16,7 +16,6 @@ footer {
   align-items: center;
   justify-content: center;
   padding-top: 60px;
-  color: #5C415D;
-
+  color: #5c415d;
 }
 /* END Footer */
