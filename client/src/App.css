@@ -1,4 +1,5 @@
 /* START Jumbotron */
+
 .jumbotron {
   text-align: center;
   background-color: #5C415D;
@@ -8,15 +9,18 @@
 .underline {
   background-color: white;
 }
+
 /* END Jumbotron */
 
+
 /* START Footer */
+
 footer {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 60px;
   color: #5C415D;
-
 }
+
 /* END Footer */
