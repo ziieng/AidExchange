@@ -16,12 +16,12 @@ export default function signup() {
 
                         <input type="text" className="form-control" id="username" placeholder="Username" />
                     </div>
-                    <div class="form-group">
+                    <div className="form-group">
 
-                        <input type="password" class="form-control" id="password" placeholder="password" />
+                        <input type="password" className="form-control" id="password" placeholder="password" />
                     </div>
 
-                    <a id="createBtn" type="submit" href="/" class="cardShadow btn btn-success justify-content-center">sign up</a>
+                    <a id="createBtn" type="submit" href="/" className="cardShadow btn btn-success justify-content-center">sign up</a>
 
                 </form>
                 <br />
