@@ -7,12 +7,13 @@ import Footer from './Components/Footer/footer'
 import Login from "./Components/Login/login";
 import Signup from "./Components/SignUp/signup";
 import NavBar from "./Components/NavBar/navbar";
-import React, { Component } from "react";
+// import React, { Component } from "react";
 
 
-class App extends Component {
-  render() {
-    return (
+function App() {
+
+  return (
+    <Router>
       <div>
         < Header />
 
@@ -27,5 +28,6 @@ class App extends Component {
   );
 }
 
-
 export default App;
+
+
