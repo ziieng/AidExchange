@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import Header from '../Jumbotron/header'
+import Footer from '../Footer/footer'
 
 export default function signup() {
     return (
         <div>
+            <Header />
             <div className="container text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
                 <h1 className="text-center">Welcome to AidExchange</h1>
                 <br />
@@ -28,6 +31,7 @@ export default function signup() {
                 <p>Or log in <Link to="./Login">here.</Link></p>
                 <br />
             </div>
+            <Footer />
         </div>
     )
 }
