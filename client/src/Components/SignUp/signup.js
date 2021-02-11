@@ -2,6 +2,18 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 export default function signup() {
+// handle user sign up
+    handleSignUp = e => {
+        e.preventDefault();
+    
+        Firebase.auth()
+          .createUserWithEmailAndPassword(this.state.email, this.state.password)
+          .catch(err => {
+            if (err){
+                console.log(err);
+            }
+
+            
     return (
         <div>
             <div className="container text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
