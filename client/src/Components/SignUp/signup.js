@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import API from "../../utils/API"
-import Header from '../Jumbotron/header'
-import Footer from '../Footer/footer'
 import fire from "../../firebaseConfig";
-import Dropdown from "react-bootstrap/Dropdown"
-import DropdownButton from "react-bootstrap/DropdownButton"
 
 export default function signup() {
     const [email, setEmail] = useState("");
@@ -15,6 +11,7 @@ export default function signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(email, password, displayName, acctType)
         if (email !== "" && password !== "" && displayName.length > 3 && acctType !=="") {
             fire.auth().createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
@@ -39,12 +36,10 @@ export default function signup() {
     }
 
     return (
-        <div>
-            <Header />
             <div className="container text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
                 <h1 className="text-center">Create New Account</h1>
                 <br />
-                <form className="login text-center" >
+            <form className="login text-center" onSubmit={handleSubmit}>
                     <div className="form-group">
 
                         <input type="text" onChange={({ target }) => setEmail(target.value)} className="form-control" name="email" placeholder="Email" />
@@ -67,14 +62,12 @@ export default function signup() {
                         </select>
                     </div>
 
-                    <button id="createBtn" type="submit" className="cardShadow btn btn-success justify-content-center">sign up</button>
+                <button id="createBtn" type="submit" className="cardShadow btn btn-success justify-content-center">sign up</button>
 
                 </form>
                 <br />
                 <p>Or log in <Link to="./Login">here.</Link></p>
                 <br />
-            </div>
-            <Footer />
         </div>
     )
 }

@@ -1,5 +1,3 @@
-import Header from '../Jumbotron/header'
-import Footer from '../Footer/footer'
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import fire from '../../firebaseConfig.js';

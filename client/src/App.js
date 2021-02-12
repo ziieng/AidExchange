@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import Header from './Components/Jumbotron/header'
+import Footer from './Components/Footer/footer'
 import Login from "./Components/Login/login";
 import LogoutButton from "./Components/LogoutButton";
 import Signup from "./Components/SignUp/signup";
@@ -22,6 +24,7 @@ function App() {
         ? (<>
           {// If they're not signed in, they can only see login or signup
           }
+          <Header />
           <Switch>
             <Route path="/Signup">
               <Signup />
@@ -48,6 +51,7 @@ function App() {
           </Switch>
         </>
         )}
+      <Footer />
     </Router>
   );
 }
