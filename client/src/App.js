@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import 'bootstrap'
 import Header from './Components/Jumbotron/header'
 import Footer from './Components/Footer/footer'
 import Login from "./Components/Login/login";
