@@ -11,11 +11,11 @@ export default function signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [displayName, setDisplay] = useState("");
-    const [acctType, setAcctType] = useState("Individual");
+    const [acctType, setAcctType] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (email !== "" && password !== "" && displayName.length > 3) {
+        if (email !== "" && password !== "" && displayName.length > 3 && acctType !=="") {
             fire.auth().createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     // Signed in 
@@ -42,29 +42,31 @@ export default function signup() {
         <div>
             <Header />
             <div className="container text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
-                <h1 className="text-center">Welcome to AidExchange</h1>
+                <h1 className="text-center">Create New Account</h1>
                 <br />
-                <form className="login text-center" onSubmit={handleSubmit}>
+                <form className="login text-center" >
                     <div className="form-group">
-                        <input type="text"
-                            onChange={({ target }) => setEmail(target.value)} className="form-control" id="email" placeholder="Email" />
+
+                        <input type="text" onChange={({ target }) => setEmail(target.value)} className="form-control" name="email" placeholder="Email" />
                     </div>
                     <div className="form-group">
-                        <input type="text" className="form-control"
-                            onChange={({ target }) => setDisplay(target.value)} id="displayName" placeholder="Display Name" />
+
+                        <input type="text" onChange={({ target }) => setDisplay(target.value)} className="form-control" name="displayName" placeholder="Display Name" />
                     </div>
                     <div className="form-group">
-                        <input type="password"
-                            onChange={({ target }) => setPassword(target.value)} className="form-control" id="password" placeholder="password" />
+
+                        <input type="password" onChange={({ target }) => setPassword(target.value)} className="form-control" name="password" placeholder="Password" />
+                    </div>
+                    <div >
+
+                        <select onChange={({ target }) => setAcctType(target.value)}  className="form-select form-select-lg mb-3 form-control" name="acctType" >
+                            <option value="">I Am A...</option>
+                            <option value="Individual">Personal User</option>
+                            <option value="Charity">501(c)(3) Organizer</option>
+                            <option value="Organization">Non-501 Organizer</option>
+                        </select>
                     </div>
 
-                    <div className="form-group">
-                        <DropdownButton id="acctType" title={acctType}>
-                            <Dropdown.Item onSelect={() => setAcctType("Individual")}>Individual</Dropdown.Item>
-                            <Dropdown.Item onSelect={() => setAcctType("Organization")}>Organization</Dropdown.Item>
-                            <Dropdown.Item onSelect={() => setAcctType("501(c)(3)")}>501(c)(3)</Dropdown.Item>
-                        </DropdownButton>
-                    </div>
                     <button id="createBtn" type="submit" className="cardShadow btn btn-success justify-content-center">sign up</button>
 
                 </form>

@@ -4,7 +4,8 @@ import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import fire from '../../firebaseConfig.js';
 
-export default function login(props) {
+export default function login() {
+                
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -15,30 +16,28 @@ export default function login(props) {
                 console.error(error);
             });
     }
-
+                
     return (
-        <div>
-            <Header />
-            <div className="container-fluid text-center mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
-                <h1 className="text-center">Welcome to AidExchange</h1>
-                <br />
-                <form className="login text-center" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <input type="text"
-                            onChange={({ target }) => setEmail(target.value)} className="form-control" id="username" placeholder="Email" />
-                    </div>
-                    <div className="form-group">
-                        <input type="password"
-                            onChange={({ target }) => setPassword(target.value)} className="form-control" id="password" placeholder="password" />
-                    </div>
+        <div className="container text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
+            <h1 className="text-center">Sign In</h1>
+            <br />
+            <form className="login text-center"  onSubmit={handleSubmit}>
+                <div className="form-group">
+
+                    <input type="text" className="form-control" name="username" onChange={({ target }) => setEmail(target.value)}  placeholder="Email" />
+                </div>
+                <div className="form-group">
+
+                    <input type="password" className="form-control" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="password" />
+                </div>
                     <button type="submit" className="cardShadow btn btn-success justify-content-center">Login</button>
-                </form>
-                <br />
-                <p>Not a user?</p>
-                <p>Create an account <Link to="./Signup">here.</Link></p>
-                <br />
-            </div>
-            <Footer />
+                {/* <a id="createBtn" type="submit" href="/" className="cardShadow btn btn-success justify-content-center"><Link to="./listing">Login</Link></a> */}
+
+            </form>
+            <br />
+            <p>Not a user?</p>
+            <p>Create an account <Link to="./Signup">here.</Link></p>
+            <br />
         </div>
     )
 }
