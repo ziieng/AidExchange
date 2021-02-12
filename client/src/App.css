@@ -1,7 +1,7 @@
 /* START Jumbotron */
 .jumbotron {
   text-align: center;
-  background-color: #5C415D;
+  background-color: #5C415D !important;
   color: white
 }
 
