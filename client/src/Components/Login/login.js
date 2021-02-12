@@ -11,11 +11,11 @@ export default function login() {
             <form className="login text-center">
                 <div className="form-group">
 
-                    <input type="text" className="form-control" name="username" placeholder="Email" />
+                    <input type="text" className="form-control" name="username" placeholder="Email" required />
                 </div>
                 <div className="form-group">
 
-                    <input type="password" className="form-control" name="password" placeholder="password" />
+                    <input type="password" className="form-control" name="password" placeholder="password" required />
                 </div>
                 <Link to="./listing">
                     <button className="cardShadow btn btn-success justify-content-center">Login</button>
