@@ -8,9 +8,9 @@ import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 
 export default function signup() {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [displayName, setDisplay] = useState();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [displayName, setDisplay] = useState("");
     const [acctType, setAcctType] = useState("Individual");
 
     const handleSubmit = (e) => {
