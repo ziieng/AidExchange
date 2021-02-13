@@ -3,9 +3,8 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   email: { type: String, required: true },
-  password: { type: String, required: true },
   displayName: { type: String, required: true },
-  acctType: { type: String, required: true },
+  acctType: { type: String, default: "Individual", required: true },
   description: String,
   location: {
     type: {
@@ -14,6 +13,7 @@ const userSchema = new Schema({
     }
   },
   links: Array,
+  uid: { type: String, required: true },
   createDate: { type: Date, default: Date.now }
 });
 
