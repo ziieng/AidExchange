@@ -21,9 +21,8 @@ function App() {
 
   return (
     <Router>
-      < ProfileDetail />
       {/* Check if user is signed in
-      {!isLoggedIn
+      {!isLoggedIn*/}
         ? (<>
           {// If they're not signed in, they can only see login or signup
           }
@@ -44,7 +43,7 @@ function App() {
           </Switch>
         </>
         )}
-      <Footer /> */}
+      <Footer /> 
     </Router>
   );
 }
