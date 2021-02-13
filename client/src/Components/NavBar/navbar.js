@@ -1,13 +1,17 @@
 import React from "react";
+import { Navbar, Nav } from 'react-bootstrap'
 
-function Nav() {
+export default function TopNav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a className="navbar-brand" href="/">
-        AidExchange
-      </a>
-    </nav>
+    <Navbar className="navbar navbar-expand-lg navbar-dark">
+      <Navbar.Brand href="">AidExchange</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Nav.Link href="">Dashboard</Nav.Link>
+          <Nav.Link href="">Profile</Nav.Link>
+          <Nav.Link href="">Search</Nav.Link>
+          <Nav.Link href="">Logout</Nav.Link>
+        </Nav>
+    </Navbar>
   );
 }
 
-export default Nav;

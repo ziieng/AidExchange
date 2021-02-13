@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import Listing from "./Components/Cards/listing";
 import NewListing from "./pages/NewListing";
 import Dashboard from "./pages/Dashboard";
+import ProfileDetail from "./pages/ProfileDetail";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -20,8 +21,8 @@ function App() {
 
   return (
     <Router>
-      {/* Check if user is signed in */}
-      {!isLoggedIn
+      {/* Check if user is signed in
+      {!isLoggedIn*/}
         ? (<>
           {// If they're not signed in, they can only see login or signup
           }
@@ -42,7 +43,7 @@ function App() {
           </Switch>
         </>
         )}
-      <Footer />
+      <Footer /> 
     </Router>
   );
 }

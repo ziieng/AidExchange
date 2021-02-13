@@ -1,16 +1,25 @@
+Button {
+  background-color: #5C415D !important;
+
+}
+
 /* START Jumbotron */
+
 .jumbotron {
   text-align: center;
   background-color: #5C415D !important;
-  color: white
+  color: white;
 }
 
 .underline {
   background-color: white;
 }
+
 /* END Jumbotron */
 
+
 /* START Footer */
+
 footer {
   display: flex;
   align-items: center;
@@ -19,3 +28,35 @@ footer {
   color: #5c415d;
 }
 /* END Footer */
+
+/* START NavBar */
+
+.navbar {
+  background-color: #5C415D !important;
+}
+
+/* END NavBar */
+
+/* START Profile Details */
+
+.profileDetails {
+  background-color: #5C415D;
+  max-height: fit-content !important;
+  max-width: 80% !important;
+  text-align: left;
+  margin: 0 auto;
+  float: none;
+  margin-top: 10px;
+}
+
+.userImage {
+  max-width: 20%  !important;
+  max-height: 20% !important;
+  float: left;
+}
+
+.editProfile {
+  float: right;
+}
+
+/* End Profile Details */
