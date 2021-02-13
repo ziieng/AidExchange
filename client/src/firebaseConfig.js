@@ -1,16 +1,15 @@
 //firebase api
 require("dotenv").config();
 
-const apiKey = process.env.FIRE_API;
 // Your web app's Firebase configuration
 
 var firebaseConfig = {
-  apiKey: apiKey,
-  authDomain: "aidexchange-bf872.firebaseapp.com",
-  projectId: "aidexchange-bf872",
-  storageBucket: "aidexchange-bf872.appspot.com",
-  messagingSenderId: process.env.messagingSenderId,
-  appId: process.env.appId,
+  apiKey: process.env.FIREBASE_APIKEY,
+  authDomain: process.env.FIREBASE_AUTHDOMAIN,
+  projectId: process.env.FIREBASE_PROJECTID,
+  storageBucket: process.env.FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APPID,
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

@@ -5,9 +5,7 @@ import Header from "./Components/Jumbotron/header";
 import Footer from "./Components/Footer/footer";
 import Login from "./Components/Login/login";
 import Signup from "./Components/SignUp/signup";
-import withFirebaseAuth from "react-with-firebase-auth";
-import "firebase/auth";
-import firebaseConfig from "./firebaseConfig";
+//removed Firebase import
 
 function App() {
   return (
@@ -28,6 +26,4 @@ function App() {
   );
 }
 
-export default withFirebaseAuth({
-  firebaseAppAuth,
-})(App);
+export default App;

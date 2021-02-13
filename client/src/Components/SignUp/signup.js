@@ -1,45 +1,77 @@
-import React from 'react';
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Firebase from "./firebaseConfig";
 
 export default function signup() {
-// handle user sign up
-    handleSignUp = e => {
-        e.preventDefault();
-    
-        Firebase.auth()
-          .createUserWithEmailAndPassword(this.state.email, this.state.password)
-          .catch(err => {
-            if (err){
-                console.log(err);
-            }
+  state = {
+    email: "",
+    password: "",
+  };
 
-            
-    return (
-        <div>
-            <div className="container text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
-                <h1 className="text-center">Welcome to AidExchange</h1>
-                <br />
-                <form className="login text-center">
-                    <div className="form-group">
+  //   const [email, setEmail] = useState([]);
+  //   const [password, setPassword] = useState({});
 
-                        <input type="text" className="form-control" id="username" placeholder="Email" />
-                    </div>
-                    <div className="form-group">
+  // handle user sign up
+  handleSignUp = (e) => {
+    e.preventDefault();
 
-                        <input type="text" className="form-control" id="username" placeholder="Username" />
-                    </div>
-                    <div className="form-group">
+    Firebase.auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+  };
 
-                        <input type="password" className="form-control" id="password" placeholder="password" />
-                    </div>
+  return (
+    <div>
+      <div className="container text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
+        <h1 className="text-center">Welcome to AidExchange</h1>
+        <br />
+        <form className="login text-center">
+          <div className="form-group">
+            <input
+              type="email"
+              className="form-control"
+              id="username"
+              placeholder="Email"
+              value={this.state.email}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              placeholder="Username"
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              placeholder="password"
+              value={this.state.password}
+            />
+          </div>
 
-                    <a id="createBtn" type="submit" href="/" className="cardShadow btn btn-success justify-content-center">sign up</a>
-
-                </form>
-                <br />
-                <p>Or log in <Link to="./Login">here.</Link></p>
-                <br />
-            </div>
-        </div>
-    )
+          <a
+            id="createBtn"
+            type="submit"
+            href="/"
+            className="cardShadow btn btn-success justify-content-center"
+          >
+            sign up
+          </a>
+        </form>
+        <br />
+        <p>
+          Or log in <Link to="./Login">here.</Link>
+        </p>
+        <br />
+      </div>
+    </div>
+  );
 }
