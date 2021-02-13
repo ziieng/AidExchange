@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import 'bootstrap'
+import fire from "./firebase";
 import Header from './Components/Jumbotron/header'
 import Footer from './Components/Footer/footer'
-import Login from "./Components/Login/login";
-import LogoutButton from "./Components/LogoutButton";
-import Signup from "./Components/SignUp/signup";
-import Listing from "./Components/Main/listing";
-import NewListing from "./Components/NewListing/newlisting";
-import fire from "./firebaseConfig";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Listing from "./Components/Cards/listing";
+import NewListing from "./pages/NewListing";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -26,12 +27,8 @@ function App() {
           }
           <Header />
           <Switch>
-            <Route path="/Signup">
-              <Signup />
-            </Route>
-            <Route path="/">
-              <Login />
-            </Route>
+            <Route path="/Signup"><Signup /></Route>
+            <Route path="/"><Login /></Route>
           </Switch>
         </>
         )
@@ -39,15 +36,9 @@ function App() {
           {// If they are signed in, they can see any page that *isn't* login or signup
           }
           <Switch>
-            <Route exact path="/listing">
-              <Listing />
-            </Route>
-            <Route exact path="/newlisting">
-              <NewListing />
-            </Route>
-            <Route path="/">
-              <LogoutButton />
-            </Route>
+            <Route exact path="/listing"><Listing /></Route>
+            <Route exact path="/newlisting"><NewListing /></Route>
+            <Route path="/"><Dashboard /></Route>
           </Switch>
         </>
         )}
@@ -57,5 +48,3 @@ function App() {
 }
 
 export default App;
-
-

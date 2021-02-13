@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import API from "../../utils/API"
-import fire from "../../firebaseConfig";
+import { Link, useHistory } from "react-router-dom";
+import { Alert } from "react-bootstrap"
+import API from "../utils/API"
+import fire from "../firebase";
 
 export default function signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
     const [displayName, setDisplay] = useState("");
     const [acctType, setAcctType] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const history = useHistory()
 
-    const handleSubmit = (e) => {
+    async function handleSubmit(e) {
         e.preventDefault();
-        console.log(email, password, displayName, acctType)
-        if (email !== "" && password !== "" && displayName.length > 3 && acctType !== "") {
+        setLoading(true)
+        if (email !== "" && password !== "" && password === passwordConfirm && displayName.length > 3 && acctType !== "") {
             fire.auth().createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     // Signed in 
@@ -29,16 +34,18 @@ export default function signup() {
                     var errorCode = error.code;
                     var errorMessage = error.message;
                     console.log(errorCode, errorMessage)
-                    alert(errorMessage)
+                    setError(errorMessage)
                     // ..
                 });
         }
+        setLoading(false)
     }
 
     return (
         <div className="container text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
             <h1 className="text-center">Create New Account</h1>
             <br />
+            {error && <Alert variant="danger">{error}</Alert>}
             <form className="login text-center" onSubmit={handleSubmit}>
                 <div className="form-group">
 
@@ -52,6 +59,10 @@ export default function signup() {
 
                     <input type="password" onChange={({ target }) => setPassword(target.value)} className="form-control" name="password" placeholder="Password" />
                 </div>
+                <div className="form-group">
+
+                    <input type="password" onChange={({ target }) => setPasswordConfirm(target.value)} className="form-control" name="passwordConfirm" placeholder="Confirm Password" />
+                </div>
                 <div >
 
                     <select onChange={({ target }) => setAcctType(target.value)} className="form-select form-select-lg mb-3 form-control" name="acctType" >
@@ -62,7 +73,7 @@ export default function signup() {
                     </select>
                 </div>
 
-                <button id="createBtn" type="submit" className="cardShadow btn btn-success justify-content-center">sign up</button>
+                <button id="createBtn" type="submit" className="cardShadow btn btn-success justify-content-center" disabled={loading}>Sign Up</button>
 
             </form>
             <br />

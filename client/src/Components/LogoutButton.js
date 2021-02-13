@@ -1,5 +1,5 @@
 import React from 'react'
-import fire from '../firebaseConfig.js';
+import fire from '../firebase.js';
 
 export default () => {
   const logout = () => {
@@ -15,6 +15,6 @@ export default () => {
   }
 
   return (
-    <button onClick={logout}>Logout</button>
+    <button className="btn btn-info" onClick={logout}>Logout</button>
   )
 }
