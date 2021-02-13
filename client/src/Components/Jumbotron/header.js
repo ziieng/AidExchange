@@ -1,7 +1,7 @@
 import React from "react";
 import { Jumbotron, Container } from "react-bootstrap";
 
-function Header(props) {
+export default function Header(props) {
     return (
         <Jumbotron className="jumbotron jumbotron-fluid">
             <Container className="container">
@@ -12,5 +12,3 @@ function Header(props) {
         </Jumbotron>
     );
 }
-
-export default Header;

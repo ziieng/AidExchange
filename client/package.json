@@ -6,8 +6,10 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "firebase": "^8.2.6",
+    "firebaseui": "^4.7.3",
     "jquery": "^3.5.1",
-    "mongoose": "^5.11.15",
+    "popper.js": "^1.16.1",
     "react": "^16.6.3",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^16.6.3",

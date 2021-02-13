@@ -1,3 +1,8 @@
+Button {
+  background-color: #5C415D !important;
+
+}
+
 /* START Jumbotron */
 
 .jumbotron {
@@ -20,8 +25,38 @@ footer {
   align-items: center;
   justify-content: center;
   padding-top: 60px;
-  color: #5C415D;
+  color: #5c415d;
+}
+/* END Footer */
 
+/* START NavBar */
+
+.navbar {
+  background-color: #5C415D !important;
 }
 
-/* END Footer */
+/* END NavBar */
+
+/* START Profile Details */
+
+.profileDetails {
+  background-color: #5C415D;
+  max-height: fit-content !important;
+  max-width: 80% !important;
+  text-align: left;
+  margin: 0 auto;
+  float: none;
+  margin-top: 10px;
+}
+
+.userImage {
+  max-width: 20%  !important;
+  max-height: 20% !important;
+  float: left;
+}
+
+.editProfile {
+  float: right;
+}
+
+/* End Profile Details */
