@@ -16,10 +16,10 @@ export default function newlisting() {
 
                         <label className="font-weight-bold" for="catagory">Catagory:</label>
                         <select className="form-select form-select-lg mb-3 form-control" name="type" >
-                            <option value="">type</option>
-                            <option value="1">Individual</option>
-                            <option value="2">501(c)(3) Organizer</option>
-                            <option value="3">Non-501 Organizer</option>
+                            <option value="">Type</option>
+                            <option value="1">Clothes</option>
+                            <option value="2">Equipment</option>
+                            <option value="3">Food</option>
                         </select>
 
 
