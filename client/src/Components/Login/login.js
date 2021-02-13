@@ -5,7 +5,7 @@ export default function login() {
     return (
 
         <div className="container text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
-            <h1 className="text-center">Welcome to AidExchange</h1>
+            <h1 className="text-center">Sign In</h1>
             <br />
             <form className="login text-center">
                 <div className="form-group">
@@ -17,7 +17,7 @@ export default function login() {
                     <input type="password" className="form-control" id="password" placeholder="password" />
                 </div>
 
-                <a id="createBtn" type="submit" href="/" className="cardShadow btn btn-success justify-content-center">Login</a>
+                <a className="createBtn" type="submit" href="/" className="cardShadow btn btn-success justify-content-center">Login</a>
 
             </form>
             <br />
