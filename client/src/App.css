@@ -1,6 +1,5 @@
 Button {
   background-color: #5C415D !important;
-
 }
 
 /* START Jumbotron */
@@ -17,22 +16,22 @@ Button {
 
 /* END Jumbotron */
 
-
 /* START Footer */
 
 footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 60px;
+  bottom: 0;
+  max-width: 100% !important;
+  padding-top: 20px;
   color: #5c415d;
 }
+
 /* END Footer */
 
 /* START NavBar */
 
 .navbar {
   background-color: #5C415D !important;
+  max-width: 100%;
 }
 
 /* END NavBar */
@@ -50,7 +49,7 @@ footer {
 }
 
 .userImage {
-  max-width: 20%  !important;
+  max-width: 20% !important;
   max-height: 20% !important;
   float: left;
 }
