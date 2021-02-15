@@ -1,24 +1,25 @@
 import React from 'react';
 import NavBar from '../NavBar/navbar'
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 export default function listing() {
     return (
-        <Card>
-            <div className="row"  >
-                <div className="col-3">
+        <Card className='myList'>
+            <Card.Body className="row"  >
+
+                <Card.Text className="col-2">
                     <Button className="">Edit</Button>
-                </div>
-                <div className="col-6">
-                    <ul className="list-group">
-                        <li className="list-group-item"></li>
-                    </ul>
-                </div>
-                <div className="col-3">
+                </Card.Text>
+                <ListGroup className="col-8 list-group-flush">
+                    <ListGroupItem className="">jjdjdjjdj
+                        {/* <li className="list-group-item"></li> */}
+                    </ListGroupItem>
+                    <ListGroupItem>gggdgggd</ListGroupItem>
+                    <ListGroupItem>hhahhaha</ListGroupItem>
+                </ListGroup>
+                <Card.Text className="col-2">
                     <Button>open</Button>
-                </div>
-            </div>
-
+                </Card.Text>
+            </Card.Body>
         </Card>
-
     )
 }

@@ -11,6 +11,7 @@ import Listing from "./Components/Cards/listing";
 import NewListing from "./pages/NewListing";
 import Dashboard from "./pages/Dashboard";
 import ProfileDetail from "./pages/ProfileDetail";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -21,8 +22,8 @@ function App() {
 
   return (
     <Router>
-      {/* Check if user is signed in
-      {!isLoggedIn*/}
+      {/* Check if user is signed in  */}
+      {!isLoggedIn
         ? (<>
           {// If they're not signed in, they can only see login or signup
           }
@@ -30,6 +31,7 @@ function App() {
           <Switch>
             <Route path="/Signup"><Signup /></Route>
             <Route path="/"><Login /></Route>
+            <Route exact path="/Forgot-password"><ForgotPassword /></Route>
           </Switch>
         </>
         )
@@ -37,13 +39,15 @@ function App() {
           {// If they are signed in, they can see any page that *isn't* login or signup
           }
           <Switch>
+
             <Route exact path="/listing"><Listing /></Route>
             <Route exact path="/newlisting"><NewListing /></Route>
-            <Route path="/"><Dashboard /></Route>
+            <Route exact path="/"><Dashboard /></Route>
+            <Route exact path="/profiledetail"><ProfileDetail /></Route>
           </Switch>
         </>
         )}
-      <Footer /> 
+      <Footer />
     </Router>
   );
 }
