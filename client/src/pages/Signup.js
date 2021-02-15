@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
-import { Alert } from "react-bootstrap"
+import { Alert, Container, Form, Button } from "react-bootstrap"
 import API from "../utils/API"
 import fire from "../firebase";
+
 
 export default function signup() {
     const [email, setEmail] = useState("");
@@ -12,7 +13,8 @@ export default function signup() {
     const [acctType, setAcctType] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const history = useHistory()
+    const history = useHistory();
+
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -42,28 +44,28 @@ export default function signup() {
     }
 
     return (
-        <div className="container text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
-            <h1 className="text-center">Create New Account</h1>
-            <br />
+        <Container className=" text-center  mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
+            <h1 className="text-center mb-4">Create New Account</h1>
+
             {error && <Alert variant="danger">{error}</Alert>}
-            <form className="login text-center" onSubmit={handleSubmit}>
-                <div className="form-group">
+            <Form className="login text-center" onSubmit={handleSubmit}>
+                <Form.Group className="">
 
-                    <input type="text" onChange={({ target }) => setEmail(target.value)} className="form-control" name="email" placeholder="Email" />
-                </div>
-                <div className="form-group">
+                    <Form.Control type="text" onChange={({ target }) => setEmail(target.value)} className="form-control" name="email" placeholder="Email" />
+                </Form.Group>
+                <Form.Group className="">
 
-                    <input type="text" onChange={({ target }) => setDisplay(target.value)} className="form-control" name="displayName" placeholder="Display Name" />
-                </div>
-                <div className="form-group">
+                    <Form.Control type="text" onChange={({ target }) => setDisplay(target.value)} className="form-control" name="displayName" placeholder="Display Name" />
+                </Form.Group>
+                <Form.Group className="">
 
-                    <input type="password" onChange={({ target }) => setPassword(target.value)} className="form-control" name="password" placeholder="Password" />
-                </div>
-                <div className="form-group">
+                    <Form.Control type="password" onChange={({ target }) => setPassword(target.value)} className="form-control" name="password" placeholder="Password" />
+                </Form.Group>
+                <Form.Group className="">
 
-                    <input type="password" onChange={({ target }) => setPasswordConfirm(target.value)} className="form-control" name="passwordConfirm" placeholder="Confirm Password" />
-                </div>
-                <div >
+                    <Form.Control type="password" onChange={({ target }) => setPasswordConfirm(target.value)} className="form-control" name="passwordConfirm" placeholder="Confirm Password" />
+                </Form.Group>
+                <Form.Group >
 
                     <select onChange={({ target }) => setAcctType(target.value)} className="form-select form-select-lg mb-3 form-control" name="acctType" >
                         <option value="">I Am A...</option>
@@ -71,14 +73,14 @@ export default function signup() {
                         <option value="Charity">501(c)(3) Organizer</option>
                         <option value="Organization">Non-501 Organizer</option>
                     </select>
-                </div>
+                </Form.Group>
 
-                <button id="createBtn" type="submit" className="cardShadow btn btn-success justify-content-center" disabled={loading}>Sign Up</button>
+                <Button id="createBtn" type="submit" className="" disabled={loading}>Sign Up</Button>
 
-            </form>
+            </Form>
             <br />
             <p>Or log in <Link to="./Login">here.</Link></p>
             <br />
-        </div>
+        </Container>
     )
 }
