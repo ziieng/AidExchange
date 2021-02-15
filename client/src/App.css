@@ -1,4 +1,4 @@
-Button {
+Button, .btn {
   background-color: #5C415D !important;
 
 }
@@ -21,11 +21,15 @@ Button {
 /* START Footer */
 
 footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 60px;
-  color: #5c415d;
+  /* position: fixed; */
+  bottom: 0;
+  max-width: 100%;
+  /* color: #5c415d; */
+  /* display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+  padding-top: 20px;
+  background-color: #5c415d; 
 }
 /* END Footer */
 

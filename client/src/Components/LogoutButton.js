@@ -1,5 +1,6 @@
 import React from 'react'
 import fire from '../firebase.js';
+import { Button } from 'react-bootstrap'
 
 export default () => {
   const logout = () => {
@@ -15,6 +16,6 @@ export default () => {
   }
 
   return (
-    <button className="btn btn-info" onClick={logout}>Logout</button>
+    <Button className="btn btn-info" onClick={logout}>Logout</Button>
   )
 }
