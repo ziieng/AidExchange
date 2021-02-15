@@ -1,11 +1,10 @@
 import React from 'react';
 
-function Footer(props) {
+export default function Footer(props) {
     return (
-        <footer>
+        <footer className='text-center mt-4'>
+
             Copyright &copy; | 2021
         </footer>
     )
 }
-
-export default Footer
