@@ -1,4 +1,4 @@
-Button {
+Button, .btn {
   background-color: #5C415D !important;
 }
 
@@ -23,6 +23,7 @@ footer {
   max-width: 100% !important;
   padding-top: 20px;
   color: #5c415d;
+
 }
 
 /* END Footer */
