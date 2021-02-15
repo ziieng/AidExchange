@@ -25,6 +25,4 @@ router
   .put(postController.updatePost)
   .delete(postController.removePost);
 
-// router.route().post("/email", userController.sendEmail);
-
 module.exports = router;

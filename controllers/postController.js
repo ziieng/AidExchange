@@ -1,4 +1,5 @@
 const db = require("../models");
+// const axios = require("axios");
 
 // Defining methods for the booksController
 module.exports = {
@@ -29,4 +30,6 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+
+  //GENERATE PDF FOR RESERVED ITEMS
 };
