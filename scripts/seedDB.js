@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const routes = require("./routes");
+const db = require("../models");
 const userSeed = require("./userSeed.json")
 const postSeed = require("./postSeed.json")
 
@@ -9,11 +9,10 @@ mongoose.connect(
 );
 
 db.User
-  .remove({})
+  .collection.deleteMany({})
   .then(() => db.User.collection.insertMany(userSeed))
   .then(data => {
     console.log(data.result.n + " User records inserted!");
-    process.exit(0);
   })
   .catch(err => {
     console.error(err);
@@ -21,7 +20,7 @@ db.User
   });
 
 db.Post
-  .remove({})
+  .collection.deleteMany({})
   .then(() => db.Post.collection.insertMany(postSeed))
   .then(data => {
     console.log(data.result.n + " Post records inserted!");
