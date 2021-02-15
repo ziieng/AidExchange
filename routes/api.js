@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { userController, postController } = require("../controllers");
+const userController = require("../controllers/userController");
+const postController = require("../controllers/postController");
 
 // Matches with "/api/user"
 router.route("/user").post(userController.create);
