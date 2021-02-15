@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "file-saver": "^2.0.5",
     "firebase": "^8.2.6",
     "firebaseui": "^4.7.3",
     "jquery": "^3.5.1",
