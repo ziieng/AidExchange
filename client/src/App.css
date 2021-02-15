@@ -1,6 +1,5 @@
 Button, .btn {
   background-color: #5C415D !important;
-
 }
 
 /* START Jumbotron */
@@ -17,26 +16,23 @@ Button, .btn {
 
 /* END Jumbotron */
 
-
 /* START Footer */
 
 footer {
-  /* position: fixed; */
   bottom: 0;
-  max-width: 100%;
-  /* color: #5c415d; */
-  /* display: flex;
-  /* align-items: center; */
-  /* justify-content: center; */
+  max-width: 100% !important;
   padding-top: 20px;
-  background-color: #5c415d; 
+  color: #5c415d;
+
 }
+
 /* END Footer */
 
 /* START NavBar */
 
 .navbar {
   background-color: #5C415D !important;
+  max-width: 100%;
 }
 
 /* END NavBar */
@@ -54,7 +50,7 @@ footer {
 }
 
 .userImage {
-  max-width: 20%  !important;
+  max-width: 20% !important;
   max-height: 20% !important;
   float: left;
 }
