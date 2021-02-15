@@ -18,6 +18,9 @@ router
   .get(postController.findAllPost)
   .post(postController.reservePost);
 
+// Matches with "/api/addPost"
+router.route("/addPost").post(postController.createPost);
+
 // Mathces with "/api/post/:id"
 router
   .route("/post/:id")

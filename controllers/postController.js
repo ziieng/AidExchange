@@ -19,6 +19,20 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+
+  createPost: function (req, res) {
+    db.Post.create({
+      title: req.body.title,
+      category: req.body.category,
+      content: req.body.content,
+      account: req.body.acctType,
+      postType: req.body.postType,
+      location: req.body.location,
+    })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+
   updatePost: function (req, res) {
     db.Post.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((dbModel) => res.json(dbModel))
