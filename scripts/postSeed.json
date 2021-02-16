@@ -36,6 +36,7 @@
       }
     ],
     "postType": "Request",
+    "status": "open",
     "location": {
       "type": "Point",
       "coordinates": [
@@ -66,6 +67,7 @@
       }
     ],
     "postType": "Request",
+    "status": "open",
     "location": {
       "type": "Point",
       "coordinates": [
@@ -96,6 +98,7 @@
       }
     ],
     "postType": "Request",
+    "status": "open",
     "location": {
       "type": "Point",
       "coordinates": [
