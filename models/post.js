@@ -5,14 +5,14 @@ const pointSchema = new mongoose.Schema({
   // reference: https://mongoosejs.com/docs/geojson.html
   type: {
     type: String,
-    enum: ['Point'],
-    required: true
+    enum: ["Point"],
+    required: true,
   },
   coordinates: {
     type: [Number],
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 const replySchema = new Schema({
   userId: { type: String, required: true }, //pull in ID from user posting it
@@ -21,7 +21,7 @@ const replySchema = new Schema({
   contents: Array, //if they're only requesting part
   location: { type: pointSchema, required: true },
   createDate: { type: Date, default: Date.now },
-})
+});
 
 const postSchema = new Schema({
   userId: { type: String, required: true }, //pull in ID from user posting it
@@ -32,7 +32,8 @@ const postSchema = new Schema({
   // description: String, // do we want to add descriptions?
   location: { type: pointSchema, required: true },
   createDate: { type: Date, default: Date.now },
-  replies: [replySchema]
+  replies: [replySchema],
+  status: { type: String, reuqired: true, default: "open" }, //to show status on items
 });
 
 const Post = mongoose.model("Post", postSchema);
