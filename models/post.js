@@ -28,7 +28,6 @@ const postSchema = new Schema({
   title: { type: String, required: true },
   category: String,
   contents: Array,
-  acctType: { type: String, required: true }, //individual, org, charity
   postType: { type: String, required: true }, //supply or request
   // description: String, // do we want to add descriptions?
   location: { type: pointSchema, required: true },
