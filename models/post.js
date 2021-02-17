@@ -33,7 +33,7 @@ const postSchema = new Schema({
   location: { type: pointSchema, required: true },
   createDate: { type: Date, default: Date.now },
   replies: [replySchema],
-  status: { type: String, reuqired: true, default: "open" }, //to show status on items
+  status: { type: String, required: true, default: "open" }, //to show status on items
 });
 
 const Post = mongoose.model("Post", postSchema);
