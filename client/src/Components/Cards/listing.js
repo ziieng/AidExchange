@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../NavBar/navbar'
 import { Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 export default function listing() {
     return (

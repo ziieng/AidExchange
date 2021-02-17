@@ -27,7 +27,7 @@ router
   .put(userController.update)
   .delete(userController.remove);
 
-// Mathces with "/api/post"
+// Matches with "/api/post"
 
 router
   .route("/post")

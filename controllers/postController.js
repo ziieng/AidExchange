@@ -4,13 +4,18 @@ const db = require("../models");
 // Defining methods for the booksController
 module.exports = {
   findAllPost: function (req, res) {
-    db.Post.find(req.query)
+    db.Post.find({})
       .sort({ date: -1 })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   findPostById: function (req, res) {
     db.Post.findById(req.params.id)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  findPostByUser: function (req, res) {
+    db.Post.findById(req.params.uid)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },

@@ -1,34 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from "react-router-dom";
 import Listing from "../Components/Cards/listing"
 import Reservation from "../Components/Cards/reservation"
-
-import { Container, Card } from 'react-bootstrap';
+import fire from '../firebase.js';
+import { Container, Card, Row, ListGroup } from 'react-bootstrap';
 import NavBar from "../Components/NavBar/navbar";
+import API from "../utils/API"
 
 export default function Dashboard() {
+
+  useEffect(() => {
+    loadListings()
+  }, [])
+
+  function loadListings() {
+    let uid = fire.auth().currentUser.uid
+    API.getListing()
+      .then(res => console.log(res))
+  }
+
   return (<>
     <NavBar />
-    <Card className="mt-5 ml-5  w-75" >
-      <Card.Body>
-        {/* <LogoutButton /> */}
-
-        <Card.Title>My Listings <Link to="./NewListing" className="btn ml-2 text-white">Add New Listing</Link></Card.Title>
-
-        {/* Map through their listings to make: */}
-        <Card.Text>
+    <Container>
+      <Row className="mt-5 ml-5  w-75" >
+        <h2>My Listings <Link to="./NewListing" className="btn ml-2 text-white">Add New Listing</Link></h2>
+        <ListGroup className="col-8 list-group-flush">
           <Listing />
-        </Card.Text>
-      </Card.Body>
-    </Card>
+        </ListGroup>
+      </Row>
     <Card className="mt-5 ml-5 w-75" >
       <Card.Body>
-        <Card.Title>My Reservations <Link to="" className="btn ml-2 text-white">Search For Items</Link></Card.Title>
-        <Card.Text>
-          {/* Map through their reservations to make: */}
+          <Card.Title>My Reservations <Link to="" className="btn ml-2 text-white">Search For Items</Link></Card.Title>
+        {/* Map through their reservations to make: */}
           <Reservation />
-        </Card.Text>
       </Card.Body>
     </Card>
+    </Container>
   </>)
 }

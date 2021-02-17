@@ -30,10 +30,9 @@ function App() {
           }
           <Header />
           <Switch>
-            <Route exact path="/Signup"><Signup /></Route>
-            <Route exact path="/"><Login /></Route>
-            <Route exact path="/ForgotPassword"><ForgotPassword /></Route>
-
+            <Route path="/Signup"><Signup /></Route>
+            <Route path="/ForgotPassword"><ForgotPassword /></Route>
+            <Route path="/"><Login /></Route>
           </Switch>
         </>
         )
@@ -41,10 +40,9 @@ function App() {
           {// If they are signed in, they can see any page that *isn't* login or signup
           }
           <Switch>
-
-            <Route exact path="/listing"><Listing /></Route>
+            <Route path="/listing"><Listing /></Route>
             <Route exact path="/newlisting"><NewListing /></Route>
-            <Route exact path="/profiledetail"><ProfileDetail /></Route>
+            <Route path="/profile"><ProfileDetail /></Route>
             <Route path="/"><Dashboard /></Route>
           </Switch>
         </>
