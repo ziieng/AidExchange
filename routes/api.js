@@ -33,12 +33,12 @@ router
   .get(postController.findAllPost)
   .post(postController.reservePost);
 
-// Matches with "/api/addPost"
-router.route("/addPost").post(postController.createPost);
+// Matches with "/api/NewListing"
+router.route("/NewListing").post(postController.createPost);
 
 // Mathces with "/api/post/:id"
 router
-  .route("/post/:id")
+  .route("/NewListing/:id")
   .get(postController.findPostById)
   .put(postController.updatePost)
   .delete(postController.removePost);

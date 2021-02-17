@@ -1,4 +1,4 @@
-import axios from "axios"; 
+import axios from "axios";
 
 export default {
   // // Gets all books
@@ -16,5 +16,9 @@ export default {
   // Saves a book to the database
   addUser: function (userData) {
     return axios.post("/api/user", userData);
-  }
+  },
+
+  addListing: function (listData) {
+    return axios.post("/api/NewListing", listData);
+  },
 };
