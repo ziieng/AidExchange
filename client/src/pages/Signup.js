@@ -31,6 +31,7 @@ export default function signup() {
                         acctType: acctType,
                         uid: uid
                     })
+                    history.push("/")
                 })
                 .catch((error) => {
                     var errorCode = error.code;
@@ -79,7 +80,8 @@ export default function signup() {
 
             </Form>
             <br />
-            <p>Or log in <Link to="./Login">here.</Link></p>
+
+            <p>Or log in <Link to="/">here.</Link></p>
             <br />
         </Container>
     )
