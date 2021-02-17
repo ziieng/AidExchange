@@ -21,7 +21,7 @@ app.use(routes);
 
 // Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/aidexchange"
+  process.env.MONGODB_URI || "mongodb://localhost/aidexchange", { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
 // Send every request to the React app
