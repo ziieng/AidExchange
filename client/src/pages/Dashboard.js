@@ -1,32 +1,72 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import Listing from "../Components/Cards/listing"
 import Reservation from "../Components/Cards/reservation"
-
-import { Container, Card } from 'react-bootstrap';
+import fire from '../firebase.js';
+import { Container, Row } from 'react-bootstrap';
 import NavBar from "../Components/NavBar/navbar";
+import API from "../utils/API"
 
 export default function Dashboard() {
+  const [myPosts, setMyPosts] = useState([])
+  const [myReplies, setMyReplies] = useState([])
+
+  useEffect(() => {
+    loadListings()
+  }, [])
+
+  function loadListings() {
+    let uid = fire.auth().currentUser.uid
+    //user's posts
+    API.getUserListing({ params: { uid: uid } })
+      .then(res => {
+        console.log(res)
+        setMyPosts(res.data)
+      })
+    API.getUserReplies({ params: { uid: uid } })
+      .then(res => {
+        console.log(res)
+        setMyReplies(res.data)
+      })
+}
+
   return (<>
     <NavBar />
-    <Card className="mt-5 ml-5  w-75" >
-      <Card.Body>
-        <Card.Title>My Listings <Link to="./NewListing" className="btn ml-2 text-white">Add New Listing</Link></Card.Title>
-
-        {/* Map through their listings to make: */}
-        <Card.Text>
-          <Listing />
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    <Card className="mt-5 ml-5 w-75" >
-      <Card.Body>
-        <Card.Title>My Reservations <Link to="" className="btn ml-2 text-white">Search For Items</Link></Card.Title>
-        <Card.Text>
-          {/* Map through their reservations to make: */}
-          <Reservation />
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <Container>
+      <Row className="mt-5 w-100" >
+        <h2>My Listings <Link to="./NewListing" className="btn ml-2 text-white">Add New Listing</Link></h2>
+        {/* Map through their posts to make: */}
+      </Row>
+      <Row>
+        {myPosts.length ? (
+          <>
+            {myPosts.map(post => {
+              return (
+                <Listing key={post._id} value={post} />
+              );
+            })}
+          </>
+        ) : (
+            <h3>No Results to Display</h3>
+          )}
+      </Row>
+      <Row className="mt-5 w-100" >
+        <h2>My Reservations <Link to="" className="btn ml-2 text-white">Search For Items</Link></h2>
+        {/* Map through their reservations to make: */}
+      </Row>
+      <Row>
+        {myReplies.length ? (
+          <>
+            {myReplies.map(post => {
+              return (
+                <Reservation key={post._id} value={post} />
+              );
+            })}
+          </>
+        ) : (
+            <h3>No Results to Display</h3>
+          )}
+      </Row>
+    </Container>)
   </>)
 }
