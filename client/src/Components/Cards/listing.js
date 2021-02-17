@@ -7,17 +7,17 @@ export default function listing() {
             <Card.Body className="row"  >
 
                 <Card.Text className="col-2">
-                    <Button className="">Edit</Button>
+                    <Button className="">Open</Button>
                 </Card.Text>
                 <ListGroup className="col-8 list-group-flush">
-                    <ListGroupItem className="">jjdjdjjdj
+                    <ListGroupItem className="">Item Name
                         {/* <li className="list-group-item"></li> */}
                     </ListGroupItem>
-                    <ListGroupItem>gggdgggd</ListGroupItem>
-                    <ListGroupItem>hhahhaha</ListGroupItem>
+                    <ListGroupItem>Item Category</ListGroupItem>
+                    <ListGroupItem>Item Location</ListGroupItem>
                 </ListGroup>
                 <Card.Text className="col-2">
-                    <Button>open</Button>
+                <Button className='edit'>Edit</Button>
                 </Card.Text>
             </Card.Body>
         </Card>

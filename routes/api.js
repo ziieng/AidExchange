@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const postController = require("../controllers/postController");
 const userController = require("../controllers/userController");
-// const multer = require("multer");
+// const multer = require('multer')
 
 // const { Storage } = require('@google-cloud/storage');
 // const storage = new Storage({
@@ -43,10 +43,10 @@ router
   .put(postController.updatePost)
   .delete(postController.removePost);
 
-// router.post("/api/upload", uploader.single("image"), async (req, res, next) => {
+// router.post('/api/upload', uploader.single('image'), async (req, res, next) => {
 //   try {
 //     if (!req.file) {
-//       res.status(400).send("No file uploaded.");
+//       res.status(400).send('No file uploaded.');
 //       return;
 //     }
 //     // This is where we'll upload our file to Cloud Storage
@@ -70,5 +70,11 @@ router
 // app.get('/fetch-pdf', (req, res) => {
 //   res.sendFile(`${__dirname}/result.pdf`)
 // })
+//     res.status(400).send(
+//       `Error, could not upload file: ${error}`
+//     );
+//     return;
+//   }
+// });
 
 module.exports = router;
