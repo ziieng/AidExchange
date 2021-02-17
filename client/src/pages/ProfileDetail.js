@@ -12,7 +12,7 @@ export default function ProfileDetail(props) {
 
                     <Card.Title>Rad Organization</Card.Title>
                             <Card.Link href="#">Website</Card.Link>
-                    <Card.Link href="#">Social Media</Card.Link>
+                            <Card.Link href="#">Social Media</Card.Link>
                             <Card.Link href="#">Venmo</Card.Link>
                     <Card.Text>
                         Description <br></br>
