@@ -1,8 +1,19 @@
 const db = require("../models");
-// const axios = require("axios");
 
 // Defining methods for the booksController
 module.exports = {
+  //calls for populating the Dashboard
+  findPostByUser: function (req, res) {
+    db.Post.find({ userId: req.query.uid })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  findReplyByUser: function (req, res) {
+    db.Post.aggregate([{ $unwind: "$replies" }, { $match: { "replies.userId": req.query.uid } }])
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  //search page
   findAllPost: function (req, res) {
     db.Post.find({})
       .sort({ date: -1 })
@@ -14,17 +25,11 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  findPostByUser: function (req, res) {
-    db.Post.findById(req.params.uid)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
-  },
   reservePost: function (req, res) {
     db.Post.create(req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-
   createPost: function (req, res) {
     db.Post.create({
       title: req.body.title,

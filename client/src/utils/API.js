@@ -2,9 +2,13 @@ import axios from "axios";
 
 export default {
   // Get all listings
-  getListing: function (uid) {
-    // return (uid ? axios.get("/api/post", { params: { uid: uid } }) : axios.get("/api/post"));
-    return axios.get("/api/post")
+  getUserListing: function (params) {
+    return (axios.get("/api/search/post", params));
+    // return axios.get("/api/post")
+  },
+  getUserReplies: function (params) {
+    return (axios.get("/api/search/reply", params));
+    // return axios.get("/api/post")
   },
   // // Gets the book with the given id
   // getBook: function (id) {
