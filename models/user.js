@@ -5,6 +5,7 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   displayName: { type: String, required: true },
   acctType: { type: String, default: "Individual", required: true },
+  avatar: String,
   description: String,
   location: {
     type: {
@@ -12,7 +13,7 @@ const userSchema = new Schema({
       enum: ['Point'], // 'location.type' must be 'Point'
     }
   },
-  links: Array,
+  links: Object,
   uid: { type: String, required: true },
   createDate: { type: Date, default: Date.now }
 });
