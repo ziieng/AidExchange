@@ -1,8 +1,4 @@
 const router = require("express").Router();
-// const { userController, postController } = require("../controllers");
-
-const postController = require("../controllers/postController")
-const userController = require("../controllers/userController");
 const postController = require("../controllers/postController")
 const userController = require("../controllers/userController");
 const multer = require('multer')
