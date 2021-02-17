@@ -39,7 +39,7 @@ export default function ForgotPassword() {
                     <Button disabled={loading} className="w-100" type="submit">Reset Password</Button>
                 </Form>
                 <div className="w-100 text-center mt-3">
-                    <Link to="/Login">Log In</Link>
+                    <Link to="/">Log In</Link>
                 </div>
             </Container>
             <div className="w-100 text-center mt-2">
