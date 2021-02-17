@@ -22,6 +22,7 @@ function App() {
 
   return (
     <Router>
+
       {/* Check if user is signed in  */}
       {!isLoggedIn
         ? (<>
@@ -29,9 +30,10 @@ function App() {
           }
           <Header />
           <Switch>
-            <Route path="/Signup"><Signup /></Route>
-            <Route path="/"><Login /></Route>
-            <Route exact path="/Forgot-password"><ForgotPassword /></Route>
+            <Route exact path="/Signup"><Signup /></Route>
+            <Route exact path="/"><Login /></Route>
+            <Route exact path="/ForgotPassword"><ForgotPassword /></Route>
+
           </Switch>
         </>
         )
@@ -42,12 +44,13 @@ function App() {
 
             <Route exact path="/listing"><Listing /></Route>
             <Route exact path="/newlisting"><NewListing /></Route>
-            <Route exact path="/"><Dashboard /></Route>
             <Route exact path="/profiledetail"><ProfileDetail /></Route>
+            <Route path="/"><Dashboard /></Route>
           </Switch>
         </>
         )}
       <Footer />
+
     </Router>
   );
 }

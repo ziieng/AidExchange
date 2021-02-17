@@ -42,11 +42,12 @@ export default function login() {
                         <Form.Control type="password" className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="password" />
                     </Form.Group>
                     <Button type="submit" className=" justify-content-center" disabled={loading} >Login</Button>
-                    <div className="text-center mt-3"><Link to="/forgot-password">Forgot Password?</Link></div>
+
                 </Form>
+                <div className="text-center mt-3"><Link to="/ForgotPassword">Forgot Password?</Link></div>
                 <div className="text-center mt-3">
                     <p>Not a user?</p>
-                    Create an account <Link to="./Signup">here.</Link>
+                    Create an account <Link to="/Signup">here.</Link>
 
                 </div>
             </Container>

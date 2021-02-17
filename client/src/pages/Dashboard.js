@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import Listing from "../Components/Cards/listing"
 import Reservation from "../Components/Cards/reservation"
-import LogoutButton from "../Components/LogoutButton";
+
 import { Container, Card } from 'react-bootstrap';
 import NavBar from "../Components/NavBar/navbar";
 
