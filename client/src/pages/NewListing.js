@@ -53,12 +53,12 @@ export default function newlisting() {
                     <br />
                     <Form.Control className=" form-control-lg" type="text" id="title" onChange={({ target }) => setTitle(target.value)} name="title" placeholder="title" />
                     <br />
-                    <Form.Label className="font-weight-bold">Catagory:</Form.Label>
+                    <Form.Label className="font-weight-bold">Category:</Form.Label>
                     <select className="form-select form-select-lg mb-3 form-control" onChange={({ target }) => setType(target.value)} name="type" >
                         <option value="">Type</option>
-                        <option value="1">Clothes</option>
-                        <option value="2">Equipment</option>
-                        <option value="3">Food</option>
+                        <option value="Clothing">Clothes</option>
+                        <option value="Equipment">Equipment</option>
+                        <option value="Food">Food</option>
                     </select>
 
                     <div className="row">
