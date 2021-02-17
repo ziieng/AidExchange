@@ -22,7 +22,6 @@ function App() {
 
   return (
     <Router>
-
       {/* Check if user is signed in  */}
       {!isLoggedIn
         ? (<>
