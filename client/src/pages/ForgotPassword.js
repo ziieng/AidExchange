@@ -1,7 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { Form, Button, Container, Alert } from 'react-bootstrap'
-// import { useAuth } from '../contexts/AuthContext';
-// import { auth } from "../../src/firebase"
 import fire from '../firebase.js';
 import { Link } from 'react-router-dom'
 
@@ -19,7 +17,7 @@ export default function ForgotPassword() {
             setMessage('')
             setError('')
             setLoading(true)
-            await fire.auth().resetPassword(emailRef.current.value)
+            await fire.auth().sendPasswordResetEmail(emailRef.current.value)
             setMessage('Check your email')
         } catch {
             setError('Failed to reset password')
@@ -29,7 +27,7 @@ export default function ForgotPassword() {
 
     return (
         <>
-            <Container className=" align-items-center mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
+            <Container className="align-items-center mb-5 mt-5 py-3 px-4 bg-light rounded w-25">
                 <h1 className="text-center mb-4">Reset Password</h1>
                 {message && <Alert variant="success">{message}</Alert>}
                 {error && <Alert variant="danger">{error}</Alert>}
