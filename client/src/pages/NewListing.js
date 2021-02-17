@@ -31,6 +31,7 @@ export default function newlisting() {
             quantity: quantity,
             location: location
         })
+            .then(data => console.log(data))
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
