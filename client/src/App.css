@@ -7,11 +7,11 @@ Button, .btn {
 .jumbotron {
   text-align: center;
   background-color: #5C415D !important;
-  color: white;
+  color: #f1faee;
 }
 
 .underline {
-  background-color: white;
+  background-color: #f1faee;
 }
 
 /* END Jumbotron */
@@ -20,7 +20,7 @@ Button, .btn {
 
 footer {
   bottom: 0;
-  max-width: 100% !important;
+  width: 100% !important;
   padding-top: 20px;
   color: #5c415d;
 }
@@ -32,6 +32,10 @@ footer {
 .navbar {
   background-color: #5C415D !important;
   max-width: 100%;
+}
+
+.navbar:hover {
+  color: #f1faee;
 }
 
 /* END NavBar */
@@ -60,3 +64,11 @@ footer {
 
 /* END Profile Details */
 
+/* START Dashboard */
+
+.edit {
+  float: right;
+}
+
+
+/* END Dashboard */

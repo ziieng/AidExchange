@@ -44,8 +44,8 @@ export default function signup() {
     }
 
     return (
-        <Container className='align-items-center'>
-            <Col sm md='auto' lg xl='auto' className="align-items-center mb-5 mt-5 py-3 px-4 bg-light rounded">
+        <Container className=' d-flex justify-content-center'>
+            <Col sm md='auto' lg xl='6' className="align-items-center mb-5 mt-5 py-3 px-4 bg-light rounded">
                 <h1 className="text-center mb-4">Create New Account</h1>
 
                 {error && <Alert variant="danger">{error}</Alert>}
@@ -78,10 +78,10 @@ export default function signup() {
 
                     <Button id="createBtn" type="submit" className="" disabled={loading}>Sign Up</Button>
 
+                    <br />
+                    <p>Or log in <Link to="./Login">here.</Link></p>
+                    <br />
                 </Form>
-                <br />
-                <p>Or log in <Link to="./Login">here.</Link></p>
-                <br />
             </Col>
         </Container>
     )
