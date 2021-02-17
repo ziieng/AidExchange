@@ -16,5 +16,11 @@ export default {
   // Saves a book to the database
   addUser: function (userData) {
     return axios.post("/api/user", userData);
+  },
+
+  // Saves a NewListing to the database
+  addNewListing: function (newListData) {
+    return axios.post("/api/NewListing", newListData);
   }
+
 };

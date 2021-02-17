@@ -19,7 +19,7 @@ export default function ForgotPassword() {
             setMessage('')
             setError('')
             setLoading(true)
-            await fire.auth().resetPassword(emailRef.current.value)
+            await fire.auth().sendPasswordResetEmail(emailRef.current.value)
             setMessage('Check your email')
         } catch {
             setError('Failed to reset password')
@@ -41,7 +41,7 @@ export default function ForgotPassword() {
                     <Button disabled={loading} className="w-100" type="submit">Reset Password</Button>
                 </Form>
                 <div className="w-100 text-center mt-3">
-                    <Link to="/Login">Log In</Link>
+                    <Link to="/">Log In</Link>
                 </div>
             </Container>
             <div className="w-100 text-center mt-2">

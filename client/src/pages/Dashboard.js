@@ -11,8 +11,6 @@ export default function Dashboard() {
     <NavBar />
     <Card className="mt-5 ml-5  w-75" >
       <Card.Body>
-        {/* <LogoutButton /> */}
-
         <Card.Title>My Listings <Link to="./NewListing" className="btn ml-2 text-white">Add New Listing</Link></Card.Title>
 
         {/* Map through their listings to make: */}
