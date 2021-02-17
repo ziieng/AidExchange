@@ -1,10 +1,15 @@
-import axios from "axios"; 
+import axios from "axios";
 
 export default {
-  // // Gets all books
-  // getBooks: function () {
-  //   return axios.get("/api/books");
-  // },
+  // Get all listings
+  getUserListing: function (params) {
+    return (axios.get("/api/search/post", params));
+    // return axios.get("/api/post")
+  },
+  getUserReplies: function (params) {
+    return (axios.get("/api/search/reply", params));
+    // return axios.get("/api/post")
+  },
   // // Gets the book with the given id
   // getBook: function (id) {
   //   return axios.get("/api/books/" + id);
@@ -16,5 +21,11 @@ export default {
   // Saves a book to the database
   addUser: function (userData) {
     return axios.post("/api/user", userData);
+  },
+
+  // Saves a NewListing to the database
+  addNewListing: function (newListData) {
+    return axios.post("/api/NewListing", newListData);
   }
+
 };

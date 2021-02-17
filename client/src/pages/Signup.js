@@ -31,6 +31,7 @@ export default function signup() {
                         acctType: acctType,
                         uid: uid
                     })
+                    history.push("/")
                 })
                 .catch((error) => {
                     var errorCode = error.code;
@@ -44,6 +45,7 @@ export default function signup() {
     }
 
     return (
+        <>
         <Container className=' d-flex justify-content-center'>
             <Col sm md='auto' lg xl='6' className="align-items-center mb-5 mt-5 py-3 px-4 bg-light rounded">
                 <h1 className="text-center mb-4">Create New Account</h1>
@@ -78,11 +80,13 @@ export default function signup() {
 
                     <Button id="createBtn" type="submit" className="" disabled={loading}>Sign Up</Button>
 
-                    <br />
-                    <p>Or log in <Link to="./Login">here.</Link></p>
-                    <br />
-                </Form>
+            </Form>
+            <br />
+
+            <p>Or log in <Link to="/">here.</Link></p>
+            <br />
             </Col>
         </Container>
+        </>
     )
 }

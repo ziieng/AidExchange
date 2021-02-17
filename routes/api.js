@@ -27,12 +27,15 @@ router
   .put(userController.update)
   .delete(userController.remove);
 
-// Mathces with "/api/post"
+// Matches with "/api/post"
 
 router
-  .route("/post")
-  .get(postController.findAllPost)
-  .post(postController.reservePost);
+  .route("/search/post?:uid")
+  .get(postController.findPostByUser)
+
+router
+  .route("/search/reply?:uid")
+  .get(postController.findReplyByUser)
 
 // Matches with "/api/addPost"
 router.route("/addPost").post(postController.createPost);
