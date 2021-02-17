@@ -68,7 +68,7 @@ export default function signup() {
                 <Form.Group >
 
                     <select onChange={({ target }) => setAcctType(target.value)} className="form-select form-select-lg mb-3 form-control" name="acctType" >
-                        <option value="">I Am A...</option>
+                        <option value="">Type:</option>
                         <option value="Individual">Personal User</option>
                         <option value="Charity">501(c)(3) Organizer</option>
                         <option value="Organization">Non-501 Organizer</option>

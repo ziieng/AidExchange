@@ -22,7 +22,8 @@ function App() {
 
   return (
     <Router>
-      {/* Check if user is signed in  */}
+      {/* < ProfileDetail /> */}
+      Check if user is signed in 
       {!isLoggedIn
         ? (<>
           {// If they're not signed in, they can only see login or signup
