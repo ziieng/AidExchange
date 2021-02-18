@@ -10,6 +10,9 @@ export default {
     return (axios.get("/api/search/reply", params));
     // return axios.get("/api/post")
   },
+  getListing: function (id) {
+    return (axios.get("/api/post/" + id));
+  },
   // // Gets the book with the given id
   // getBook: function (id) {
   //   return axios.get("/api/books/" + id);

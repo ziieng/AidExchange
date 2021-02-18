@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const pointSchema = new mongoose.Schema({
+
+
+const pointSchema = new Schema({
   // reference: https://mongoosejs.com/docs/geojson.html
   type: {
     type: String,
@@ -22,7 +24,11 @@ const replySchema = new Schema({
   status: { type: String, required: true, default: "pending" },
   location: { type: pointSchema, required: true },
   createDate: { type: Date, default: Date.now },
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 })
+replySchema.virtual("replyBy", { ref: "User", localField: "userId", foreignField: "userId", justOne: true })
 
 const postSchema = new Schema({
   userId: { type: String, required: true }, //pull in ID from user posting it
@@ -35,7 +41,11 @@ const postSchema = new Schema({
   location: { type: pointSchema, required: true },
   createDate: { type: Date, default: Date.now },
   replies: [replySchema]
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
+postSchema.virtual("postBy", { ref: "User", localField: "userId", foreignField: "userId", justOne: true })
 
 const Post = mongoose.model("Post", postSchema);
 

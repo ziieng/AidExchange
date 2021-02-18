@@ -14,8 +14,11 @@ const userSchema = new Schema({
     }
   },
   links: Object,
-  uid: { type: String, required: true },
+  userId: { type: String, required: true },
   createDate: { type: Date, default: Date.now }
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
 
 const User = mongoose.model("User", userSchema);

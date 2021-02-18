@@ -15,14 +15,14 @@ module.exports = {
   },
   //search page
   findAllPost: function (req, res) {
-    db.Post.find({})
+    db.Post.find({}).populate('postBy')
       .sort({ date: -1 })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   findPostById: function (req, res) {
-    db.Post.findById(req.params.id)
-      .then((dbModel) => res.json(dbModel))
+    db.Post.find({ "_id": req.params.id }).populate('postBy')
+      .then((dbModel) => res.json(dbModel[0]))
       .catch((err) => res.status(422).json(err));
   },
   reservePost: function (req, res) {
