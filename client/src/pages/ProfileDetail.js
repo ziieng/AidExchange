@@ -3,10 +3,12 @@ import { Container, Card, Button } from 'react-bootstrap';
 import TopNav from '../Components/NavBar/navbar';
 import { useParams } from "react-router-dom"
 import API from "../utils/API"
+import fire from '../firebase.js';
 import Listing from "../Components/Cards/listing"
 
 export default function ProfileDetail(props) {
-    let { id } = useParams()
+    let uid = fire.auth().currentUser.uid
+  let { id } = useParams()
     const [userPosts, setUserPosts] = useState([])
     const [user, setUser] = useState({
         "email": "",
@@ -60,7 +62,8 @@ export default function ProfileDetail(props) {
                                     (No description provided) <br></br>
                         </Card.Text>
                             )}
-                    <Button className='editProfile' variant="dark">Edit Profile</Button>{' '}
+                        {id === uid ?
+                            (<Button className='editProfile' variant="dark" href="/editprofile">Edit Profile</Button>) : (" ")}
                 </Card.Body>
             </Card>
                 {userPosts.length ? (

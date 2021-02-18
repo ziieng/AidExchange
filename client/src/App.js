@@ -11,6 +11,7 @@ import ListingDetail from "./pages/ListingDetail";
 import NewListing from "./pages/NewListing";
 import Dashboard from "./pages/Dashboard";
 import ProfileDetail from "./pages/ProfileDetail";
+import EditProfile from "./pages/EditProfile";
 import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
             <Route path="/listing/:id"><ListingDetail /></Route>
             <Route exact path="/newlisting"><NewListing /></Route>
             <Route path="/profile/:id"><ProfileDetail /></Route>
+            <Route path="/editprofile"><EditProfile /></Route>
             <Route path="/"><Dashboard /></Route>
           </Switch>
         </>
