@@ -41,7 +41,7 @@ function App() {
           <Switch>
             <Route path="/listing/:id"><ListingDetail /></Route>
             <Route exact path="/newlisting"><NewListing /></Route>
-            <Route path="/profile"><ProfileDetail /></Route>
+            <Route path="/profile/:id"><ProfileDetail /></Route>
             <Route path="/"><Dashboard /></Route>
           </Switch>
         </>
