@@ -28,7 +28,7 @@ export default function ListingDetail() {
           <Row>
             <Card className='listingDetail' >
               <Card.Title>{listing.title}</Card.Title>
-              <Card.Subtitle><img className='userImage float-left' src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" alt={"user profile image for " + listing.postBy.displayName} />{listing.postBy.displayName}</Card.Subtitle>
+              <Card.Subtitle><img className='userImage float-left' src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" alt={"user profile image for " + listing.postBy.displayName} /><Card.Link href={"/profile/" + listing.postBy.userId}>{listing.postBy.displayName}</Card.Link></Card.Subtitle>
               {listing.description && <Card.Text>
                 {listing.description}
               </Card.Text>}
