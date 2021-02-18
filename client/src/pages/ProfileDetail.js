@@ -15,7 +15,7 @@ export default function ProfileDetail(props) {
         "displayName": "",
         "acctType": "",
         "location": {},
-        "links": {},
+        "links": [],
         "userId": ""
     })
 
@@ -44,9 +44,9 @@ export default function ProfileDetail(props) {
                         <Card.Title>{user.displayName}</Card.Title>
                         {user.links ? (
                             <>
-                                {Object.entries(user.links).map(([key, value], i) => {
+                                {user.links.map((link, i) => {
                                     return (
-                                        <Card.Link key={i} href={value}>{key}</Card.Link>
+                                        <Card.Link key={i} href={link.url}>{link.label}</Card.Link>
                                     );
                                 })}
                             </>

@@ -13,7 +13,7 @@ const userSchema = new Schema({
       enum: ['Point'], // 'location.type' must be 'Point'
     }
   },
-  links: Object,
+  links: Array,
   userId: { type: String, required: true },
   createDate: { type: Date, default: Date.now }
 }, {
