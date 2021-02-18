@@ -7,7 +7,7 @@ import Header from './Components/Jumbotron/header'
 import Footer from './Components/Footer/footer'
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Listing from "./Components/Cards/listing";
+import ListingDetail from "./pages/ListingDetail";
 import NewListing from "./pages/NewListing";
 import Dashboard from "./pages/Dashboard";
 import ProfileDetail from "./pages/ProfileDetail";
@@ -39,7 +39,7 @@ function App() {
           {// If they are signed in, they can see any page that *isn't* login or signup
           }
           <Switch>
-            <Route path="/listing"><Listing /></Route>
+            <Route path="/listing/:id"><ListingDetail /></Route>
             <Route exact path="/newlisting"><NewListing /></Route>
             <Route path="/profile"><ProfileDetail /></Route>
             <Route path="/"><Dashboard /></Route>
