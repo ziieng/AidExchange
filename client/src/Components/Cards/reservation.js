@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Button, Badge } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 export default function reservation(props) {
     let post = props.value
@@ -7,7 +8,7 @@ export default function reservation(props) {
 
     return (
         <Card className='myListings m-1'>
-            <h5 className="px-2 pt-2 pb-0">{post.title} <Badge variant="light">{post.status}</Badge>
+            <h5 className="px-2 pt-2 pb-0"><Link to={"./listing/" + post._id}>{post.title}</Link> <Badge variant="light">{post.status}</Badge>
                 <Button className="float-right" size="sm">edit/close</Button></h5>
             <ul className="pt-0">
                 {contentList.length <= 3 ? (<>
