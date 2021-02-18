@@ -1,28 +1,43 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
-import Listing from "../Components/Cards/listing"
-import Reservation from "../Components/Cards/reservation"
-import { Container, Card } from 'react-bootstrap';
+import Listing from "../Components/Cards/listing";
+import Reservation from "../Components/Cards/reservation";
+import { Container, Card } from "react-bootstrap";
 import NavBar from "../Components/NavBar/navbar";
+import Print from "../utils/document";
 
 export default function Dashboard() {
-  return (<>
-    <NavBar />
-    <Card className="mt-5 ml-5  w-75" >
-      <Card.Body>
+  return (
+    <>
+      <NavBar />
+      <Card className="mt-5 ml-5  w-75">
+        <Card.Body>
+          <Card.Title>
+            My Listings{" "}
+            <Link to="./NewListing" className="btn ml-2 text-white">
+              Add New Listing
+            </Link>
+          </Card.Title>
 
-        <Card.Title>My Listings <Link to="./NewListing" className="btn ml-2 text-white">Add New Listing</Link></Card.Title>
+          {/* Map through their listings to make: */}
 
-        {/* Map through their listings to make: */}
           <Listing />
-      </Card.Body>
-    </Card>
-    <Card className="mt-5 ml-5 w-75" >
-      <Card.Body>
-        <Card.Title>My Reservations <Link to="" className="btn ml-2 text-white">Search For Items</Link></Card.Title>
+          {/* Call for pdf download */}
+          <Print />
+        </Card.Body>
+      </Card>
+      <Card className="mt-5 ml-5 w-75">
+        <Card.Body>
+          <Card.Title>
+            My Reservations{" "}
+            <Link to="" className="btn ml-2 text-white">
+              Search For Items
+            </Link>
+          </Card.Title>
           {/* Map through their reservations to make: */}
           <Reservation />
-      </Card.Body>
-    </Card>
-  </>)
+        </Card.Body>
+      </Card>
+    </>
+  );
 }
