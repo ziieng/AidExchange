@@ -29,7 +29,7 @@ export default function signup() {
                         email: email,
                         displayName: displayName,
                         acctType: acctType,
-                        uid: uid
+                        userId: uid
                     })
                     history.push("/")
                 })
