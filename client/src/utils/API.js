@@ -19,6 +19,9 @@ export default {
   addUser: function (userData) {
     return axios.post("/api/user", userData);
   },
+  updateUser: function (userData) {
+    return axios.put("/api/user/" + userData.userId, userData);
+  },
   // Saves a NewListing to the database
   addNewListing: function (newListData) {
     return axios.post("/api/NewListing", newListData);
