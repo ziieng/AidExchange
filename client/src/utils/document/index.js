@@ -58,8 +58,10 @@ const MyPdf = () => (
 
       <Text>{example.title}</Text>
       <Text style={styles.page}>
-        {example.contents.map((line) => {
-          return <Text> {line.quantity + " " + line.item + "\n "} </Text>;
+        {example.contents.map((line, i) => {
+          return (
+            <Text key={i}> {line.quantity + " " + line.item + "\n "} </Text>
+          );
         })}
       </Text>
     </Page>
