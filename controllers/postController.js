@@ -31,14 +31,7 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   createPost: function (req, res) {
-    db.Post.create({
-      title: req.body.title,
-      category: req.body.category,
-      content: req.body.content,
-      account: req.body.acctType,
-      postType: req.body.postType,
-      location: req.body.location,
-    })
+    db.Post.create(req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
