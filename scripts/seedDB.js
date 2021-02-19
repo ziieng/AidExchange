@@ -1,32 +1,30 @@
 const mongoose = require("mongoose");
 const db = require("../models");
-const userSeed = require("./userSeed.json")
-const postSeed = require("./postSeed.json")
+const userSeed = require("./userSeed.json");
+const postSeed = require("./testSeed.json");
 
 // Connect to the Mongo DB
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/aidexchange"
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/aidexchange");
 
-db.User
-  .collection.deleteMany({})
+db.User.collection
+  .deleteMany({})
   .then(() => db.User.collection.insertMany(userSeed))
-  .then(data => {
+  .then((data) => {
     console.log(data.result.n + " User records inserted!");
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err);
     process.exit(1);
   });
 
-db.Post
-  .collection.deleteMany({})
+db.Post.collection
+  .deleteMany({})
   .then(() => db.Post.collection.insertMany(postSeed))
-  .then(data => {
+  .then((data) => {
     console.log(data.result.n + " Post records inserted!");
     process.exit(0);
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err);
     process.exit(1);
   });

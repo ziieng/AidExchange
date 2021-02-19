@@ -21,7 +21,7 @@ module.exports = {
     db.Post.find({})
       .populate("postBy")
       .sort({ date: -1 })
-      .then((dbModel) => res.json(dbModel))
+      .then((dbModel) => res.json(dbModel[0]))
       .catch((err) => res.status(422).json(err));
   },
   findPostById: function (req, res) {
