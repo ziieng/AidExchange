@@ -47,7 +47,7 @@ export default function Dashboard() {
             })}
           </>
         ) : (
-            <h3>No Results to Display</h3>
+            <h5>No Results to Display</h5>
           )}
       </Row>
       <Row className="mt-5 w-100" >
@@ -64,7 +64,7 @@ export default function Dashboard() {
             })}
           </>
         ) : (
-            <h3>No Results to Display</h3>
+            <h5>No Results to Display</h5>
           )}
       </Row>
     </Container>
