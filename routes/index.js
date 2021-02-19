@@ -1,5 +1,5 @@
 const path = require("path");
-const router = require("express").Router();
+const router = require("express").Router({ mergeParams: true });
 const apiRoutes = require("./api");
 const cors = require("cors")
 

@@ -10,10 +10,13 @@
         47.56972503575317
       ]
     },
-    "links": {
-      "website": "https://pes.pemibaker.org/home"
-    },
-    "uid": "pKBPUYXbTqPBC77qqakGKN81VpH2",
+    "links": [
+      {
+        "label": "Website",
+        "url": "https://pes.pemibaker.org/home"
+      }
+    ],
+    "userId": "pKBPUYXbTqPBC77qqakGKN81VpH2",
     "createDate": "2021-02-13 06:00:57.963Z"
   },
   {
@@ -27,8 +30,8 @@
         47.568326599490476
       ]
     },
-    "links": {},
-    "uid": "AK3qqdL3icMxIV8CoRUbIA9txSA3",
+    "links": [],
+    "userId": "AK3qqdL3icMxIV8CoRUbIA9txSA3",
     "createDate": "2021-02-13 20:04:23.514Z"
   },
   {
@@ -42,8 +45,8 @@
         47.590346866879834
       ]
     },
-    "links": {},
-    "uid": "0hgAYjhP8kM2TFthZCoh17McAAp2",
+    "links": [],
+    "userId": "0hgAYjhP8kM2TFthZCoh17McAAp2",
     "createDate": "2021-02-13 20:04:51.600Z"
   },
   {
@@ -57,12 +60,18 @@
         47.62097507908694
       ]
     },
-    "links": {
-      "website": "https://donorbox.org/tsmp",
-      "twitter": "https://twitter.com/RebellionBaby"
-    },
+    "links": [
+      {
+        "label": "Website",
+        "url": "https://donorbox.org/tsmp"
+      },
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com/RebellionBaby"
+      }
+    ],
     "description": "The Thomas Street Mini Park (TSMP) Mutual Aid Pop-Up is a weekly event intended to support our Unhoused neighbors in Seattle. We raise funds to supply tents, tarps, sleeping bags, and other life-saving necessities.",
-    "uid": "n8ly3uMNuqPHOe2ipXt0YV6oXTn1",
+    "userId": "n8ly3uMNuqPHOe2ipXt0YV6oXTn1",
     "createDate": "2021-02-13 20:05:15.670Z"
   },
   {
@@ -70,8 +79,8 @@
     "displayName": "Redmond Mutual Aid",
     "acctType": "Organization",
     "location": {},
-    "links": {},
-    "uid": "cJujjRExZEWJokfvTAH6rsiclmB2",
+    "links": [],
+    "userId": "cJujjRExZEWJokfvTAH6rsiclmB2",
     "createDate": "2021-02-13 20:13:06.702Z"
   },
   {
@@ -85,8 +94,13 @@
         47.67481344133391
       ]
     },
-    "links": {},
-    "uid": "mEOfYqMX14eTKymODesyqTTZ8Fh2",
+    "links": [
+      {
+        "label": "Website",
+        "url": "https://openkitchenredmond.com/"
+      }
+    ],
+    "userId": "mEOfYqMX14eTKymODesyqTTZ8Fh2",
     "createDate": "2021-02-13 20:13:32.924Z"
   },
   {
@@ -94,8 +108,8 @@
     "displayName": "Glinda Goodwitch",
     "acctType": "Individual",
     "location": {},
-    "links": {},
-    "uid": "r6YrNeeXb8egM124vOzYJAu6csl1",
+    "links": [],
+    "userId": "r6YrNeeXb8egM124vOzYJAu6csl1",
     "createDate": "2021-02-13 20:15:02.921Z"
   },
   {
@@ -103,8 +117,8 @@
     "displayName": "Panopto",
     "acctType": "Individual",
     "location": {},
-    "links": {},
-    "uid": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
+    "links": [],
+    "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
     "createDate": "2021-02-12 20:15:02.921Z"
   },
   {
@@ -112,8 +126,8 @@
     "displayName": "Tester",
     "acctType": "Individual",
     "location": {},
-    "links": {},
-    "uid": "sqV9MWEunGXGb7CuvCfB3b2fSBC2",
+    "links": [],
+    "userId": "sqV9MWEunGXGb7CuvCfB3b2fSBC2",
     "createDate": "2021-02-11 21:15:02.921Z"
   }
 ]
