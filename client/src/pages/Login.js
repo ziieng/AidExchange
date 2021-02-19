@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from "react-router-dom";
 import fire from '../firebase.js';
-import { Alert, Button, Container, Form } from "react-bootstrap"
+import { Alert, Button, Container, Form, Card } from "react-bootstrap"
 
 
 export default function login() {
