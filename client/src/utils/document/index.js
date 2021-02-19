@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const MyDoc = () => (
+const MyPdf = () => (
   // getData(),
   <Document>
     <Page size="A4">
@@ -68,7 +68,11 @@ const MyDoc = () => (
 
 const Print = () => (
   <div>
-    <PDFDownloadLink document={<MyDoc />} fileName="example.pdf">
+    <PDFDownloadLink
+      key={example.userId}
+      document={<MyPdf />}
+      fileName="example.pdf"
+    >
       {({ blob, url, loading, error }) =>
         loading ? "Loading document..." : "Download pdf now!"
       }
