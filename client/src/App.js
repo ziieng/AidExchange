@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import ProfileDetail from "./pages/ProfileDetail";
 import EditProfile from "./pages/EditProfile";
 import ForgotPassword from "./pages/ForgotPassword";
+import ListingDetails from './pages/ListingDetail'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -49,7 +50,6 @@ function App() {
         </>
         )}
       <Footer />
-
     </Router>
   );
 }
