@@ -13,9 +13,12 @@ const userSchema = new Schema({
       enum: ['Point'], // 'location.type' must be 'Point'
     }
   },
-  links: Object,
-  uid: { type: String, required: true },
+  links: Array,
+  userId: { type: String, required: true },
   createDate: { type: Date, default: Date.now }
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
 
 const User = mongoose.model("User", userSchema);

@@ -19,7 +19,7 @@ export default function TopNav() {
       <Navbar.Brand href="">AidExchange</Navbar.Brand>
       <Nav className="justify-content-end" style={{ width: "100%"}}>
         <Nav.Link href='/'>Dashboard</Nav.Link>
-        <Nav.Link href='/profiledetail'>Profile</Nav.Link>
+        <Nav.Link href={'/profile/' + fire.auth().currentUser.uid}>Profile</Nav.Link>
         <Nav.Link href='/search'>Search</Nav.Link>
         <Nav.Link onClick={logout}>Logout</Nav.Link>
       </Nav>
