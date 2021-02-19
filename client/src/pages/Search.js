@@ -15,7 +15,6 @@ export default function Search() {
                         <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
                         <Button type="submit">Submit</Button>
                     </Form>
-
                 </Card.Body>
             </Card>
             <Card className='filter' >
