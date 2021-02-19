@@ -33,7 +33,7 @@ export default function Search() {
                                 <Form.Check
                                     type={type}
                                     id={`default-${type}`}
-                                    label={`Tools ${type}`}
+                                    label={`Equipment ${type}`}
                                 />
                                 <Form.Check
                                     type={type}

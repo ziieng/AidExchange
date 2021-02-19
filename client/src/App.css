@@ -113,11 +113,10 @@ footer {
 }
 
 .donateRequest {
-  float:right
+  float: right
 }
 
 /* END ListingDetails */
-
 
 /* START Search */
 
@@ -155,3 +154,16 @@ footer {
 }
 
 /* END Search */
+
+/* START NewListing */
+
+#newItem {
+  float: right;
+}
+
+#submit {
+  float: right;
+  margin-right: 2%;
+}
+
+/* END NewListing */

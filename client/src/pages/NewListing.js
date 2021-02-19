@@ -118,12 +118,13 @@ export default function newlisting() {
                     })}
                     {contentError && <Alert variant="warning">Items that don't have BOTH a label and a quantity won't be saved.</Alert>}
                     <Button id="newItem" type="button" disabled={loading} onClick={addItem}>Add Item</Button>
+                    <Button id="submit" type="submit" to="/" disabled={loading}>Submit</Button>
+                    <br />
                     <br />
                     {/* <Form.Label className="font-weight-bold" >Location:</Form.Label>
                     <br />
                     <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setLocation(target.value)} name="location" placeholder="location" />
                     <br /> */}
-                    <Button id="submit" type="submit" to="/" disabled={loading}>Submit</Button>
 
                 </Form>
 
