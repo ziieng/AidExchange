@@ -38,7 +38,8 @@ router
   .get(postController.findReplyByUser)
 
 // Matches with "/api/addPost"
-router.route("/addPost").post(postController.createPost);
+router.route("/addPost")
+  .post(postController.createPost);
 
 // Mathces with "/api/post/:id"
 router
