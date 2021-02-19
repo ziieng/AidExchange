@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../NavBar/navbar'
 import { Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
-export default function listing() {
+export default function Listing() {
     return (
         <Card className='myList'>
             <Card.Body className="row"  >

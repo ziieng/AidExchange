@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 
-export default function reservation() {
+export default function Reservation() {
     return (
         <Card className='reservations'>
             <Card.Body className="row"  >

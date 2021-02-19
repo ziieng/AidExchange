@@ -12,7 +12,8 @@ import NewListing from "./pages/NewListing";
 import Dashboard from "./pages/Dashboard";
 import ProfileDetail from "./pages/ProfileDetail";
 import ForgotPassword from "./pages/ForgotPassword";
-import ListingDetails from './pages/ListingDetail'
+import ListingDetails from './pages/ListingDetail';
+import Search from './pages/Search'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -23,7 +24,7 @@ function App() {
 
   return (
     <Router>
-      < ListingDetails />
+      < Search />
       {/* Check if user is signed in 
       {!isLoggedIn
         ? (<>
