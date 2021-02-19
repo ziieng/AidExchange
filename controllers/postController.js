@@ -1,17 +1,28 @@
 const db = require("../models");
-// const axios = require("axios");
 
 // Defining methods for the booksController
 module.exports = {
+  //calls for populating the Dashboard
+  findPostByUser: function (req, res) {
+    db.Post.find({ userId: req.query.uid })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  findReplyByUser: function (req, res) {
+    db.Post.aggregate([{ $unwind: "$replies" }, { $match: { "replies.userId": req.query.uid } }])
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  //search page
   findAllPost: function (req, res) {
-    db.Post.find(req.query)
+    db.Post.find({}).populate('postBy')
       .sort({ date: -1 })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   findPostById: function (req, res) {
-    db.Post.findById(req.params.id)
-      .then((dbModel) => res.json(dbModel))
+    db.Post.find({ "_id": req.params.id }).populate('postBy')
+      .then((dbModel) => res.json(dbModel[0]))
       .catch((err) => res.status(422).json(err));
   },
   reservePost: function (req, res) {
@@ -19,7 +30,6 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-
   createPost: function (req, res) {
     console.log("AddNewListing", req.body)
     db.Post.create({

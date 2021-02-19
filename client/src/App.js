@@ -7,11 +7,13 @@ import Header from './Components/Jumbotron/header'
 import Footer from './Components/Footer/footer'
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Listing from "./Components/Cards/listing";
+import ListingDetail from "./pages/ListingDetail";
 import NewListing from "./pages/NewListing";
 import Dashboard from "./pages/Dashboard";
 import ProfileDetail from "./pages/ProfileDetail";
+import EditProfile from "./pages/EditProfile";
 import ForgotPassword from "./pages/ForgotPassword";
+import ListingDetails from './pages/ListingDetail'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -22,7 +24,6 @@ function App() {
 
   return (
     <Router>
-
       {/* Check if user is signed in  */}
       {!isLoggedIn
         ? (<>
@@ -30,10 +31,9 @@ function App() {
           }
           <Header />
           <Switch>
-            <Route exact path="/Signup"><Signup /></Route>
-            <Route exact path="/"><Login /></Route>
-            <Route exact path="/ForgotPassword"><ForgotPassword /></Route>
-
+            <Route path="/Signup"><Signup /></Route>
+            <Route path="/ForgotPassword"><ForgotPassword /></Route>
+            <Route path="/"><Login /></Route>
           </Switch>
         </>
         )
@@ -41,16 +41,15 @@ function App() {
           {// If they are signed in, they can see any page that *isn't* login or signup
           }
           <Switch>
-
-            <Route exact path="/listing"><Listing /></Route>
+            <Route path="/listing/:id"><ListingDetail /></Route>
             <Route exact path="/newlisting"><NewListing /></Route>
-            <Route exact path="/profiledetail"><ProfileDetail /></Route>
+            <Route path="/profile/:id"><ProfileDetail /></Route>
+            <Route path="/editprofile"><EditProfile /></Route>
             <Route path="/"><Dashboard /></Route>
           </Switch>
         </>
         )}
       <Footer />
-
     </Router>
   );
 }
