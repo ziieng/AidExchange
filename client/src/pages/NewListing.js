@@ -61,7 +61,7 @@ export default function newlisting() {
             })
                 .then(data => {
                     console.log(data)
-                    history.push('/profile/' + data.data._id)
+                    history.push('/listing/' + data.data._id)
                 })
                 .then(data => {
                     console.log(data)
