@@ -2,6 +2,7 @@ Button, .btn {
   background-color: #5C415D !important;
 }
 
+
 /* START Jumbotron */
 
 .jumbotron {
@@ -68,6 +69,15 @@ footer {
 
 .edit {
   float: right;
+}
+
+#listingName {
+  color: #AEA0AE !important;
+}
+
+#listingName:hover {
+  color: #5C415D !important;
+  text-decoration: none !important;
 }
 
 /* END Dashboalistingrd */
