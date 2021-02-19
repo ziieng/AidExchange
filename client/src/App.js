@@ -12,6 +12,7 @@ import NewListing from "./pages/NewListing";
 import Dashboard from "./pages/Dashboard";
 import ProfileDetail from "./pages/ProfileDetail";
 import ForgotPassword from "./pages/ForgotPassword";
+import ListingDetails from './pages/ListingDetail'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -22,8 +23,8 @@ function App() {
 
   return (
     <Router>
-      {/* < ProfileDetail /> */}
-      {/* Check if user is signed in  */}
+      < ListingDetails />
+      {/* Check if user is signed in 
       {!isLoggedIn
         ? (<>
           {// If they're not signed in, they can only see login or signup
@@ -48,7 +49,7 @@ function App() {
           </Switch>
         </>
         )}
-      <Footer />
+      <Footer /> */}
     </Router>
   );
 }
