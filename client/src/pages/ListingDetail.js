@@ -30,7 +30,7 @@ export default function ListingDetail() {
                 <Card.Body>
                     <Card.Img className='icon' variant="top" src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" alt={"user profile image for " + listing.postBy.displayName} />
                     <Card.Title>{listing.title}</Card.Title>
-      <Card.Subtitle>/><Card.Link href={"/profile/" + listing.postBy.userId}>{listing.postBy.displayName}</Card.Link></Card.Subtitle>
+                <Card.Subtitle><Card.Link href={"/profile/" + listing.postBy.userId}>{listing.postBy.displayName}</Card.Link></Card.Subtitle>
                     {listing.description && <Card.Text>
                 {listing.description}
               </Card.Text>}
@@ -38,13 +38,13 @@ export default function ListingDetail() {
                 </Card.Body>
             </Card>
     <Card className='map'>
-                <Card.Img className='mapPush' variant="top" src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" />
+              <Card.Img className='mapPush' variant="top" src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" /> (I'm a map)
             </Card>
           </Row>
           <Row>
     <Card className='contents'>
                 <Card.Body>
-                    <h2> Contents: </h2><Button className='donateRequest' variant="dark">Donate/Request</Button>
+                <h2> Contents: <Button className='donateRequest align-self-right' variant="dark">Donate/Request</Button></h2>
             <Table striped bordered hover>
               <thead>
                 <tr>
