@@ -27,6 +27,11 @@ router
   .delete(userController.remove);
 
 // Matches with "/api/post"
+router
+  .route("/post/:id")
+  .get(postController.findPostById)
+  .put(postController.updatePost)
+  .delete(postController.removePost);
 
 router.route("/search/post?:uid").get(postController.findPostByUser);
 
