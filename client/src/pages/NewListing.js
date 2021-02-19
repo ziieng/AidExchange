@@ -193,11 +193,6 @@ return (
         <Button id="newItem" type="button" disabled={loading} onClick={addItem}>
           Add Item
         </Button>
-        <br />
-        {/* <Form.Label className="font-weight-bold" >Location:</Form.Label>
-                    <br />
-                    <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setLocation(target.value)} name="location" placeholder="location" />
-                    <br /> */}
         <Button
           id="submit"
           type="submit"
@@ -207,6 +202,12 @@ return (
         >
           Submit
         </Button>
+        <br />
+        <br />
+        {/* <Form.Label className="font-weight-bold" >Location:</Form.Label>
+                    <br />
+                    <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setLocation(target.value)} name="location" placeholder="location" />
+                    <br /> */}
       </Form>
     </Container>
   </>
