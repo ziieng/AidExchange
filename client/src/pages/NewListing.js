@@ -1,35 +1,41 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Container, Button, Form } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
+// import fire from '../firebase.js';
+// import { useAuth } from '../contexts/AuthContext'
 
-export default function newlisting() {
-    // Setting our component's initial state
-    // const [newlist, setNewList] = useState([])
-    // const [formObject, setFormObject] = useState({})
+export default function NewListing() {
+
+    const refreshPage = () => {
+        window.location.reload();
+    }
+
     const [title, setTitle] = useState("");
-    const [type, setType] = useState("");
+    const [category, setCategory] = useState("");
     const [item, setItem] = useState("");
     const [quantity, setQuantity] = useState("");
+    const [content, setContent] = useState([]);
+    const [postType, setPostType] = useState("Request")
     const [location, setLocation] = useState("");
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    // const history = useHistory();
 
-    // function handleInputChange(event) {
-    //     const { name, value } = event.target;
-    //     setFormObject({ ...formObject, [name]: value })
-    // };
+    // const history = useHistory();
 
     function handleFormSubmit(event) {
         event.preventDefault();
+        console.log(item, quantity)
+
+        setContent({ item: item, quantity: quantity })
         API.addNewListing({
             title: title,
-            type: type,
-            item: item,
-            quantity: quantity,
-            location: location
+            category: category,
+            content: content,
+            // item: item,
+            // quantity: quantity,
+            location: location,
+            postType: postType
         })
             .then(data => console.log(data))
             .catch((error) => {
@@ -53,12 +59,16 @@ export default function newlisting() {
                     <br />
                     <Form.Control className=" form-control-lg" type="text" id="title" onChange={({ target }) => setTitle(target.value)} name="title" placeholder="title" />
                     <br />
-                    <Form.Label className="font-weight-bold">Catagory:</Form.Label>
-                    <select className="form-select form-select-lg mb-3 form-control" onChange={({ target }) => setType(target.value)} name="type" >
+                    <Form.Label className="font-weight-bold" >PostType:</Form.Label>
+                    <br />
+                    <Form.Control className=" form-control-lg" type="text" id="postType" onChange={({ target }) => setPostType(target.value)} name="posttype" placeholder="post-type" />
+                    <br />
+                    <Form.Label className="font-weight-bold">Category:</Form.Label>
+                    <select className="form-select form-select-lg mb-3 form-control" onChange={({ target }) => setCategory(target.value)} name="category" >
                         <option value="">Type</option>
-                        <option value="1">Clothes</option>
-                        <option value="2">Equipment</option>
-                        <option value="3">Food</option>
+                        <option value="Clothes">Clothes</option>
+                        <option value="Equipment">Equipment</option>
+                        <option value="Food">Food</option>
                     </select>
 
                     <div className="row">
@@ -70,7 +80,6 @@ export default function newlisting() {
 
                         <div className="col-2">
                             <Form.Label className="font-weight-bold" >Quantity:</Form.Label>
-
                             <Form.Control className="form-control form-control-lg" type="number" onChange={({ target }) => setQuantity(target.value)} name="quantity" placeholder="qty" />
                         </div>
 
@@ -85,11 +94,12 @@ export default function newlisting() {
                             <Form.Control className="form-control form-control-lg" type="number" onChange={({ target }) => setQuantity(target.value)} name="quantity" placeholder="qty" />
                         </div>
                     </div>
+
                     <Form.Label className="font-weight-bold" >Location:</Form.Label>
                     <br />
                     <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setLocation(target.value)} name="location" placeholder="location" />
                     <br />
-                    <Button id="submit" type="submit" to="/" >Submit</Button>
+                    <Button id="submit" onClick={refreshPage} type="submit" to="/" >Submit</Button>
 
                 </Form>
 

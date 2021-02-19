@@ -20,7 +20,7 @@ export default {
 
   // Saves a NewListing to the database
   addNewListing: function (newListData) {
-    return axios.post("/api/NewListing", newListData);
+    return axios.post("/api/addPost", newListData);
   }
 
 };

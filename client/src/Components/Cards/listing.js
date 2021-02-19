@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../NavBar/navbar'
+// import NavBar from '../NavBar/navbar'
 import { Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 export default function listing() {
     return (
@@ -10,11 +10,11 @@ export default function listing() {
                     <Button className="">Edit</Button>
                 </Card.Text>
                 <ListGroup className="col-8 list-group-flush">
-                    <ListGroupItem className="">jjdjdjjdj
+                    <ListGroupItem className="">
                         {/* <li className="list-group-item"></li> */}
                     </ListGroupItem>
-                    <ListGroupItem>gggdgggd</ListGroupItem>
-                    <ListGroupItem>hhahhaha</ListGroupItem>
+                    <ListGroupItem></ListGroupItem>
+                    <ListGroupItem></ListGroupItem>
                 </ListGroup>
                 <Card.Text className="col-2">
                     <Button>open</Button>

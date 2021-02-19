@@ -21,6 +21,7 @@ module.exports = {
   },
 
   createPost: function (req, res) {
+    console.log("AddNewListing", req.body)
     db.Post.create({
       title: req.body.title,
       category: req.body.category,
