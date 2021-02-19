@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
-import 'firebase/auth'
-import 'firebase/storage'
+import "firebase/auth";
+import "firebase/storage";
 
 // Set the configuration for your app
 // TODO: Replace with your app's config object
@@ -8,7 +8,7 @@ var firebaseConfig = {
   apiKey: process.env.apiKey,
   authDomain: process.env.authDomain,
   databaseURL: process.env.databaseURL,
-  storageBucket: process.env.storageBucket
+  storageBucket: process.env.storageBucket,
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -19,8 +19,8 @@ var storage = firebase.storage();
 var storageRef = storage.ref();
 
 // Create a child reference
-var imagesRef = storageRef.child('images');
+var imagesRef = storageRef.child("images");
 // imagesRef now points to 'images'
 
 // Child references can also take paths delimited by '/'
-var spaceRef = storageRef.child('images/space.jpg');
+var spaceRef = storageRef.child("images/space.jpg");
