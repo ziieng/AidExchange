@@ -10,7 +10,7 @@ export default function newlisting() {
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [contents, setContents] = useState([{ item: "", quantity: "" }]);
-    const [postType, setPostType] = useState("");
+    const [postType, setPostType] = useState("Request");
     const [description, setDescription] = useState("");
     // const [location, setLocation] = useState("");
     const [error, setError] = useState("");
@@ -44,18 +44,19 @@ export default function newlisting() {
             }
             return line
         })
-        if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== "") {        
+        if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== []) {        
         API.addNewListing({
             userId: uid,
             title: title,
             category: category,
+            status: "open",
             postType: postType,
             contents: scrubbedContents,
             description: description,
         })
             .then(data => {
                 console.log(data)
-                // history.push('/profile/' + data._id)
+                history.push('/profile/' + data.data._id)
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -78,6 +79,8 @@ export default function newlisting() {
                 <Form className="" onSubmit={handleFormSubmit} >
                     <Form.Label className="font-weight-bold" >Title:</Form.Label>
                     <br />
+
+                    {error && <Alert variant="danger">{error}</Alert>}
                     <Form.Control className=" form-control-lg" type="text" id="title" onChange={({ target }) => setTitle(target.value)} name="title" placeholder="Aid Request/Offer" />
                     <br />
                     <Form.Label className="font-weight-bold">Category:</Form.Label>

@@ -26,27 +26,14 @@ router
   .put(userController.update)
   .delete(userController.remove);
 
-<<<<<<< HEAD
-//Matchs with "/api/" display to dashboard
-
-router
-  .route("/")
-  .get(postController.findAllPost)
-  .post(postController.reservePost);
-=======
 // Matches with "/api/post"
 
-router
-  .route("/search/post?:uid")
-  .get(postController.findPostByUser)
+router.route("/search/post?:uid").get(postController.findPostByUser);
 
-router
-  .route("/search/reply?:uid")
-  .get(postController.findReplyByUser)
->>>>>>> develop
+router.route("/search/reply?:uid").get(postController.findReplyByUser);
 
-// Matches with "/api/NewListing"
-router.route("/NewListing").post(postController.createPost);
+// Matches with "/api/addPost"
+router.route("/addPost").post(postController.createPost);
 
 // Mathces with "/api/NewListing/:id"
 router
