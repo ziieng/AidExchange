@@ -7,7 +7,7 @@ export default function Header(props) {
             <Container className="container">
                 <h1 className="display-4">AidExchange</h1>
                 <p className="lead">Helping you help others.</p>
-            <hr className='my-4 underline'></hr>
+                <hr className='underline'></hr>
             </Container>
         </Jumbotron>
     );
