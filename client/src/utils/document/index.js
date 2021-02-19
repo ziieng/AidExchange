@@ -1,23 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { PDFDownloadLink, Text, Document, Page } from "@react-pdf/renderer";
-import API from "../API";
+// import React, { useState, useEffect } from "react";
+import React from "react";
 
-// function getData() {
-//   const [listingData, setListingData] = useState("");
-
-//   useEffect(() => {
-//     //API call to read from database?
-
-//     API.getAllListing()
-//       .then((res) => {
-//         console.log("this is data from newlisting", res);
-//         setListingData(res.data);
-//       })
-//       .catch((err) => {
-//         console.log("error from document:", err);
-//       });
-//   }, []);
-// }
+import {
+  PDFDownloadLink,
+  Text,
+  Document,
+  Page,
+  StyleSheet,
+} from "@react-pdf/renderer";
 
 const example = {
   userId: "mEOfYqMX14eTKymODesyqTTZ8Fh2",
@@ -46,16 +36,30 @@ const example = {
   createDate: "2021-02-14 12:00:57.963Z",
 };
 
+// Create styles
+const styles = StyleSheet.create({
+  page: {
+    margin: 10,
+    flexDirection: "row",
+    backgroundColor: "#E4E4E4",
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+  },
+});
+
 const MyDoc = () => (
   // getData(),
   <Document>
-    <Page wrap>
+    <Page size="A4">
       {/* <Text>{listingData}</Text> */}
 
       <Text>{example.title}</Text>
-      <Text>
+      <Text style={styles.page}>
         {example.contents.map((line) => {
-          return line.item + " ";
+          return <Text> {line.quantity + " " + line.item + "\n "} </Text>;
         })}
       </Text>
     </Page>
