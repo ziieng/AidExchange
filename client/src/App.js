@@ -1,21 +1,57 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import 'bootstrap'
+import fire from "./firebase";
+import Header from './Components/Jumbotron/header'
+import Footer from './Components/Footer/footer'
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import ListingDetail from "./pages/ListingDetail";
+import NewListing from "./pages/NewListing";
+import Dashboard from "./pages/Dashboard";
+import ProfileDetail from "./pages/ProfileDetail";
+import EditProfile from "./pages/EditProfile";
+import ForgotPassword from "./pages/ForgotPassword";
+import ListingDetails from './pages/ListingDetail'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  fire.auth().onAuthStateChanged((user) => {
+    return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  });
+
+  return (
+    <Router>
+      {/* Check if user is signed in  */}
+      {!isLoggedIn
+        ? (<>
+          {// If they're not signed in, they can only see login or signup
+          }
+          <Header />
+          <Switch>
+            <Route path="/Signup"><Signup /></Route>
+            <Route path="/ForgotPassword"><ForgotPassword /></Route>
+            <Route path="/"><Login /></Route>
+          </Switch>
+        </>
+        )
+        : (<>
+          {// If they are signed in, they can see any page that *isn't* login or signup
+          }
+          <Switch>
+            <Route path="/listing/:id"><ListingDetail /></Route>
+            <Route exact path="/newlisting"><NewListing /></Route>
+            <Route path="/profile/:id"><ProfileDetail /></Route>
+            <Route path="/editprofile"><EditProfile /></Route>
+            <Route path="/"><Dashboard /></Route>
+          </Switch>
+        </>
+        )}
+      <Footer />
+    </Router>
+  );
 }
 
 export default App;
