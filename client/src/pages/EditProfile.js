@@ -10,7 +10,7 @@ export default function editProfile() {
   const [acctType, setAcctType] = useState("");
   const [description, setDescription] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [links, setLinks] = useState([]);
+  const [links, setLinks] = useState([{ label: "", url: "" }]);
   // const [location, setLocation] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -29,8 +29,20 @@ export default function editProfile() {
         setAcctType(userData.acctType)
         setDescription(userData.description)
         setAvatar(userData.avatar)
+        if (userData.links) {
         setLinks(userData.links)
+        }
       })
+  }
+
+  function addLink() {
+    setLinks([...links, { label: "", url: "" }])
+  }
+
+  function handleLinkChange(e) {
+    const updatedLinks = [...links];
+    updatedLinks[e.target.dataset.i][e.target.dataset.box] = e.target.value;
+    setLinks(updatedLinks);
   }
 
   function handleFormSubmit(event) {
@@ -76,31 +88,23 @@ export default function editProfile() {
               <option value="Charity">501(c)(3) Charity</option>
               <option value="Organization">Non-501 Organization</option>
             </select>
-
-            <div className="row">
-              <div className="col-10">
-                <Form.Label className="font-weight-bold" >Item:</Form.Label>
-                {/* <Form.Control className="form-control form-control-lg" type="text" id="item" onChange={({ target }) => setItem(target.value)} name="item" placeholder="item" /> */}
+            {links.map((row, i) => {
+              const labelId = 'label-' + i
+              const urlId = 'url-' + i
+              return (<div className="row" key={'link-' + i}>
+                <div className="col-6">
+                  <Form.Label className="font-weight-bold" >Link {i + 1} Label:</Form.Label>
+                  <Form.Control className="form-control form-control-lg" type="text" id={labelId} data-box="label" data-i={i} name={labelId} onChange={handleLinkChange} value={links[i].label} placeholder="Website" />
                 <br />
               </div>
-
-              <div className="col-2">
-                <Form.Label className="font-weight-bold" >Quantity:</Form.Label>
-
-                {/* <Form.Control className="form-control form-control-lg" type="number" onChange={({ target }) => setQuantity(target.value)} name="quantity" placeholder="qty" /> */}
+                <div className="col-6">
+                  <Form.Label className="font-weight-bold" >Link {i + 1} URL:</Form.Label>
+                  <Form.Control className="form-control form-control-lg" type="text" id={urlId} data-box="url" data-i={i} name={urlId} onChange={handleLinkChange} value={links[i].url} placeholder="http://myradsite.com" />
               </div>
+              </div>)
+            })}
+            <Button id="newLink" type="button" disabled={loading} onClick={addLink}>Add Link</Button>
 
-            </div>
-
-            <div className="row">
-              <div className="col-10">
-                {/* <Form.Control className="form-control form-control-lg" type="text" id="item" onChange={({ target }) => setItem(target.value)} name="item" placeholder="item" /> */}
-                <br />
-              </div>
-              <div className="col-2">
-                {/* <Form.Control className="form-control form-control-lg" type="number" onChange={({ target }) => setQuantity(target.value)} name="quantity" placeholder="qty" /> */}
-              </div>
-            </div>
             <br />
             <Button id="submit" type="submit" disabled={loading} >Save Changes</Button>
 
