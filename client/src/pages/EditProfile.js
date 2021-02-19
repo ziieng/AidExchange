@@ -3,6 +3,7 @@ import { Container, Button, Form, Card, Alert } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
 import fire from '../firebase.js';
+import { useHistory } from "react-router-dom";
 
 export default function editProfile() {
   // Setting our component's initial state
@@ -13,8 +14,10 @@ export default function editProfile() {
   const [links, setLinks] = useState([{ label: "", url: "" }]);
   // const [location, setLocation] = useState("");
   const [error, setError] = useState("");
+  const [linkError, setLinkError] = useState(false);
   const [loading, setLoading] = useState(false);
   let uid = fire.auth().currentUser.uid
+  let history = useHistory();
 
   useEffect(() => {
     loadUser()
@@ -29,7 +32,7 @@ export default function editProfile() {
         setAcctType(userData.acctType)
         setDescription(userData.description)
         setAvatar(userData.avatar)
-        if (userData.links) {
+        if (userData.links !== []) {
         setLinks(userData.links)
         }
       })
@@ -37,27 +40,43 @@ export default function editProfile() {
 
   function addLink() {
     setLinks([...links, { label: "", url: "" }])
+    setLinkError(true)
   }
 
   function handleLinkChange(e) {
-    const updatedLinks = [...links];
+    let updatedLinks = [...links];
     updatedLinks[e.target.dataset.i][e.target.dataset.box] = e.target.value;
     setLinks(updatedLinks);
+    updatedLinks = links.filter(function (row) {
+      return row.label === "" || row.url === ""
+    })
+    if (updatedLinks.length > 0) { setLinkError(true) } else { setLinkError(false) }
   }
 
   function handleFormSubmit(event) {
     event.preventDefault();
     setLoading(true)
+
     if (displayName !== "" && acctType !== "") {
+      let scrubbedLinks = []
+      links.map((line) => {
+        if (line.label !== "" && line.url !== "") {
+          scrubbedLinks.push(line)
+        }
+        return line
+      })
       API.updateUser({
         userId: uid,
         displayName: displayName,
         acctType: acctType,
         description: description,
         avatar: avatar,
-        links: links
+        links: scrubbedLinks
       })
-        .then(data => console.log(data))
+        .then(data => {
+          console.log(data)
+          history.push('/profile/' + fire.auth().currentUser.uid)
+        })
         .catch((error) => {
           var errorCode = error.code;
           var errorMessage = error.message;
@@ -80,14 +99,19 @@ export default function editProfile() {
           <Form className="" onSubmit={handleFormSubmit} >
             <Form.Label className="font-weight-bold" >Display Name:</Form.Label>
             <br />
-            <Form.Control className=" form-control-lg" type="text" id="title" onChange={({ target }) => setDisplayName(target.value)} name="displayName" value={displayName} />
+            <Form.Control className="form-control-lg" type="text" id="displayName" onChange={({ target }) => setDisplayName(target.value)} name="displayName" value={displayName} />
             <br />
-            <Form.Label className="font-weight-bold">Category:</Form.Label>
-            <select className="form-select form-select-lg mb-3 form-control" onChange={({ target }) => setAcctType(target.value)} value={acctType} name="type" >
+            <Form.Label className="font-weight-bold">Account Type:</Form.Label>
+            <Form.Control as="select" className="form-control-lg" onChange={({ target }) => setAcctType(target.value)} value={acctType} name="type" >
               <option value="Individual">Personal User</option>
               <option value="Charity">501(c)(3) Charity</option>
               <option value="Organization">Non-501 Organization</option>
-            </select>
+            </Form.Control>
+            <br />
+            <Form.Label className="font-weight-bold" >Introduction:</Form.Label>
+            <br />
+            <Form.Control className="form-control-lg" as="textarea" rows={3} id="description" onChange={({ target }) => setDescription(target.value)} name="description" value={description} />
+            <br />
             {links.map((row, i) => {
               const labelId = 'label-' + i
               const urlId = 'url-' + i
@@ -103,6 +127,7 @@ export default function editProfile() {
               </div>
               </div>)
             })}
+            {linkError && <Alert variant="warning">Links that don't have BOTH a label and a URL won't be saved.</Alert>}
             <Button id="newLink" type="button" disabled={loading} onClick={addLink}>Add Link</Button>
 
             <br />
