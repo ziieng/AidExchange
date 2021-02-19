@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { PDFDownloadLink, Text, Document, Page } from "@react-pdf/renderer";
+import API from "../API";
 
-//API call to read from database?
+// function getData() {
+//   const [listingData, setListingData] = useState("");
+
+//   useEffect(() => {
+//     //API call to read from database?
+
+//     API.getAllListing()
+//       .then((res) => {
+//         console.log("this is data from newlisting", res);
+//         setListingData(res.data);
+//       })
+//       .catch((err) => {
+//         console.log("error from document:", err);
+//       });
+//   }, []);
+// }
 
 const example = {
   userId: "mEOfYqMX14eTKymODesyqTTZ8Fh2",
@@ -31,12 +47,15 @@ const example = {
 };
 
 const MyDoc = () => (
+  // getData(),
   <Document>
     <Page wrap>
+      {/* <Text>{listingData}</Text> */}
+
       <Text>{example.title}</Text>
       <Text>
         {example.contents.map((line) => {
-          return line.item;
+          return line.item + " ";
         })}
       </Text>
     </Page>
@@ -45,9 +64,9 @@ const MyDoc = () => (
 
 const Print = () => (
   <div>
-    <PDFDownloadLink document={<MyDoc />} fileName="currentList.pdf">
+    <PDFDownloadLink document={<MyDoc />} fileName="example.pdf">
       {({ blob, url, loading, error }) =>
-        loading ? "Loading document..." : "Download now!"
+        loading ? "Loading document..." : "Download pdf now!"
       }
     </PDFDownloadLink>
   </div>
