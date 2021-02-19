@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const db = require("../models");
 const userSeed = require("./userSeed.json")
-const postSeed = require("./postSeed.json")
+const postSeed = require("./testSeed.json")
 
 // Connect to the Mongo DB
 mongoose.connect(
