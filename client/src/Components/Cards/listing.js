@@ -1,13 +1,14 @@
 import React from 'react';
+
 import { Card, Button, Badge } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
-export default function listing(props) {
+export default function Listing(props) {
     let post = props.value
     let contentList = props.value.contents
 
     return (
-        <Card className='m-1'>
+        <Card className='myList m-1'>
             <h5 className="px-2 pt-2 pb-0"><Link to={"/listing/" + post._id}>{post.title}</Link> <Badge variant="light">{post.status}</Badge>
                 <Button className="float-right" size="sm">edit/close</Button></h5>
             <ul className="pt-0">
