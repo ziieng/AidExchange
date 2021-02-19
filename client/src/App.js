@@ -14,6 +14,7 @@ import ProfileDetail from "./pages/ProfileDetail";
 import EditProfile from "./pages/EditProfile";
 import ForgotPassword from "./pages/ForgotPassword";
 import ListingDetails from "./pages/ListingDetail";
+import Search from "./pages/Search";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,7 +25,6 @@ function App() {
 
   return (
     <Router>
-      {/* Check if user is signed in  */}
       {!isLoggedIn ? (
         <>
           {
