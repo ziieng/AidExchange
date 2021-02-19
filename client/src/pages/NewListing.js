@@ -19,6 +19,11 @@ export default function newlisting() {
     let uid = fire.auth().currentUser.uid
     let history = useHistory();
 
+    //Refresh the page 
+    const refreshPage = () => {
+        window.location.reload();
+    }
+
     function addItem() {
         setContents([...contents, { item: "", quantity: "" }])
         setContentError(true)
@@ -44,26 +49,30 @@ export default function newlisting() {
             }
             return line
         })
-        if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== []) {        
-        API.addNewListing({
-            userId: uid,
-            title: title,
-            category: category,
-            status: "open",
-            postType: postType,
-            contents: scrubbedContents,
-            description: description,
-        })
-            .then(data => {
-                console.log(data)
-                history.push('/profile/' + data.data._id)
+        if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== []) {
+            API.addNewListing({
+                userId: uid,
+                title: title,
+                category: category,
+                status: "open",
+                postType: postType,
+                contents: scrubbedContents,
+                description: description,
             })
-            .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log(errorCode, errorMessage)
-                setError(errorMessage)
-            });
+                .then(data => {
+                    console.log(data)
+                    history.push('/listing/' + data.data._id)
+                })
+                .then(data => {
+                    console.log(data)
+                    // history.push('/profile/' + data._id)
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.log(errorCode, errorMessage)
+                    setError(errorMessage)
+                });
         } else {
             setError("Title, Category, and Contents required!")
         }
@@ -108,12 +117,12 @@ export default function newlisting() {
                             <div className="col-6">
                                 <Form.Label className="font-weight-bold" >Item {i + 1} Description:</Form.Label>
                                 <Form.Control className="form-control form-control-lg" type="text" id={itemId} data-box="item" data-i={i} name={itemId} onChange={handleContentChange} placeholder="Things" />
-                                    <br />
-                                </div>
+                                <br />
+                            </div>
                             <div className="col-6">
                                 <Form.Label className="font-weight-bold" >Item {i + 1} Quantity:</Form.Label>
                                 <Form.Control className="form-control form-control-lg" type="text" id={qtyId} data-box="quantity" data-i={i} name={qtyId} onChange={handleContentChange} placeholder="any" />
-                                </div>
+                            </div>
                         </div>)
                     })}
                     {contentError && <Alert variant="warning">Items that don't have BOTH a label and a quantity won't be saved.</Alert>}
@@ -123,7 +132,7 @@ export default function newlisting() {
                     <br />
                     <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setLocation(target.value)} name="location" placeholder="location" />
                     <br /> */}
-                    <Button id="submit" type="submit" to="/" disabled={loading}>Submit</Button>
+                    <Button id="submit" type="submit" onClick={refreshPage} to="/" disabled={loading}>Submit</Button>
 
                 </Form>
 

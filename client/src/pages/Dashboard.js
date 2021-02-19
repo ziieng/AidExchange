@@ -28,7 +28,7 @@ export default function Dashboard() {
         console.log(res)
         setMyReplies(res.data)
       })
-}
+  }
 
   return (<>
     <NavBar />
@@ -67,6 +67,6 @@ export default function Dashboard() {
             <h3>No Results to Display</h3>
           )}
       </Row>
-    </Container>)
+    </Container>
   </>)
 }
