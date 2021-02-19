@@ -26,17 +26,17 @@ router
   .put(userController.update)
   .delete(userController.remove);
 
-// Mathces with "/api/post"
+//Matchs with "/api/" display to dashboard
 
 router
-  .route("/post")
+  .route("/")
   .get(postController.findAllPost)
   .post(postController.reservePost);
 
 // Matches with "/api/NewListing"
 router.route("/NewListing").post(postController.createPost);
 
-// Mathces with "/api/post/:id"
+// Mathces with "/api/NewListing/:id"
 router
   .route("/NewListing/:id")
   .get(postController.findPostById)
