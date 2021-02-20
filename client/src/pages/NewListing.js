@@ -5,7 +5,7 @@ import API from "../utils/API"
 import fire from '../firebase.js';
 import { useHistory } from "react-router-dom";
 import MyMapComponent from "../Components/Map";
-import { addrFromCoords, coordsFromAddr } from "../utils/GeoCodeSearch"
+import GeoSearch from "../utils/GeoCodeSearch"
 import { FaSearchLocation } from "react-icons/fa"
 
 export default function newlisting() {
@@ -101,14 +101,14 @@ export default function newlisting() {
     function handleSearch() {
         if (addr !== "") {
             setMapRender(false)
-            // coordPromise(addr)
-            //     .then((coords) => {
-            //         console.log(coords)
-            //         setLocation(coords)
-            //         setAddrError(false)
-            //         setMapRender(true)
-            //     })
-            //     .catch()
+            GeoSearch.coordsFromAddr(addr)
+                .then((coords) => {
+                    console.log(coords)
+                    setLocation(coords)
+                    setAddrError(false)
+                    setMapRender(true)
+                })
+                .catch()
         } else {
             setAddrError(true)
         }
