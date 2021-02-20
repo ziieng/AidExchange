@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const db = require("../models");
 const userSeed = require("./userSeed.json");
-const postSeed = require("./testSeed.json");
+const postSeed = require("./postSeed.json");
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/aidexchange");

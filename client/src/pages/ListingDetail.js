@@ -1,31 +1,36 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, Table, Button, Container, Row, Col } from "react-bootstrap";
 import TopNav from "../Components/NavBar/navbar";
 import API from "../utils/API";
 import { useParams } from "react-router-dom";
 import Print from "../utils/document";
-import MyMapComponent from "../Components/Map"
+import MyMapComponent from "../Components/Map";
 
 export default function ListingDetail() {
   let { id } = useParams();
-  const [listing, setListing] = useState({ "contents": [], "postBy": { "displayName": "" } })
-  const [location, setLocation] = useState({ "lat": 0, "lng": 0 })
-  const [mapRender, setMapRender] = useState(false)
+  const [listing, setListing] = useState({
+    contents: [],
+    postBy: { displayName: "" },
+  });
+  const [location, setLocation] = useState({ lat: 0, lng: 0 });
+  const [mapRender, setMapRender] = useState(false);
   useEffect(() => {
     loadListing();
   }, []);
 
   function loadListing() {
     API.getListing(id)
-      .then(res => {
-        setListing(res.data)
-        setLocation({ "lat": res.data.location.coordinates[1], "lng": res.data.location.coordinates[0] })
+      .then((res) => {
+        setListing(res.data);
+        setLocation({
+          lat: res.data.location.coordinates[1],
+          lng: res.data.location.coordinates[0],
+        });
       })
       //extra .then so the location update finishes before the map renders
       .then(() => {
-        setMapRender(true)
-      })
+        setMapRender(true);
+      });
   }
 
   return (
@@ -55,14 +60,12 @@ export default function ListingDetail() {
                 <Button className="editProfile" variant="dark">
                   Edit Listing
                 </Button>
-
-                {/* To have the download link */}
-                {mapRender && <Print listing={listing} />}
-                {/* ------------------------- */}
               </Card.Body>
             </Card>
             <Card className="map">
-              {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
+              {mapRender && (
+                <MyMapComponent isMarkerShown={true} coords={location} />
+              )}
             </Card>
           </Row>
           <br></br>
@@ -79,6 +82,9 @@ export default function ListingDetail() {
                     Donate/Request
                   </Button>
                 </h2>
+                {/* This is the download link */}
+                {mapRender && <Print listing={listing} />}
+                {/* ------------------------- */}
                 <Table striped bordered hover>
                   <thead>
                     <tr>
