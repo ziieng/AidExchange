@@ -78,7 +78,7 @@ export default function signup() {
                             </select>
                         </Form.Group>
 
-                        <Button id="createBtn" type="submit" className="" disabled={loading}>Sign Up</Button>
+                        <Button id="createBtn" type="submit" disabled={loading}>Sign Up</Button>
 
                         <br />
 
