@@ -25,32 +25,10 @@ export default function newlisting() {
     let uid = fire.auth().currentUser.uid
     let history = useHistory();
 
-    const coordPromise = (addr) => {
-        return new Promise((resolve, reject) => {
-            coordsFromAddr(addr, (err, coords) => {
-                if (err) reject(err);
-                else {
-                    setLocation(coords)
-                    resolve(coords);
-                }
-            });
-        })
-    }
-
-    function addItem() {
-        setContents([...contents, { item: "", quantity: "" }])
-        setContentError(true)
-    }
-
-    //Refresh the page
-    const refreshPage = () => {
-        window.location.reload();
-    };
-
-    function addItem() {
-        setContents([...contents, { item: "", quantity: "" }]);
-        setContentError(true);
-    }
+  function addItem() {
+    setContents([...contents, { item: "", quantity: "" }]);
+    setContentError(true);
+  }
 
     function handleContentChange(e) {
         let updatedContents = [...contents];
@@ -123,22 +101,17 @@ export default function newlisting() {
     function handleSearch() {
         if (addr !== "") {
             setMapRender(false)
-            coordPromise(addr)
-                .then((coords) => {
-                    console.log(coords)
-                    setLocation(coords)
-                    setAddrError(false)
-                    setMapRender(true)
-                })
-                .catch()
+            // coordPromise(addr)
+            //     .then((coords) => {
+            //         console.log(coords)
+            //         setLocation(coords)
+            //         setAddrError(false)
+            //         setMapRender(true)
+            //     })
+            //     .catch()
         } else {
             setAddrError(true)
         }
-    }
-
-    function handleTest(e) {
-        e.preventDefault()
-        console.log(location)
     }
 
     return (

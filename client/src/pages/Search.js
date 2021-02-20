@@ -3,7 +3,6 @@ import { Card, FormControl, Button, Table, Form } from 'react-bootstrap';
 import TopNav from '../Components/NavBar/navbar';
 import Listing from '../Components/Cards/listing'
 
-
 export default function Search() {
     return (
         <>
