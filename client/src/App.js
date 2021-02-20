@@ -15,7 +15,6 @@ import EditProfile from "./pages/EditProfile";
 import EditListing from "./pages/EditListing";
 import ForgotPassword from "./pages/ForgotPassword";
 import Search from "./pages/Search";
-import EditListing from './pages/EditListing'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
