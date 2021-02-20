@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from "react-router-dom";
 import fire from '../firebase.js';
-import { Alert, Button, Card, Container, Form } from "react-bootstrap"
+
+import { Alert, Button, Col, Container, Form } from "react-bootstrap"
+
 
 
 export default function login() {
@@ -29,7 +31,7 @@ export default function login() {
     return (
         <>
             <Container className="d-flex justify-content-center">
-                <Card className="align-items-center my-4 p-5 bg-light rounded">
+                <Col sm md='auto' lg xl='6' className="align-items-center my-4 p-5 bg-light rounded">
 
                     <h1 className="text-center mb-4">Sign In</h1>
 
@@ -48,11 +50,11 @@ export default function login() {
                     </Form>
                     <div className="text-center mt-3"><Link to="/ForgotPassword">Forgot Password?</Link></div>
                     <div className="text-center mt-3">
-                        <p>Not a user?</p>
+                        <p>Not a user?
                     Create an account <Link to="/Signup">here.</Link>
-
+                        </p>
                     </div>
-                </Card>
+                </Col>
             </Container >
         </>
     )

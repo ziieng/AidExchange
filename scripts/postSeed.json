@@ -1,6 +1,6 @@
 [
   {
-    "userId": "pKBPUYXbTqPBC77qqakGKN81VpH2",
+    "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
     "title": "Nurse's Office Emergency Clothes",
     "category": [
       "Clothing"
@@ -36,12 +36,12 @@
       }
     ],
     "postType": "Request",
-    "status": "open",
+    "status": "Open",
     "location": {
       "type": "Point",
       "coordinates": [
-        -71.70313323289052,
-        43.76513732361775
+        -122.11935698105621,
+        47.67481344133391
       ]
     },
     "createDate": "2021-02-14 06:00:57.963Z"
@@ -67,7 +67,22 @@
       }
     ],
     "postType": "Request",
-    "status": "open",
+    "replies": [
+      {
+        "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
+        "replyType": "Give",
+        "status": "Pending",
+        "location": {
+          "type": "Point",
+          "coordinates": [
+            -122.11935698105621,
+            47.67481344133391
+          ]
+        },
+        "createDate": "2021-02-15 12:00:57.963Z"
+      }
+    ],
+    "status": "Open",
     "location": {
       "type": "Point",
       "coordinates": [
@@ -97,8 +112,23 @@
         "quantity": "any"
       }
     ],
+    "replies": [
+      {
+        "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
+        "replyType": "Give",
+        "status": "Pending",
+        "location": {
+          "type": "Point",
+          "coordinates": [
+            -71.70313323289052,
+            43.76513732361775
+          ]
+        },
+        "createDate": "2021-02-15 12:00:57.963Z"
+      }
+    ],
     "postType": "Request",
-    "status": "open",
+    "status": "Open",
     "location": {
       "type": "Point",
       "coordinates": [

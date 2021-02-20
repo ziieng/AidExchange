@@ -46,47 +46,47 @@ export default function signup() {
 
     return (
         <>
-        <Container className=' d-flex justify-content-center'>
-            <Col sm md='auto' lg xl='6' className="align-items-center mb-5 mt-5 py-3 px-4 bg-light rounded">
-                <h1 className="text-center mb-4">Create New Account</h1>
+            <Container className=' d-flex justify-content-center'>
+                <Col sm md='auto' lg xl='6' className="align-items-center mb-5 mt-5 py-3 px-4 bg-light rounded">
+                    <h1 className="text-center mb-4">Create New Account</h1>
 
-                {error && <Alert variant="danger">{error}</Alert>}
-                <Form className="login text-center" onSubmit={handleSubmit}>
-                    <Form.Group className="">
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    <Form className="login text-center" onSubmit={handleSubmit}>
+                        <Form.Group className="">
 
-                        <Form.Control type="text" onChange={({ target }) => setEmail(target.value)} className="form-control" name="email" placeholder="Email" />
-                    </Form.Group>
-                    <Form.Group className="">
+                            <Form.Control type="text" onChange={({ target }) => setEmail(target.value)} className="form-control" name="email" placeholder="Email" />
+                        </Form.Group>
+                        <Form.Group className="">
 
-                        <Form.Control type="text" onChange={({ target }) => setDisplay(target.value)} className="form-control" name="displayName" placeholder="Display Name" />
-                    </Form.Group>
-                    <Form.Group className="">
+                            <Form.Control type="text" onChange={({ target }) => setDisplay(target.value)} className="form-control" name="displayName" placeholder="Display Name" />
+                        </Form.Group>
+                        <Form.Group className="">
 
-                        <Form.Control type="password" onChange={({ target }) => setPassword(target.value)} className="form-control" name="password" placeholder="Password" />
-                    </Form.Group>
-                    <Form.Group className="">
+                            <Form.Control type="password" onChange={({ target }) => setPassword(target.value)} className="form-control" name="password" placeholder="Password" />
+                        </Form.Group>
+                        <Form.Group className="">
 
-                        <Form.Control type="password" onChange={({ target }) => setPasswordConfirm(target.value)} className="form-control" name="passwordConfirm" placeholder="Confirm Password" />
-                    </Form.Group>
-                    <Form.Group >
+                            <Form.Control type="password" onChange={({ target }) => setPasswordConfirm(target.value)} className="form-control" name="passwordConfirm" placeholder="Confirm Password" />
+                        </Form.Group>
+                        <Form.Group >
 
-                        <select onChange={({ target }) => setAcctType(target.value)} className="form-select form-select-lg mb-3 form-control" name="acctType" >
-                            <option value="">Type</option>
-                            <option value="Individual">Personal User</option>
-                            <option value="Charity">501(c)(3) Organizer</option>
-                            <option value="Organization">Non-501 Organizer</option>
-                        </select>
-                    </Form.Group>
+                            <select onChange={({ target }) => setAcctType(target.value)} className="form-select form-select-lg mb-3 form-control" name="acctType" >
+                                <option value="">Type</option>
+                                <option value="Individual">Personal User</option>
+                                <option value="Charity">501(c)(3) Organizer</option>
+                                <option value="Organization">Non-501 Organizer</option>
+                            </select>
+                        </Form.Group>
 
-                    <Button id="createBtn" type="submit" className="" disabled={loading}>Sign Up</Button>
+                        <Button id="createBtn" type="submit" disabled={loading}>Sign Up</Button>
 
-            </Form>
-            <br />
+                        <br />
 
-            <p>Or log in <Link to="/">here.</Link></p>
-            <br />
-            </Col>
-        </Container>
+                        <p>Or log in <Link to="/">here.</Link></p>
+                        <br />
+                    </Form>
+                </Col>
+            </Container>
         </>
     )
 }
