@@ -35,7 +35,6 @@ export default function ProfileDetail(props) {
   return (
     <>
       <TopNav />
-      <Container>
         <Card className="profileDetails">
           <Card.Body>
             <Card.Img
@@ -80,16 +79,21 @@ export default function ProfileDetail(props) {
             )}
           </Card.Body>
         </Card>
+        <Card id='orgListing'>
         {userPosts.length ? (
           <>
             {userPosts.map((post) => {
-              return <Listing key={post._id} value={post} />;
+              return <>
+              <br></br>
+              <h2>Organization Listings</h2>
+              <Listing key={post._id} value={post} />
+              </>
             })}
           </>
         ) : (
           <h3>No Listings to Display</h3>
         )}
-      </Container>
+        </Card>
     </>
   );
 }
