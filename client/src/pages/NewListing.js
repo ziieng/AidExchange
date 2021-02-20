@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
-import { Container, Button, Form, Alert } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Container, Button, Form, Alert, InputGroup } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
 import fire from '../firebase.js';
 import { useHistory } from "react-router-dom";
+import MyMapComponent from "../Components/Map";
+import { addrFromCoords, coordsFromAddr } from "../utils/GeoCodeSearch"
+import { FaSearchLocation } from "react-icons/fa"
 
 export default function newlisting() {
     // Setting our component's initial state
@@ -12,12 +15,27 @@ export default function newlisting() {
     const [contents, setContents] = useState([{ item: "", quantity: "" }]);
     const [postType, setPostType] = useState("Request");
     const [description, setDescription] = useState("");
-    // const [location, setLocation] = useState("");
+    const [addr, setAddr] = useState("")
+    const [addrError, setAddrError] = useState(false)
+    const [location, setLocation] = useState({ "lat": 0, "lng": 0 })
+    const [mapRender, setMapRender] = useState(false)
     const [error, setError] = useState("");
     const [contentError, setContentError] = useState(true);
     const [loading, setLoading] = useState(false);
     let uid = fire.auth().currentUser.uid
     let history = useHistory();
+
+    const coordPromise = (addr) => {
+        return new Promise((resolve, reject) => {
+            coordsFromAddr(addr, (err, coords) => {
+                if (err) reject(err);
+                else {
+                    setLocation(coords)
+                    resolve(coords);
+                }
+            });
+        })
+    }
 
     function addItem() {
         setContents([...contents, { item: "", quantity: "" }])
@@ -44,30 +62,69 @@ export default function newlisting() {
             }
             return line
         })
-        if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== []) {        
-        API.addNewListing({
-            userId: uid,
-            title: title,
-            category: category,
-            status: "open",
-            postType: postType,
-            contents: scrubbedContents,
-            description: description,
-        })
-            .then(data => {
-                console.log(data)
-                history.push('/listing/' + data.data._id)
+        if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== [] && location !== { "lat": 0, "lng": 0 }) {
+            API.addNewListing({
+                userId: uid,
+                title: title,
+                category: category,
+                status: "open",
+                postType: postType,
+                contents: scrubbedContents,
+                location: [location.lng, location.lat],
+                description: description,
             })
-            .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log(errorCode, errorMessage)
-                setError(errorMessage)
-            });
+                .then(data => {
+                    history.push('/listing/' + data.data._id)
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.log(errorCode, errorMessage)
+                    setError(errorMessage)
+                });
         } else {
             setError("Title, Category, and Contents required!")
         }
         setLoading(false)
+    }
+
+    useEffect(() => {
+        loadUserLocation()
+    }, [])
+
+    function loadUserLocation() {
+        API.getUser(uid)
+            .then(res => {
+                if (res.data.location) {
+                    setLocation({ "lat": res.data.location.coordinates[1], "lng": res.data.location.coordinates[0] })
+                } else {
+                    setLocation({ "lat": 47.62059307965106, "lng": -122.34932031534254 })
+                }
+            })
+            .then(() => {
+                setMapRender(true)
+            })
+    }
+
+    function handleSearch() {
+        if (addr !== "") {
+            setMapRender(false)
+            coordPromise(addr)
+                .then((coords) => {
+                    console.log(coords)
+                    setLocation(coords)
+                    setAddrError(false)
+                    setMapRender(true)
+                })
+                .catch()
+        } else {
+            setAddrError(true)
+        }
+    }
+
+    function handleTest(e) {
+        e.preventDefault()
+        console.log(location)
     }
 
     return (
@@ -108,22 +165,33 @@ export default function newlisting() {
                             <div className="col-6">
                                 <Form.Label className="font-weight-bold" >Item {i + 1} Description:</Form.Label>
                                 <Form.Control className="form-control form-control-lg" type="text" id={itemId} data-box="item" data-i={i} name={itemId} onChange={handleContentChange} placeholder="Things" />
-                                    <br />
-                                </div>
+                                <br />
+                            </div>
                             <div className="col-6">
                                 <Form.Label className="font-weight-bold" >Item {i + 1} Quantity:</Form.Label>
                                 <Form.Control className="form-control form-control-lg" type="text" id={qtyId} data-box="quantity" data-i={i} name={qtyId} onChange={handleContentChange} placeholder="any" />
-                                </div>
+                            </div>
                         </div>)
                     })}
                     {contentError && <Alert variant="warning">Items that don't have BOTH a label and a quantity won't be saved.</Alert>}
                     <Button id="newItem" type="button" disabled={loading} onClick={addItem}>Add Item</Button>
                     <br />
-                    {/* <Form.Label className="font-weight-bold" >Location:</Form.Label>
+                    <Form.Label className="font-weight-bold" >Location:</Form.Label>
                     <br />
-                    <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setLocation(target.value)} name="location" placeholder="location" />
-                    <br /> */}
-                    <Button id="submit" type="submit" to="/" disabled={loading}>Submit</Button>
+                    <InputGroup className="mb-3">
+                        <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="location" />
+                        <InputGroup.Append>
+                            <Button variant="outline-secondary" onClick={handleSearch}>Find <FaSearchLocation /></Button>
+                        </InputGroup.Append>
+                    </InputGroup>
+                    {addrError && <Alert variant="danger">Address not recognized.</Alert>}
+                    <br />
+                    <div className="listMap" style={{ height: "300px", width: "300px" }}>
+                        {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
+                    </div>
+                    <br />
+                    <Button id="submit" type="submit" disabled={loading}>Submit</Button>
+                    <Button id="test" onClick={handleTest} disabled={loading}>What even</Button>
 
                 </Form>
 

@@ -7,10 +7,20 @@ const Marker = () => {
 }
 
 class SimpleMap extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      center: {
+        lat: this.props.coords.lat,
+        lng: this.props.coords.lng
+      }
+    }
+  }
+
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: 47.568326599490476,
+      lng: -122.64486808604016
     },
     extra: "",
     zoom: 11
@@ -20,10 +30,10 @@ class SimpleMap extends Component {
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100%', width: '100%' }}>
-        <GoogleMapReact
+        <GoogleMapReact defaultCenter={{ lat: 47.568326599490476, lng: -122.64486808604016 }}
           bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_API_KEY }}
-          defaultCenter={this.props.coords}
-          defaultZoom={9}
+          center={this.state.center}
+          defaultZoom={10}
         >
           <Marker lat={this.props.coords.lat} lng={this.props.coords.lng} />
           {(this.props.extra !== "") ? (<>
