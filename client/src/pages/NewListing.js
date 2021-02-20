@@ -25,10 +25,28 @@ export default function newlisting() {
     let uid = fire.auth().currentUser.uid
     let history = useHistory();
 
-  function addItem() {
-    setContents([...contents, { item: "", quantity: "" }]);
-    setContentError(true);
-  }
+    useEffect(() => {
+        loadUserLocation()
+    }, [])
+
+    function loadUserLocation() {
+        API.getUser(uid)
+            .then(res => {
+                if (res.data.location) {
+                    setLocation({ "lat": res.data.location.coordinates[1], "lng": res.data.location.coordinates[0] })
+                } else {
+                    setLocation({ "lat": 47.62059307965106, "lng": -122.34932031534254 })
+                }
+            })
+            .then(() => {
+                setMapRender(true)
+            })
+    }
+
+    function addItem() {
+        setContents([...contents, { item: "", quantity: "" }]);
+        setContentError(true);
+    }
 
     function handleContentChange(e) {
         let updatedContents = [...contents];
@@ -62,7 +80,7 @@ export default function newlisting() {
                 status: "open",
                 postType: postType,
                 contents: scrubbedContents,
-                location: [location.lng, location.lat],
+                location: location,
                 description: description,
             })
                 .then(data => {
@@ -78,24 +96,6 @@ export default function newlisting() {
             setError("Title, Category, Location, and Contents required!")
         }
         setLoading(false);
-    }
-
-    useEffect(() => {
-        loadUserLocation()
-    }, [])
-
-    function loadUserLocation() {
-        API.getUser(uid)
-            .then(res => {
-                if (res.data.location) {
-                    setLocation({ "lat": res.data.location.coordinates[1], "lng": res.data.location.coordinates[0] })
-                } else {
-                    setLocation({ "lat": 47.62059307965106, "lng": -122.34932031534254 })
-                }
-            })
-            .then(() => {
-                setMapRender(true)
-            })
     }
 
     function handleSearch() {
@@ -129,7 +129,7 @@ export default function newlisting() {
                     <Form.Label className="font-weight-bold">Category:</Form.Label>
                     <Form.Control as="select" className="form-control-lg" onChange={({ target }) => setCategory(target.value)} name="type" >
                         <option value="">Type of Things</option>
-                        <option value="Clothing">Clothes</option>
+                        <option value="Clothing">Clothing</option>
                         <option value="Equipment">Equipment</option>
                         <option value="Food">Food</option>
                     </Form.Control>
