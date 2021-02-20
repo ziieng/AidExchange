@@ -136,11 +136,6 @@ export default function newlisting() {
         }
     }
 
-    function handleTest(e) {
-        e.preventDefault()
-        console.log(location)
-    }
-
     return (
         <>
             <NavBar />
