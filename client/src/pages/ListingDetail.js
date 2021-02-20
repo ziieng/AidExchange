@@ -3,6 +3,7 @@ import { Card, Table, Button, Container, Row, Col } from "react-bootstrap";
 import TopNav from "../Components/NavBar/navbar";
 import API from "../utils/API";
 import { useParams } from "react-router-dom";
+import Print from "../utils/document";
 
 export default function ListingDetail() {
   let { id } = useParams();
@@ -45,10 +46,14 @@ export default function ListingDetail() {
                 {listing.description && (
                   <Card.Text>{listing.description}</Card.Text>
                 )}
-                {/* PDF print here <Document listing={listing}></Document> */}
+
                 <Button className="editProfile" variant="dark">
                   Edit Listing
                 </Button>
+
+                {/* To have the download link */}
+                <Print listing={listing} />
+                {/* ------------------------- */}
               </Card.Body>
             </Card>
             <Card className="map">
