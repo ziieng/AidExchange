@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import { Container, Button, Form, Alert, InputGroup } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
@@ -42,26 +43,40 @@ export default function newlisting() {
         setContentError(true)
     }
 
-    function handleContentChange(e) {
-        let updatedContents = [...contents];
-        updatedContents[e.target.dataset.i][e.target.dataset.box] = e.target.value;
-        setContents(updatedContents);
-        updatedContents = contents.filter(function (row) {
-            return row.item === "" || row.quantity === ""
-        })
-        if (updatedContents.length > 0) { setContentError(true) } else { setContentError(false) }
-    }
+  //Refresh the page
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
-    function handleFormSubmit(event) {
-        event.preventDefault();
-        setLoading(true)
-        let scrubbedContents = []
-        contents.map((line) => {
-            if (line.item !== "" && line.quantity !== "") {
-                scrubbedContents.push(line)
-            }
-            return line
-        })
+  function addItem() {
+    setContents([...contents, { item: "", quantity: "" }]);
+    setContentError(true);
+  }
+
+  function handleContentChange(e) {
+    let updatedContents = [...contents];
+    updatedContents[e.target.dataset.i][e.target.dataset.box] = e.target.value;
+    setContents(updatedContents);
+    updatedContents = contents.filter(function (row) {
+      return row.item === "" || row.quantity === "";
+    });
+    if (updatedContents.length > 0) {
+      setContentError(true);
+    } else {
+      setContentError(false);
+    }
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    setLoading(true);
+    let scrubbedContents = [];
+    contents.map((line) => {
+      if (line.item !== "" && line.quantity !== "") {
+        scrubbedContents.push(line);
+      }
+      return line;
+    });
         if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== [] && location !== { "lat": 0, "lng": 0 }) {
             API.addNewListing({
                 userId: uid,
@@ -83,10 +98,10 @@ export default function newlisting() {
                     setError(errorMessage)
                 });
         } else {
-            setError("Title, Category, and Contents required!")
+            setError("Title, Category, Location, and Contents required!")
         }
-        setLoading(false)
-    }
+    setLoading(false);
+  }
 
     useEffect(() => {
         loadUserLocation()
@@ -133,10 +148,9 @@ export default function newlisting() {
             <Container className="mb-5 mt-5 py-3 px-4 bg-light rounded w-50">
                 <h1 className="text-center">New Listing</h1>
 
-                <Form className="" onSubmit={handleFormSubmit} >
-                    <Form.Label className="font-weight-bold" >Title:</Form.Label>
-                    <br />
-
+        <Form className="" onSubmit={handleFormSubmit}>
+          <Form.Label className="font-weight-bold">Title:</Form.Label>
+          <br />
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form.Control className=" form-control-lg" type="text" id="title" onChange={({ target }) => setTitle(target.value)} name="title" placeholder="Aid Request/Offer" />
                     <br />

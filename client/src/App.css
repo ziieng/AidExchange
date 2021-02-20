@@ -2,6 +2,7 @@ Button, .btn {
   background-color: #5C415D !important;
 }
 
+
 /* START Jumbotron */
 
 .jumbotron {
@@ -64,13 +65,22 @@ footer {
 
 /* END Profile Details */
 
-/* START Dashboard */
+/* START listing */
 
 .edit {
   float: right;
 }
 
-/* END Dashboard */
+#listingName {
+  color: #AEA0AE !important;
+}
+
+#listingName:hover {
+  color: #5C415D !important;
+  text-decoration: none !important;
+}
+
+/* END Dashboalistingrd */
 
 /* START ListingDetails */
 
@@ -113,7 +123,57 @@ footer {
 }
 
 .donateRequest {
-  float:right
+  float: right
 }
 
 /* END ListingDetails */
+
+/* START Search */
+
+.searchForm {
+  margin-top: 10px;
+  border: none !important;
+}
+
+.filter {
+  max-height: fit-content !important;
+  width: 50% !important;
+  text-align: left;
+  margin: 0 auto;
+  float: left;
+  margin-top: 10px;
+}
+
+.clear {
+  margin-right: 2%;
+  margin-bottom: 2%;
+}
+
+.apply {
+  margin-bottom: 2%;
+}
+
+.data {
+  max-height: 50% !important;
+  width: 50% !important;
+  align-content: center;
+  margin: 0 auto;
+  float: right;
+  margin-top: 10px;
+  border: none !important;
+}
+
+/* END Search */
+
+/* START NewListing */
+
+#newItem {
+  float: right;
+}
+
+#submit {
+  float: right;
+  margin-right: 2%;
+}
+
+/* END NewListing */
