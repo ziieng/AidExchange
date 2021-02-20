@@ -13,7 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import ProfileDetail from "./pages/ProfileDetail";
 import EditProfile from "./pages/EditProfile";
 import ForgotPassword from "./pages/ForgotPassword";
-// import Search from "./pages/Search";
+import Search from "./pages/Search";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,29 +43,32 @@ function App() {
           </Switch>
         </>
       ) : (
-        <>
-          {
-            // If they are signed in, they can see any page that *isn't* login or signup
-          }
-          <Switch>
-            <Route path="/listing/:id">
-              <ListingDetail />
-            </Route>
-            <Route exact path="/newlisting">
-              <NewListing />
-            </Route>
-            <Route path="/profile/:id">
-              <ProfileDetail />
-            </Route>
-            <Route path="/editprofile">
-              <EditProfile />
-            </Route>
-            <Route path="/">
-              <Dashboard />
-            </Route>
-          </Switch>
-        </>
-      )}
+          <>
+            {
+              // If they are signed in, they can see any page that *isn't* login or signup
+            }
+            <Switch>
+              <Route path="/listing/:id">
+                <ListingDetail />
+              </Route>
+              <Route exact path="/newlisting">
+                <NewListing />
+              </Route>
+              <Route path="/profile/:id">
+                <ProfileDetail />
+              </Route>
+              <Route path="/editprofile">
+                <EditProfile />
+              </Route>
+              <Route path="/Search">
+                <Search />
+              </Route>
+              <Route path="/">
+                <Dashboard />
+              </Route>
+            </Switch>
+          </>
+        )}
       <Footer />
     </Router>
   );

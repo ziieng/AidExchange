@@ -11,6 +11,7 @@ export default function Listing(props) {
         <Card className='myList m-1'>
             <h5 className="px-2 pt-2 pb-0">
                 <Link id='listingName' to={"/listing/" + post._id}>{post.title}</Link>
+                <br></br>
                 <Badge variant="light">{post.status}</Badge>
             </h5>
             <ul className="pt-0">
@@ -33,7 +34,7 @@ export default function Listing(props) {
                                 (and {contentList.length - 2} more)
                     </>
                     )}
-            <Button className="float-right" size="sm">Edit/Close</Button>
+            <Button className="float-right">Edit</Button>
             </ul>
         </Card>
     )

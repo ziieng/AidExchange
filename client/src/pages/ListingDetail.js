@@ -68,6 +68,7 @@ export default function ListingDetail() {
               )}
             </Card>
           </Row>
+          <br></br>
           <Row>
             <Card className="contents">
               <Card.Body>

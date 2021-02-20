@@ -13,7 +13,7 @@ export default function newlisting() {
     // Setting our component's initial state
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
-    const [contents, setContents] = useState([{ item: "", quantity: "" }]);
+    const [contents, setContents] = useState([{ item: "", quantity: "" }])
     const [postType, setPostType] = useState("Request");
     const [description, setDescription] = useState("");
     const [addr, setAddr] = useState("")
@@ -195,7 +195,7 @@ export default function newlisting() {
                     <InputGroup className="mb-3">
                         <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="location" />
                         <InputGroup.Append>
-                            <Button variant="outline-secondary" onClick={handleSearch}>Find <FaSearchLocation /></Button>
+                            <Button id='find' variant="outline-secondary" onClick={handleSearch}>Find <FaSearchLocation /></Button>
                         </InputGroup.Append>
                     </InputGroup>
                     {addrError && <Alert variant="danger">Address not recognized.</Alert>}
@@ -205,8 +205,6 @@ export default function newlisting() {
                     </div>
                     <br />
                     <Button id="submit" type="submit" disabled={loading}>Submit</Button>
-                    <Button id="test" onClick={handleTest} disabled={loading}>What even</Button>
-
                 </Form>
 
             </Container>
