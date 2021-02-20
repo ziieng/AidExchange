@@ -44,7 +44,6 @@ footer {
 /* START Profile Details */
 
 .profileDetails {
-  background-color: #5C415D;
   max-height: fit-content !important;
   max-width: 80% !important;
   text-align: left;
