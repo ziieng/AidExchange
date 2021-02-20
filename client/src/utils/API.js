@@ -25,7 +25,7 @@ export default {
   // Saves a NewListing to the database
   addNewListing: function (newListData) {
     let fixedLocation = newListData.location
-    newListData.location= {type:"Point", coordinates: fixedLocation}
+    newListData.location = { type: "Point", coordinates: fixedLocation }
     return axios.post("/api/addPost", newListData);
   },
 };
