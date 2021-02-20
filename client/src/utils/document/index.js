@@ -56,7 +56,7 @@ const Print = (props) => {
         }
         fileName="example.pdf"
       >
-        <img src="./pdficon.png" />
+        {/* <img src="pdficon.png" /> */}
 
         {({ blob, url, loading, error }) =>
           loading ? "Loading document..." : "Download pdf."
