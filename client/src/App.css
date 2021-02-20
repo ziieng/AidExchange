@@ -60,6 +60,13 @@ footer {
 
 .editProfile {
   float: right;
+  margin-top: 10%;
+}
+
+#orgListing {
+  border: none;
+  max-height: fit-content !important;
+  /* width: 80% !important; */
 }
 
 /* END Profile Details */
@@ -84,7 +91,7 @@ footer {
   width: 70% !important;
   text-align: left;
   margin: 0 auto;
-  float: left;
+  /* float: left; */
   margin-top: 10px;
 }
 
@@ -118,25 +125,28 @@ footer {
 
 /* START ListingDetails */
 
-.listingDetails {
+.listingDetail {
   max-height: fit-content !important;
-  width: 50% !important;
+  width: 65% !important;
   text-align: left;
   margin: 0 auto;
   float: left;
+  margin-top: 20px !important;
+}
+
+.marginTop {
   margin-top: 10px;
 }
 
 .icon {
   max-width: 20% !important;
-  max-height: 20% !important;
-  float: left !important;
+  float: left ;
 }
 
 .map {
-  max-height: 50% !important;
-  width: 50% !important;
-  align-content: center;
+  height: 300px !important;
+  width: 300px !important;
+  max-width: 70%;
   margin: 0 auto;
   float: right;
   margin-top: 10px;
@@ -158,6 +168,10 @@ footer {
 
 .donateRequest {
   float: right
+}
+
+.editListing {
+  float: right;
 }
 
 /* END ListingDetails */
