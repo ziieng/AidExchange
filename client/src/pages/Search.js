@@ -20,7 +20,7 @@ export default function Search() {
             <Card className='filter' >
                 <Card.Body>
                     <Form>
-                    <h2> Filter: </h2>
+                        <h2> Filter: </h2>
                         <Button className='clear' variant="dark">Clear</Button>
                         <Button className='apply' variant="dark">Apply</Button>
                         {['checkbox'].map((type) => (
@@ -52,8 +52,8 @@ export default function Search() {
                     <Table striped bordered hover>
                         <tbody>
                             <tr>
-                                < Listing />
-                                < Listing />
+                                {/* < Listing />
+                                < Listing /> */}
                             </tr>
                         </tbody>
                     </Table>

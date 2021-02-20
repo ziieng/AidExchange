@@ -1,7 +1,7 @@
 import Geocode from "react-geocode";
 
 // set Google Maps Geocoding API 
-Geocode.setApiKey(process.env.REACT_APP_MAP_API_KEY);
+Geocode.setApiKey(process.env.REACT_APP_FIREBASE_API_KEY);
 // set response language to english.
 Geocode.setLanguage("en");
 

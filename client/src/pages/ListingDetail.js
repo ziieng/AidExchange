@@ -57,7 +57,7 @@ export default function ListingDetail() {
                 </Button>
 
                 {/* To have the download link */}
-                <Print listing={listing} />
+                {mapRender && <Print listing={listing} />}
                 {/* ------------------------- */}
               </Card.Body>
             </Card>
