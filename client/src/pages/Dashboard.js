@@ -49,13 +49,13 @@ export default function Dashboard() {
               })}
             </>
           ) : (
-            <h5>No Results to Display</h5>
-          )}
+              <h5>No Results to Display</h5>
+            )}
         </Row>
         <Row className="mt-5 w-100">
           <h2>
             My Reservations{" "}
-            <Link to="" className="btn ml-2 text-white">
+            <Link to="./Search" className="btn ml-2 text-white">
               Search For Items
             </Link>
           </h2>
@@ -69,8 +69,8 @@ export default function Dashboard() {
               })}
             </>
           ) : (
-            <h5>No Results to Display</h5>
-          )}
+              <h5>No Results to Display</h5>
+            )}
         </Row>
       </Container>
     </>

@@ -1,6 +1,6 @@
 // import React, { useState, useEffect } from "react";
 import React from "react";
-
+import icon from "./pdficon.png";
 import {
   PDFDownloadLink,
   Text,
@@ -56,8 +56,19 @@ const Print = (props) => {
         }
         fileName="example.pdf"
       >
+        {/* <img src="pdficon.png" /> */}
+
         {({ blob, url, loading, error }) =>
-          loading ? "Loading document..." : "Download pdf."
+          loading ? (
+            "Loading document..."
+          ) : (
+            <img
+              src={icon}
+              width="35"
+              height="35"
+              style={{ float: "right", marginBottom: "10px" }}
+            />
+          )
         }
       </PDFDownloadLink>
     </div>
