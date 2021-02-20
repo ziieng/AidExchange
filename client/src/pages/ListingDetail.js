@@ -5,8 +5,10 @@ import API from "../utils/API";
 import { useParams } from "react-router-dom";
 import Print from "../utils/document";
 import MyMapComponent from "../Components/Map";
+import fire from "../firebase.js";
 
 export default function ListingDetail() {
+  let uid = fire.auth().currentUser.uid;
   let { id } = useParams();
   const [listing, setListing] = useState({
     contents: [],
@@ -57,9 +59,17 @@ export default function ListingDetail() {
                   <Card.Text>{listing.description}</Card.Text>
                 )}
 
-                <Button className="editProfile" variant="dark">
-                  Edit Listing
-                </Button>
+                {listing.userId === uid ? (
+                  <Button
+                    className="editProfile"
+                    variant="dark"
+                    href="/editprofile"
+                  >
+                    Edit Profile
+              </Button>
+                ) : (
+                    " "
+                  )}
               </Card.Body>
             </Card>
             <Card className="map">

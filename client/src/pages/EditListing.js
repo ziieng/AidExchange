@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Button, Form, Alert } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
@@ -12,7 +12,7 @@ export default function editListing() {
     const [contents, setContents] = useState([{ item: "", quantity: "" }]);
     const [postType, setPostType] = useState("Request");
     const [description, setDescription] = useState("");
-    // const [location, setLocation] = useState("");
+    const [location, setLocation] = useState("");
     const [error, setError] = useState("");
     const [contentError, setContentError] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -27,12 +27,19 @@ export default function editListing() {
     function loadListing() {
         API.getListing(id)
             .then(res => {
+                console.log(res)
                 let listing = res.data
                 setTitle(listing.title)
                 setCategory(listing.category)
                 setContents(listing.contents)
                 setPostType(listing.postType)
                 setDescription(listing.description)
+                if (listing.location) {
+                    setLocation({
+                        lat: listing.location.coordinates[1],
+                        lng: listing.location.coordinates[0],
+                  })
+                }
             })
     }
 
@@ -62,18 +69,19 @@ export default function editListing() {
             return line
         })
         if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== []) {
-            API.addNewListing({
+            API.updateListing(id, {
                 userId: uid,
                 title: title,
                 category: category,
                 status: "open",
                 postType: postType,
                 contents: scrubbedContents,
+                location: location,
                 description: description,
             })
                 .then(data => {
                     console.log(data)
-                    history.push('/listing/' + data.data._id)
+                    history.push('/listing/' + id)
                 })
                 .catch((error) => {
                     var errorCode = error.code;
@@ -98,25 +106,24 @@ export default function editListing() {
                     <br />
 
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <Form.Control className=" form-control-lg" type="text" id="title" onChange={({ target }) => setTitle(target.value)} name="title" placeholder="Aid Request/Offer" />
+                    <Form.Control className=" form-control-lg" type="text" id="title" value={title} onChange={({ target }) => setTitle(target.value)} name="title" placeholder="Aid Request/Offer" />
                     <br />
                     <Form.Label className="font-weight-bold">Category:</Form.Label>
-                    <Form.Control as="select" className="form-control-lg" onChange={({ target }) => setCategory(target.value)} name="type" >
-                        <option value="">Type of Things</option>
-                        <option value="Clothing">Clothes</option>
+                    <Form.Control as="select" className="form-control-lg" value={category} onChange={({ target }) => setCategory(target.value)} name="type" >
+                        <option value="Clothing">Clothing</option>
                         <option value="Equipment">Equipment</option>
                         <option value="Food">Food</option>
                     </Form.Control>
                     <br />
                     <Form.Label className="font-weight-bold">Type of Post:</Form.Label>
-                    <Form.Control as="select" className="form-control-lg" onChange={({ target }) => setPostType(target.value)} name="type" >
+                    <Form.Control as="select" className="form-control-lg" onChange={({ target }) => setPostType(target.value)} value={postType} name="type" >
                         <option value="Request">Request</option>
                         <option value="Offer">Offer</option>
                     </Form.Control>
                     <br />
                     <Form.Label className="font-weight-bold" >Description:</Form.Label>
                     <br />
-                    <Form.Control className="form-control-lg" as="textarea" rows={3} id="description" onChange={({ target }) => setDescription(target.value)} name="description" placeholder="Is there anything folks need to know?" />
+                    <Form.Control className="form-control-lg" as="textarea" rows={3} id="description" value={description} onChange={({ target }) => setDescription(target.value)} name="description" placeholder="Is there anything folks need to know?" />
                     <br />
                     {contents.map((row, i) => {
                         const itemId = 'item-' + i
@@ -124,12 +131,12 @@ export default function editListing() {
                         return (<div className="row" key={'line-' + i}>
                             <div className="col-6">
                                 <Form.Label className="font-weight-bold" >Item {i + 1} Description:</Form.Label>
-                                <Form.Control className="form-control form-control-lg" type="text" id={itemId} data-box="item" data-i={i} name={itemId} onChange={handleContentChange} placeholder="Things" />
+                                <Form.Control className="form-control form-control-lg" type="text" id={itemId} data-box="item" data-i={i} name={itemId} value={contents[i].item} onChange={handleContentChange} placeholder="Things" />
                                 <br />
                             </div>
                             <div className="col-6">
                                 <Form.Label className="font-weight-bold" >Item {i + 1} Quantity:</Form.Label>
-                                <Form.Control className="form-control form-control-lg" type="text" id={qtyId} data-box="quantity" data-i={i} name={qtyId} onChange={handleContentChange} placeholder="any" />
+                                <Form.Control className="form-control form-control-lg" type="text" id={qtyId} data-box="quantity" data-i={i} name={qtyId} value={contents[i].quantity} onChange={handleContentChange} placeholder="any" />
                             </div>
                         </div>)
                     })}

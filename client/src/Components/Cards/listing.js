@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 export default function Listing(props) {
     let post = props.value
     let contentList = props.value.contents
-
     return (
         <Card className='myList m-1'>
             <h5 className="px-2 pt-2 pb-0">
@@ -34,7 +33,7 @@ export default function Listing(props) {
                                 (and {contentList.length - 2} more)
                     </>
                     )}
-            <Button className="float-right">Edit</Button>
+                <Button className="float-right" href={"/editlisting/" + post._id}>Edit</Button>
             </ul>
         </Card>
     )

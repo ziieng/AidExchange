@@ -12,6 +12,7 @@ import NewListing from "./pages/NewListing";
 import Dashboard from "./pages/Dashboard";
 import ProfileDetail from "./pages/ProfileDetail";
 import EditProfile from "./pages/EditProfile";
+import EditListing from "./pages/EditListing";
 import ForgotPassword from "./pages/ForgotPassword";
 import Search from "./pages/Search";
 
