@@ -38,7 +38,7 @@ const postSchema = new Schema({
   contents: Array,
   postType: { type: String, required: true }, //supply or request
   description: String, // do we want to add descriptions?
-  // location: { type: pointSchema, required: true },
+  location: { type: pointSchema, required: true },
   createDate: { type: Date, default: Date.now },
   replies: [replySchema]
 }, {
