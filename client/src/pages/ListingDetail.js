@@ -23,11 +23,14 @@ export default function ListingDetail() {
   function loadListing() {
     API.getListing(id)
       .then((res) => {
-        setListing(res.data);
-        setLocation({
-          lat: res.data.location.coordinates[1],
-          lng: res.data.location.coordinates[0],
-        });
+        let post = res.data
+        setListing(post);
+        if (post.location) {
+          setLocation({
+            lat: post.location.coordinates[1],
+            lng: post.location.coordinates[0],
+          })
+        };
       })
       //extra .then so the location update finishes before the map renders
       .then(() => {
@@ -66,7 +69,7 @@ export default function ListingDetail() {
                     href="/editprofile"
                   >
                     Edit Profile
-              </Button>
+                  </Button>
                 ) : (
                     " "
                   )}
