@@ -48,11 +48,14 @@ function App() {
               // If they are signed in, they can see any page that *isn't* login or signup
             }
             <Switch>
+              <Route exact path="/newlisting">
+                <NewListing />
+              </Route>
               <Route path="/listing/:id">
                 <ListingDetail />
               </Route>
-              <Route exact path="/newlisting">
-                <NewListing />
+              <Route path="/editlisting/:id">
+                <EditListing />
               </Route>
               <Route path="/profile/:id">
                 <ProfileDetail />
