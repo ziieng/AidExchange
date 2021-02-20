@@ -6,7 +6,6 @@ import fire from "../firebase.js";
 import { Container, Row } from "react-bootstrap";
 import NavBar from "../Components/NavBar/navbar";
 import API from "../utils/API";
-import Print from "../utils/document";
 
 export default function Dashboard() {
   const [myPosts, setMyPosts] = useState([]);
