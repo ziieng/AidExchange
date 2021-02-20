@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ListingDetail from "./pages/ListingDetail";
 import NewListing from "./pages/NewListing";
+import EditListing from "./pages/EditListing";
 import Dashboard from "./pages/Dashboard";
 import ProfileDetail from "./pages/ProfileDetail";
 import EditProfile from "./pages/EditProfile";
@@ -43,35 +44,35 @@ function App() {
           </Switch>
         </>
       ) : (
-          <>
-            {
-              // If they are signed in, they can see any page that *isn't* login or signup
-            }
-            <Switch>
-              <Route exact path="/newlisting">
-                <NewListing />
-              </Route>
-              <Route path="/listing/:id">
-                <ListingDetail />
-              </Route>
-              <Route path="/editlisting/:id">
-                <EditListing />
-              </Route>
-              <Route path="/profile/:id">
-                <ProfileDetail />
-              </Route>
-              <Route path="/editprofile">
-                <EditProfile />
-              </Route>
-              <Route path="/search">
-                <Search />
-              </Route>
-              <Route path="/">
-                <Dashboard />
-              </Route>
-            </Switch>
-          </>
-        )}
+        <>
+          {
+            // If they are signed in, they can see any page that *isn't* login or signup
+          }
+          <Switch>
+            <Route exact path="/newlisting">
+              <NewListing />
+            </Route>
+            <Route path="/listing/:id">
+              <ListingDetail />
+            </Route>
+            <Route path="/editlisting/:id">
+              <EditListing />
+            </Route>
+            <Route path="/profile/:id">
+              <ProfileDetail />
+            </Route>
+            <Route path="/editprofile">
+              <EditProfile />
+            </Route>
+            <Route path="/search">
+              <Search />
+            </Route>
+            <Route path="/">
+              <Dashboard />
+            </Route>
+          </Switch>
+        </>
+      )}
       <Footer />
     </Router>
   );
