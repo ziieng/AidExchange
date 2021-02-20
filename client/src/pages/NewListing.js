@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import { Container, Button, Form, Alert, InputGroup } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
@@ -205,7 +204,6 @@ export default function newlisting() {
                     </div>
                     <br />
                     <Button id="submit" type="submit" disabled={loading}>Submit</Button>
-                    <Button id="test" onClick={handleTest} disabled={loading}>What even</Button>
 
                 </Form>
 
