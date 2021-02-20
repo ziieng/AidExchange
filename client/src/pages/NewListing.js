@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import { Container, Button, Form, Alert, InputGroup } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
