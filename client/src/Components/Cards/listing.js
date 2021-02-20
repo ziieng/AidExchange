@@ -34,7 +34,7 @@ export default function Listing(props) {
                                 (and {contentList.length - 2} more)
                     </>
                     )}
-            <Button className="float-right">Edit</Button>
+                <Button className="float-right" href={"/editlisting/" + post._id}>Edit</Button>
             </ul>
         </Card>
     )

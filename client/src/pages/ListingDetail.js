@@ -57,7 +57,7 @@ export default function ListingDetail() {
                   <Card.Text>{listing.description}</Card.Text>
                 )}
 
-                <Button className="editListing" variant="dark">
+                <Button className="editProfile" variant="dark" href={"/editlisting/" + id}>
                   Edit Listing
                 </Button>
               </Card.Body>
