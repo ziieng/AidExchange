@@ -9,19 +9,24 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findReplyByUser: function (req, res) {
-    db.Post.aggregate([{ $unwind: "$replies" }, { $match: { "replies.userId": req.query.uid } }])
+    db.Post.aggregate([
+      { $unwind: "$replies" },
+      { $match: { "replies.userId": req.query.uid } },
+    ])
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   //search page
   findAllPost: function (req, res) {
-    db.Post.find({}).populate('postBy')
+    db.Post.find({})
+      .populate("postBy")
       .sort({ date: -1 })
-      .then((dbModel) => res.json(dbModel))
+      .then((dbModel) => res.json(dbModel[0]))
       .catch((err) => res.status(422).json(err));
   },
   findPostById: function (req, res) {
-    db.Post.find({ "_id": req.params.id }).populate('postBy')
+    db.Post.find({ _id: req.params.id })
+      .populate("postBy")
       .then((dbModel) => res.json(dbModel[0]))
       .catch((err) => res.status(422).json(err));
   },

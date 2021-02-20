@@ -4,10 +4,15 @@ const path = require("path");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 
+//To create pdf
+// const pdf = require('html-pdf');
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 
 // Define middleware here
+
+// app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -20,9 +25,10 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/aidexchange", { useNewUrlParser: true, useUnifiedTopology: true }
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/aidexchange", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // Send every request to the React app
 // Define any API routes before this runs

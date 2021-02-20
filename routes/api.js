@@ -1,8 +1,7 @@
 const router = require("express").Router();
-const postController = require("../controllers/postController")
+const postController = require("../controllers/postController");
 const userController = require("../controllers/userController");
 // const multer = require('multer')
-
 
 // const { Storage } = require('@google-cloud/storage');
 // const storage = new Storage({
@@ -28,22 +27,22 @@ router
   .delete(userController.remove);
 
 // Matches with "/api/post"
-
-router
-  .route("/search/post?:uid")
-  .get(postController.findPostByUser)
-
-router
-  .route("/search/reply?:uid")
-  .get(postController.findReplyByUser)
-
-// Matches with "/api/addPost"
-router.route("/addPost")
-  .post(postController.createPost);
-
-// Mathces with "/api/post/:id"
 router
   .route("/post/:id")
+  .get(postController.findPostById)
+  .put(postController.updatePost)
+  .delete(postController.removePost);
+
+router.route("/search/post?:uid").get(postController.findPostByUser);
+
+router.route("/search/reply?:uid").get(postController.findReplyByUser);
+
+// Matches with "/api/addPost"
+router.route("/addPost").post(postController.createPost);
+
+// Mathces with "/api/NewListing/:id"
+router
+  .route("/NewListing/:id")
   .get(postController.findPostById)
   .put(postController.updatePost)
   .delete(postController.removePost);
@@ -56,6 +55,25 @@ router
 //     }
 //     // This is where we'll upload our file to Cloud Storage
 //   } catch (error) {
+//     res.status(400).send(`Error, could not upload file: ${error}`);
+//     return;
+//   }
+// });
+
+//GENERATE PDF ROUTE
+// app.post('/create-pdf', (req, res) => {
+//   pdf.create(pdfTemplate(req.body), {}).toFile('result.pdf', (err) => {
+//       if(err) {
+//           res.send(Promise.reject());
+//       }
+
+//       res.send(Promise.resolve());
+//   });
+// });
+
+// app.get('/fetch-pdf', (req, res) => {
+//   res.sendFile(`${__dirname}/result.pdf`)
+// })
 //     res.status(400).send(
 //       `Error, could not upload file: ${error}`
 //     );
