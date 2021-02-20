@@ -45,7 +45,7 @@ export default function ListingDetail() {
         <Col>
           <Row>
             <Card className="listingDetail">
-              <Card.Body>
+              <Card.Body className='marginTop'>
                 <Card.Img
                   className="icon"
                   variant="top"
@@ -66,7 +66,7 @@ export default function ListingDetail() {
                   <Button
                     className="editProfile"
                     variant="dark"
-                    href="/editprofile"
+                    href={"/editlisting/" + id}
                   >
                     Edit Profile
                   </Button>
@@ -94,10 +94,10 @@ export default function ListingDetail() {
                   >
                     Donate/Request
                   </Button>
-                </h2>
                 {/* This is the download link */}
                 {mapRender && <Print listing={listing} />}
                 {/* ------------------------- */}
+                </h2>
                 <Table striped bordered hover>
                   <thead>
                     <tr>
