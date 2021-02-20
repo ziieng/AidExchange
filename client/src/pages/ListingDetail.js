@@ -60,10 +60,6 @@ export default function ListingDetail() {
                 <Button className="editProfile" variant="dark">
                   Edit Listing
                 </Button>
-
-                {/* To have the download link */}
-                {mapRender && <Print listing={listing} />}
-                {/* ------------------------- */}
               </Card.Body>
             </Card>
             <Card className="map">
@@ -85,6 +81,9 @@ export default function ListingDetail() {
                     Donate/Request
                   </Button>
                 </h2>
+                {/* This is the download link */}
+                {mapRender && <Print listing={listing} />}
+                {/* ------------------------- */}
                 <Table striped bordered hover>
                   <thead>
                     <tr>
