@@ -80,7 +80,42 @@ footer {
   text-decoration: none !important;
 }
 
-/* END Dashboalistingrd */
+.myList {
+  max-height: fit-content !important;
+  width: 70% !important;
+  text-align: left;
+  margin: 0 auto;
+  float: left;
+  margin-top: 10px;
+}
+
+/* END Listing */
+
+/* START Reservation */
+
+.reservations {
+  max-height: fit-content !important;
+  width: 70% !important;
+  text-align: left;
+  margin: 0 auto;
+  float: left;
+  margin-top: 10px;
+}
+
+#reservationName {
+  color: #AEA0AE !important;
+}
+
+#reservationName:hover {
+  color: #5C415D !important;
+  text-decoration: none !important;
+}
+
+.float-right {
+  margin-right: 2%
+}
+
+/* END Reservation */
 
 /* START ListingDetails */
 
@@ -174,6 +209,12 @@ footer {
 #submit {
   float: right;
   margin-right: 2%;
+}
+
+#find {
+  background-color: #5C415D !important;
+  color: #f1faee;
+
 }
 
 /* END NewListing */

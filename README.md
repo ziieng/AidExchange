@@ -4,7 +4,7 @@
 
 Explore the [Project Page](https://github.com/ziieng/AidExchange)
 
-<!-- [Deployed Application]() -->
+[Deployed Application](https://aidexchange.herokuapp.com/)
 
 ## Table of Contents
 
