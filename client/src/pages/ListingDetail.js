@@ -65,6 +65,7 @@ export default function ListingDetail() {
               {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
             </Card>
           </Row>
+          <br></br>
           <Row>
             <Card className="contents">
               <Card.Body>
