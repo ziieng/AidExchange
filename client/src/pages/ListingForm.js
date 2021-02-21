@@ -8,7 +8,8 @@ import MyMapComponent from "../Components/Map";
 import GeoSearch from "../utils/GeoCodeSearch"
 import { FaSearchLocation } from "react-icons/fa"
 
-export default function editListing() {
+export default function editListing(props) {
+    const version = props.version
     // Setting our component's initial state
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
@@ -27,7 +28,11 @@ export default function editListing() {
     let history = useHistory();
 
     useEffect(() => {
-        loadListing()
+        if (version === "Edit") {
+            loadListing()
+        } else if (version === "New") {
+            loadUserLocation()
+        }
     }, [])
 
     function loadListing() {
@@ -44,7 +49,22 @@ export default function editListing() {
                     setLocation({
                         lat: post.location.coordinates[1],
                         lng: post.location.coordinates[0],
-                  })
+                    })
+                }
+            })
+            .then(() => {
+                setMapRender(true)
+            })
+    }
+
+    function loadUserLocation() {
+        API.getUser(uid)
+            .then(res => {
+                console.log(res)
+                if (res.data.location) {
+                    setLocation({ "lat": res.data.location.coordinates[1], "lng": res.data.location.coordinates[0] })
+                } else {
+                    setLocation({ "lat": 0, "lng": 0 })
                 }
             })
             .then(() => {
@@ -67,42 +87,6 @@ export default function editListing() {
         if (updatedContents.length > 0) { setContentError(true) } else { setContentError(false) }
     }
 
-    function handleFormSubmit(event) {
-        event.preventDefault();
-        setLoading(true)
-        let scrubbedContents = []
-        contents.map((line) => {
-            if (line.item !== "" && line.quantity !== "") {
-                scrubbedContents.push(line)
-            }
-            return line
-        })
-        if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== [] && location !== { "lat": 0, "lng": 0 }) {
-            API.updateListing(id, {
-                userId: uid,
-                title: title,
-                category: category,
-                status: "open",
-                postType: postType,
-                contents: scrubbedContents,
-                location: location,
-                description: description,
-            })
-                .then(() => {
-                    history.push('/listing/' + id)
-                })
-                .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    console.log(errorCode, errorMessage)
-                    setError(errorMessage)
-                });
-        } else {
-            setError("Title, Category, Location, and Contents required!")
-        }
-        setLoading(false)
-    }
-
     function handleSearch() {
         if (addr !== "") {
             setMapRender(false)
@@ -119,11 +103,61 @@ export default function editListing() {
         }
     }
 
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        setLoading(true)
+        let scrubbedContents = []
+        contents.map((line) => {
+            if (line.item !== "" && line.quantity !== "") {
+                scrubbedContents.push(line)
+            }
+            return line
+        })
+        if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== [] && location !== { "lat": 0, "lng": 0 }) {
+            let postObj = {
+                userId: uid,
+                title: title,
+                category: category,
+                status: "open",
+                postType: postType,
+                contents: scrubbedContents,
+                location: location,
+                description: description,
+            }
+            if (version === "Edit") {
+                API.updateListing(id, postObj)
+                    .then(() => {
+                        history.push('/listing/' + id)
+                    })
+                    .catch((error) => {
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.log(errorCode, errorMessage)
+                        setError(errorMessage)
+                    });
+            } else if (version === "New") {
+                API.addNewListing(postObj)
+                    .then(data => {
+                        history.push('/listing/' + data.data._id)
+                    })
+                    .catch((error) => {
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.log(errorCode, errorMessage)
+                        setError(errorMessage)
+                    });
+            }
+        } else {
+            setError("Title, Category, Location, and Contents required!")
+        }
+        setLoading(false)
+    }
+
     return (
         <>
             <NavBar />
             <Container className="mb-5 mt-5 py-3 px-4 bg-light rounded w-50">
-                <h1 className="text-center">Edit Listing</h1>
+                <h1 className="text-center">{version} Listing</h1>
 
                 <Form className="" onSubmit={handleFormSubmit} >
                     <Form.Label className="font-weight-bold" >Title:</Form.Label>
@@ -180,7 +214,7 @@ export default function editListing() {
                         {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
                     </div>
                     <br />
-                    <Button id="submit" type="submit" to="/" disabled={loading}>Submit</Button>
+                    <Button id="submit" type="submit" to="/" disabled={loading}>{(version === "New") ? "Submit" : "Update"}</Button>
                 </Form>
 
             </Container>
