@@ -12,7 +12,7 @@ export default function ListingDetail() {
   let { id } = useParams();
   const [listing, setListing] = useState({
     contents: [],
-    postBy: { displayName: "" },
+    postBy: { displayName: "", avatar: "" },
   });
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const [mapRender, setMapRender] = useState(false);
@@ -49,7 +49,7 @@ export default function ListingDetail() {
                 <Card.Img
                   className="icon"
                   variant="top"
-                  src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"
+                  src={listing.postBy.avatar}
                   alt={"user profile image for " + listing.postBy.displayName}
                 />
                 <Card.Title>{listing.title}</Card.Title>

@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { Container, Button, Form, Card, Alert, InputGroup } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
-import fire from '../firebase.js';
+import fire, { storage } from '../firebase.js';
 import { useHistory } from "react-router-dom";
 import MyMapComponent from "../Components/Map";
 import GeoSearch from "../utils/GeoCodeSearch"
-import { FaSearchLocation } from "react-icons/fa"
+import { FaSearchLocation, FaUpload } from "react-icons/fa"
 
 export default function editProfile() {
   // Setting our component's initial state
   const [displayName, setDisplayName] = useState("");
   const [acctType, setAcctType] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
   const [avatar, setAvatar] = useState("");
   const [links, setLinks] = useState([{ label: "", url: "" }]);
   const [addr, setAddr] = useState("")
@@ -41,7 +43,7 @@ export default function editProfile() {
         if (userData.links !== []) {
           setLinks(userData.links)
           if (res.data.location) {
-            setLocation({ "lat": res.data.location.coordinates[1], "lng": res.data.location.coordinates[0] })
+            setLocation(location)
           }
         }
       })
@@ -65,6 +67,37 @@ export default function editProfile() {
       setAddrError(true)
     }
   }
+
+  const handleFileChange = e => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const done = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(done);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            setAvatar(url);
+          });
+      }
+    );
+  };
 
   function addLink() {
     setLinks([...links, { label: "", url: "" }])
@@ -99,6 +132,7 @@ export default function editProfile() {
         acctType: acctType,
         description: description,
         avatar: avatar,
+        location: location,
         links: scrubbedLinks
       })
         .then(data => {
@@ -128,6 +162,19 @@ export default function editProfile() {
             <Form.Label className="font-weight-bold" >Display Name:</Form.Label>
             <br />
             <Form.Control className="form-control-lg" type="text" id="displayName" onChange={({ target }) => setDisplayName(target.value)} name="displayName" value={displayName} />
+            <br />
+            <Form.Label className="font-weight-bold" >Avatar Image:<img
+              style={{ height: "80px", width: "80px" }}
+              src={avatar}
+              alt={"user profile image for " + displayName}
+            /></Form.Label>
+            <br />
+            <InputGroup>
+              <Form.File id="avatarFile" onChange={handleFileChange} label="Select New Avatar Image" />
+              <InputGroup.Append>
+                <Button id='find' variant="outline-secondary" onClick={handleUpload}>Upload <FaUpload /></Button>
+              </InputGroup.Append>
+            </InputGroup>
             <br />
             <Form.Label className="font-weight-bold">Account Type:</Form.Label>
             <Form.Control as="select" className="form-control-lg" onChange={({ target }) => setAcctType(target.value)} value={acctType} name="type" >

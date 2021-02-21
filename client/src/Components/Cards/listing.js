@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Card, Button, Badge } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
@@ -33,7 +32,13 @@ export default function Listing(props) {
                                 (and {contentList.length - 2} more)
                     </>
                     )}
-                <Button className="float-right" href={"/editlisting/" + post._id}>Edit</Button>
+                {post.userId === props.uid ? (
+                    <Button className="float-right" href={"/editlisting/" + post._id}>
+                        Edit
+                    </Button>
+                ) : (
+                        " "
+                    )}
             </ul>
         </Card>
     )

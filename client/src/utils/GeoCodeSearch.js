@@ -9,8 +9,11 @@ Geocode.setLocationType("ROOFTOP");
 
 // Get address from latitude & longitude.
 function addrFromCoords(geoPoint) {
-  let lat = geoPoint.coords[1];
-  let lng = geoPoint.coords[0];
+  console.log(geoPoint)
+  if (geoPoint !== "" && geoPoint !== [0, 0]) {
+    return new Promise((resolve, reject) => {
+      let lat = geoPoint[1];
+      let lng = geoPoint[0];
   Geocode.fromLatLng(lat, lng).then(
     (response) => {
       const address = response.results[0].formatted_address;
@@ -34,12 +37,18 @@ function addrFromCoords(geoPoint) {
           }
         }
       }
-      return { city, state, country, address };
-    },
-    (error) => {
-      return error;
+      let output = { city, state, country, address }
+      resolve(output);
+    })
+    .catch((error) => {
+      console.error(error)
+      reject(error)
     }
   );
+    })
+  } else {
+    return null
+  }
 }
 
 // Get latitude & longitude from address.
@@ -64,4 +73,4 @@ function coordsFromAddr(addr) {
 
 const GeoSearch = { addrFromCoords: addrFromCoords, coordsFromAddr: coordsFromAddr }
 
-export default GeoSearch;
+export { GeoSearch as default };
