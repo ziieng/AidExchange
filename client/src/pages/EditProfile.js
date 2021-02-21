@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Button, Form, Card, Alert } from 'react-bootstrap'
+import { Container, Button, Form, Card, Alert, InputGroup } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
 import fire from '../firebase.js';
 import { useHistory } from "react-router-dom";
+import MyMapComponent from "../Components/Map";
+import GeoSearch from "../utils/GeoCodeSearch"
+import { FaSearchLocation } from "react-icons/fa"
 
 export default function editProfile() {
   // Setting our component's initial state
@@ -12,7 +15,10 @@ export default function editProfile() {
   const [description, setDescription] = useState("");
   const [avatar, setAvatar] = useState("");
   const [links, setLinks] = useState([{ label: "", url: "" }]);
-  // const [location, setLocation] = useState("");
+  const [addr, setAddr] = useState("")
+  const [addrError, setAddrError] = useState(false)
+  const [location, setLocation] = useState({ "lat": 0, "lng": 0 })
+  const [mapRender, setMapRender] = useState(false)
   const [error, setError] = useState("");
   const [linkError, setLinkError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,9 +39,31 @@ export default function editProfile() {
         setDescription(userData.description)
         setAvatar(userData.avatar)
         if (userData.links !== []) {
-        setLinks(userData.links)
+          setLinks(userData.links)
+          if (res.data.location) {
+            setLocation({ "lat": res.data.location.coordinates[1], "lng": res.data.location.coordinates[0] })
+          }
         }
       })
+      .then(() => {
+        setMapRender(true)
+      })
+  }
+
+  function handleSearch() {
+    if (addr !== "") {
+      setMapRender(false)
+      GeoSearch.coordsFromAddr(addr)
+        .then((coords) => {
+          console.log(coords)
+          setLocation(coords)
+          setAddrError(false)
+          setMapRender(true)
+        })
+        .catch()
+    } else {
+      setAddrError(true)
+    }
   }
 
   function addLink() {
@@ -75,7 +103,7 @@ export default function editProfile() {
       })
         .then(data => {
           console.log(data)
-          history.push('/profile/' + fire.auth().currentUser.uid)
+          history.push('/profile/' + uid)
         })
         .catch((error) => {
           var errorCode = error.code;
@@ -119,17 +147,31 @@ export default function editProfile() {
                 <div className="col-6">
                   <Form.Label className="font-weight-bold" >Link {i + 1} Label:</Form.Label>
                   <Form.Control className="form-control form-control-lg" type="text" id={labelId} data-box="label" data-i={i} name={labelId} onChange={handleLinkChange} value={links[i].label} placeholder="Website" />
-                <br />
-              </div>
+                  <br />
+                </div>
                 <div className="col-6">
                   <Form.Label className="font-weight-bold" >Link {i + 1} URL:</Form.Label>
                   <Form.Control className="form-control form-control-lg" type="text" id={urlId} data-box="url" data-i={i} name={urlId} onChange={handleLinkChange} value={links[i].url} placeholder="http://myradsite.com" />
-              </div>
+                </div>
               </div>)
             })}
             {linkError && <Alert variant="warning">Links that don't have BOTH a label and a URL won't be saved.</Alert>}
             <Button id="newLink" type="button" disabled={loading} onClick={addLink}>Add Link</Button>
-
+            <br />
+            <br />
+            <Form.Label className="font-weight-bold" >Default Post Location:</Form.Label>
+            <br />
+            <InputGroup className="mb-3">
+              <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="location" />
+              <InputGroup.Append>
+                <Button id='find' variant="outline-secondary" onClick={handleSearch}>Find <FaSearchLocation /></Button>
+              </InputGroup.Append>
+            </InputGroup>
+            {addrError && <Alert variant="danger">Address not recognized.</Alert>}
+            <br />
+            <div className="listMap" style={{ height: "300px", width: "300px" }}>
+              {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
+            </div>
             <br />
             <Button id="submit" type="submit" disabled={loading} >Save Changes</Button>
 
