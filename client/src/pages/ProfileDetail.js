@@ -96,12 +96,11 @@ export default function ProfileDetail(props) {
           </Card.Body>
         </Card>
         <Card id='orgListing'>
-        <h2>Listings</h2>
+        <h2>Listings:</h2>
         {userPosts.length ? (
           <>
             {userPosts.map((post) => {
               return <>
-                <br></br>
               <Listing key={post._id} value={post} />
               </>
             })}
