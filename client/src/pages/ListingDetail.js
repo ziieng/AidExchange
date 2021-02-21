@@ -68,7 +68,7 @@ export default function ListingDetail() {
                     variant="dark"
                     href={"/editlisting/" + id}
                   >
-                    Edit Profile
+                    Edit Listing
                   </Button>
                 ) : (
                     " "
@@ -92,7 +92,7 @@ export default function ListingDetail() {
                     className="donateRequest align-self-right"
                     variant="dark"
                   >
-                    Donate/Request
+                    {(listing.postType === "Request") ? "Donate" : "Request"}
                   </Button>
                 {/* This is the download link */}
                 {mapRender && <Print listing={listing} />}
