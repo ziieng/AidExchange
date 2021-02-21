@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./App.css";
 import "bootstrap";
+import "./App.css";
 import fire from "./firebase";
 import Header from "./Components/Jumbotron/header";
 import Footer from "./Components/Footer/footer";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import ListingDetail from "./pages/ListingDetail";
-import NewListing from "./pages/NewListing";
+import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
+import ListingDetail from "./pages/ListingDetail";
+import ListingForm from "./pages/ListingForm";
 import ProfileDetail from "./pages/ProfileDetail";
 import EditProfile from "./pages/EditProfile";
-import ForgotPassword from "./pages/ForgotPassword";
 import Search from "./pages/Search";
-import EditListing from './pages/EditListing'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,24 +49,23 @@ function App() {
                 // If they are signed in, they can see any page that *isn't* login or signup
               }
               <Switch>
-                <Route exact path="/newlisting">
-                  <NewListing />
-                </Route>
-                <Route path="/listing/:id">
-                  <ListingDetail />
-                </Route>
-                <Route path="/editlisting/:id">
-                  <EditListing />
-                </Route>
-                <Route path="/profile/:id">
-                  <ProfileDetail />
-                </Route>
-                <Route path="/editprofile">
-                  <EditProfile />
-                </Route>
-                <Route path="/search">
-                  <Search />
-                </Route>
+              <Route exact path="/newlisting">
+                <ListingForm version="New" />
+              </Route>
+              <Route path="/editlisting/:id">
+                <ListingForm version="Edit" />
+              </Route>
+              <Route path="/listing/:id">
+                <ListingDetail />
+              </Route>
+              <Route path="/profile/:id">
+                <ProfileDetail />
+              </Route>
+              <Route path="/editprofile">
+                <EditProfile />
+              </Route>
+              <Route path="/search">
+                <Search />
                 <Route path="/">
                   <Dashboard />
                 </Route>

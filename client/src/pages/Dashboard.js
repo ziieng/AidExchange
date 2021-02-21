@@ -10,13 +10,13 @@ import API from "../utils/API";
 export default function Dashboard() {
   const [myPosts, setMyPosts] = useState([]);
   const [myReplies, setMyReplies] = useState([]);
+  let uid = fire.auth().currentUser.uid;
 
   useEffect(() => {
     loadListings();
   }, []);
 
   function loadListings() {
-    let uid = fire.auth().currentUser.uid;
     //user's posts
     API.getUserListing({ params: { uid: uid } }).then((res) => {
       console.log(res);
@@ -45,7 +45,7 @@ export default function Dashboard() {
           {myPosts.length ? (
             <>
               {myPosts.map((post) => {
-                return <Listing key={post._id} value={post} />;
+                return <Listing key={post._id} value={post} uid={uid} />;
               })}
             </>
           ) : (

@@ -20,7 +20,21 @@ export default {
     return axios.post("/api/user", userData);
   },
   updateUser: function (userData) {
+    let fixedLocation = userData.location;
+    if (fixedLocation.lat) {
+      fixedLocation = [fixedLocation.lng, fixedLocation.lat]
+    }
+    userData.location = { type: "Point", coordinates: fixedLocation };
     return axios.put("/api/user/" + userData.userId, userData);
+  },
+  // Saves a NewListing to the database
+  updateListing: function (id, editData) {
+    let fixedLocation = editData.location;
+    if (fixedLocation.lat) {
+      fixedLocation = [fixedLocation.lng, fixedLocation.lat]
+    }
+    editData.location = { type: "Point", coordinates: fixedLocation };
+    return axios.put("/api/put/" + id, editData);
   },
   // Saves a NewListing to the database
   addNewListing: function (newListData) {
