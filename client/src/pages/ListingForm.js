@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Button, Form, Alert } from 'react-bootstrap'
+import { Container, Button, Form, Alert, InputGroup } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
 import fire from '../firebase.js';
 import { useHistory, useParams } from "react-router-dom";
+import MyMapComponent from "../Components/Map";
+import GeoSearch from "../utils/GeoCodeSearch"
+import { FaSearchLocation } from "react-icons/fa"
 
-export default function editListing() {
+export default function editListing(props) {
+    const version = props.version
     // Setting our component's initial state
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [contents, setContents] = useState([{ item: "", quantity: "" }]);
     const [postType, setPostType] = useState("Request");
     const [description, setDescription] = useState("");
-    const [location, setLocation] = useState("");
+    const [addr, setAddr] = useState("")
+    const [addrError, setAddrError] = useState(false)
+    const [location, setLocation] = useState({ "lat": 0, "lng": 0 })
+    const [mapRender, setMapRender] = useState(false)
     const [error, setError] = useState("");
     const [contentError, setContentError] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -21,25 +28,47 @@ export default function editListing() {
     let history = useHistory();
 
     useEffect(() => {
-        loadListing()
+        if (version === "Edit") {
+            loadListing()
+        } else if (version === "New") {
+            loadUserLocation()
+        }
     }, [])
 
     function loadListing() {
         API.getListing(id)
             .then(res => {
                 console.log(res)
-                let listing = res.data
-                setTitle(listing.title)
-                setCategory(listing.category)
-                setContents(listing.contents)
-                setPostType(listing.postType)
-                setDescription(listing.description)
-                if (listing.location) {
+                let post = res.data
+                setTitle(post.title)
+                setCategory(post.category)
+                setContents(post.contents)
+                setPostType(post.postType)
+                setDescription(post.description)
+                if (post.location) {
                     setLocation({
-                        lat: listing.location.coordinates[1],
-                        lng: listing.location.coordinates[0],
-                  })
+                        lat: post.location.coordinates[1],
+                        lng: post.location.coordinates[0],
+                    })
                 }
+            })
+            .then(() => {
+                setMapRender(true)
+            })
+    }
+
+    function loadUserLocation() {
+        API.getUser(uid)
+            .then(res => {
+                console.log(res)
+                if (res.data.location) {
+                    setLocation({ "lat": res.data.location.coordinates[1], "lng": res.data.location.coordinates[0] })
+                } else {
+                    setLocation({ "lat": 0, "lng": 0 })
+                }
+            })
+            .then(() => {
+                setMapRender(true)
             })
     }
 
@@ -58,6 +87,22 @@ export default function editListing() {
         if (updatedContents.length > 0) { setContentError(true) } else { setContentError(false) }
     }
 
+    function handleSearch() {
+        if (addr !== "") {
+            setMapRender(false)
+            GeoSearch.coordsFromAddr(addr)
+                .then((coords) => {
+                    console.log(coords)
+                    setLocation(coords)
+                    setAddrError(false)
+                    setMapRender(true)
+                })
+                .catch()
+        } else {
+            setAddrError(true)
+        }
+    }
+
     function handleFormSubmit(event) {
         event.preventDefault();
         setLoading(true)
@@ -68,8 +113,8 @@ export default function editListing() {
             }
             return line
         })
-        if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== []) {
-            API.updateListing(id, {
+        if (title !== "" && category !== "" && postType !== "" && scrubbedContents !== [] && location !== { "lat": 0, "lng": 0 }) {
+            let postObj = {
                 userId: uid,
                 title: title,
                 category: category,
@@ -78,19 +123,32 @@ export default function editListing() {
                 contents: scrubbedContents,
                 location: location,
                 description: description,
-            })
-                .then(data => {
-                    console.log(data)
-                    history.push('/listing/' + id)
-                })
-                .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    console.log(errorCode, errorMessage)
-                    setError(errorMessage)
-                });
+            }
+            if (version === "Edit") {
+                API.updateListing(id, postObj)
+                    .then(() => {
+                        history.push('/listing/' + id)
+                    })
+                    .catch((error) => {
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.log(errorCode, errorMessage)
+                        setError(errorMessage)
+                    });
+            } else if (version === "New") {
+                API.addNewListing(postObj)
+                    .then(data => {
+                        history.push('/listing/' + data.data._id)
+                    })
+                    .catch((error) => {
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.log(errorCode, errorMessage)
+                        setError(errorMessage)
+                    });
+            }
         } else {
-            setError("Title, Category, and Contents required!")
+            setError("Title, Category, Location, and Contents required!")
         }
         setLoading(false)
     }
@@ -99,12 +157,11 @@ export default function editListing() {
         <>
             <NavBar />
             <Container className="mb-5 mt-5 py-3 px-4 bg-light rounded w-50">
-                <h1 className="text-center">New Listing</h1>
+                <h1 className="text-center">{version} Listing</h1>
 
                 <Form className="" onSubmit={handleFormSubmit} >
                     <Form.Label className="font-weight-bold" >Title:</Form.Label>
                     <br />
-
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form.Control className=" form-control-lg" type="text" id="title" value={title} onChange={({ target }) => setTitle(target.value)} name="title" placeholder="Aid Request/Offer" />
                     <br />
@@ -143,12 +200,21 @@ export default function editListing() {
                     {contentError && <Alert variant="warning">Items that don't have BOTH a label and a quantity won't be saved.</Alert>}
                     <Button id="newItem" type="button" disabled={loading} onClick={addItem}>Add Item</Button>
                     <br />
-                    {/* <Form.Label className="font-weight-bold" >Location:</Form.Label>
+                    <Form.Label className="font-weight-bold" >Location:</Form.Label>
                     <br />
-                    <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setLocation(target.value)} name="location" placeholder="location" />
-                    <br /> */}
-                    <Button id="submit" type="submit" to="/" disabled={loading}>Submit</Button>
-
+                    <InputGroup className="mb-3">
+                        <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="location" />
+                        <InputGroup.Append>
+                            <Button id='find' variant="outline-secondary" onClick={handleSearch}>Find <FaSearchLocation /></Button>
+                        </InputGroup.Append>
+                    </InputGroup>
+                    {addrError && <Alert variant="danger">Address not recognized.</Alert>}
+                    <br />
+                    <div className="listMap" style={{ height: "300px", width: "300px" }}>
+                        {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
+                    </div>
+                    <br />
+                    <Button id="submit" type="submit" to="/" disabled={loading}>{(version === "New") ? "Submit" : "Update"}</Button>
                 </Form>
 
             </Container>

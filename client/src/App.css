@@ -24,6 +24,7 @@ footer {
   width: 100% !important;
   padding-top: 20px;
   color: #5c415d;
+  align-self: flex-end;
 }
 
 /* END Footer */

@@ -12,7 +12,7 @@ export default function ListingDetail() {
   let { id } = useParams();
   const [listing, setListing] = useState({
     contents: [],
-    postBy: { displayName: "" },
+    postBy: { displayName: "", avatar: "" },
   });
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const [mapRender, setMapRender] = useState(false);
@@ -23,11 +23,14 @@ export default function ListingDetail() {
   function loadListing() {
     API.getListing(id)
       .then((res) => {
-        setListing(res.data);
-        setLocation({
-          lat: res.data.location.coordinates[1],
-          lng: res.data.location.coordinates[0],
-        });
+        let post = res.data
+        setListing(post);
+        if (post.location) {
+          setLocation({
+            lat: post.location.coordinates[1],
+            lng: post.location.coordinates[0],
+          })
+        };
       })
       //extra .then so the location update finishes before the map renders
       .then(() => {
@@ -46,7 +49,7 @@ export default function ListingDetail() {
                 <Card.Img
                   className="icon"
                   variant="top"
-                  src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"
+                  src={listing.postBy.avatar}
                   alt={"user profile image for " + listing.postBy.displayName}
                 />
                 <Card.Title>{listing.title}</Card.Title>
@@ -65,8 +68,8 @@ export default function ListingDetail() {
                     variant="dark"
                     href={"/editlisting/" + id}
                   >
-                    Edit Profile
-              </Button>
+                    Edit Listing
+                  </Button>
                 ) : (
                     " "
                   )}
@@ -89,7 +92,7 @@ export default function ListingDetail() {
                     className="donateRequest align-self-right"
                     variant="dark"
                   >
-                    Donate/Request
+                    {(listing.postType === "Request") ? "Donate" : "Request"}
                   </Button>
                 {/* This is the download link */}
                 {mapRender && <Print listing={listing} />}
