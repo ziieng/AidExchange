@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./App.css";
 import "bootstrap";
+import "./App.css";
 import fire from "./firebase";
 import Header from "./Components/Jumbotron/header";
 import Footer from "./Components/Footer/footer";
@@ -15,7 +15,7 @@ import EditProfile from "./pages/EditProfile";
 import EditListing from "./pages/EditListing";
 import ForgotPassword from "./pages/ForgotPassword";
 import Search from "./pages/Search";
-import EditListing from './pages/EditListing'
+// import EditListing from './pages/EditListing'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
