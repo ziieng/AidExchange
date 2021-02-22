@@ -18,11 +18,30 @@ Font.register({
 
 // Create styles
 const styles = StyleSheet.create({
-  page: {
-    margin: 10,
+  content: {
     flexDirection: "row",
     backgroundColor: "#E4E4E4",
+    margin: 10,
+    padding: 10,
   },
+
+  line: {
+    borderBottom: "grey",
+    borderBottomWidth: 1,
+  },
+
+  heading: {
+    // flexDirection: "row",
+    backgroundColor: "#5C415D",
+    height: "2cm",
+    textAlign: "center",
+    color: "#AEA0AE",
+    borderBottom: "red",
+    borderBottomWidth: 5,
+    // margin: 20,
+    paddingTop: 10,
+  },
+
   section: {
     margin: 10,
     padding: 10,
@@ -30,31 +49,69 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 24,
-    textAlign: "center",
+    fontSize: 18,
+    textAlign: "left",
     fontWeight: "semibold",
+    margin: 10,
     // fontFamily: "Roboto",
   },
   subtitle: {
-    fontSize: 18,
-    margin: 12,
+    fontSize: 16,
+    margin: 10,
+  },
+  date: {
+    fontSize: 11,
+    textAlign: "center",
+    color: "#AEA0AE",
+  },
+  pageNumber: {
+    position: "absolute",
+    fontSize: 12,
+    bottom: 30,
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    color: "grey",
   },
 });
 
+//Getting today's date
+let today = new Date();
+
 const MyDocument = (props) => (
   <Document>
-    <Page size="A4">
-      <Text style={styles.title}>{props.title}</Text>
+    <Page size="LETTER" wrap>
       <Text style={styles.heading}>
-        Your {props.postType} of : {props.title}{" "}
+        AidExchange
+        <Text style={styles.date}>
+          {"\n"}
+          Date:{" "}
+          {`${
+            today.getMonth() + 1
+          } / ${today.getDate()} / ${today.getFullYear()}`}
+        </Text>
       </Text>
-      <Text style={styles.page}>
+
+      <Text style={styles.title}> Hello {props.displayName}</Text>
+
+      <Text style={styles.subtitle}>
+        {props.postType}ed item's list for: {props.title}{" "}
+      </Text>
+
+      <Text style={styles.content}>
         {props.contents.map((line, i) => {
           return (
-            <Text key={i}> {line.quantity + " " + line.item + "\n "} </Text>
+            <Text style={styles.line} key={i}>
+              {line.quantity + "--" + line.item + "\n "}{" "}
+            </Text>
           );
         })}
       </Text>
+      <Text
+        style={styles.pageNumber}
+        render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`}
+        fixed
+      />
     </Page>
   </Document>
 );
