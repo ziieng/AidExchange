@@ -5,12 +5,14 @@ import API from "../utils/API";
 import { useParams } from "react-router-dom";
 import Print from "../utils/document";
 import MyMapComponent from "../Components/Map";
+import fire from "../firebase.js";
 
 export default function ListingDetail() {
+  let uid = fire.auth().currentUser.uid;
   let { id } = useParams();
   const [listing, setListing] = useState({
     contents: [],
-    postBy: { displayName: "" },
+    postBy: { displayName: "", avatar: "" },
   });
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const [mapRender, setMapRender] = useState(false);
@@ -21,11 +23,14 @@ export default function ListingDetail() {
   function loadListing() {
     API.getListing(id)
       .then((res) => {
-        setListing(res.data);
-        setLocation({
-          lat: res.data.location.coordinates[1],
-          lng: res.data.location.coordinates[0],
-        });
+        let post = res.data
+        setListing(post);
+        if (post.location) {
+          setLocation({
+            lat: post.location.coordinates[1],
+            lng: post.location.coordinates[0],
+          })
+        };
       })
       //extra .then so the location update finishes before the map renders
       .then(() => {
@@ -40,11 +45,11 @@ export default function ListingDetail() {
         <Col>
           <Row>
             <Card className="listingDetail">
-              <Card.Body>
+              <Card.Body className='marginTop'>
                 <Card.Img
                   className="icon"
                   variant="top"
-                  src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png"
+                  src={listing.postBy.avatar}
                   alt={"user profile image for " + listing.postBy.displayName}
                 />
                 <Card.Title>{listing.title}</Card.Title>
@@ -57,9 +62,17 @@ export default function ListingDetail() {
                   <Card.Text>{listing.description}</Card.Text>
                 )}
 
-                <Button className="editProfile" variant="dark">
-                  Edit Listing
-                </Button>
+                {listing.userId === uid ? (
+                  <Button
+                    className="editProfile"
+                    variant="dark"
+                    href={"/editlisting/" + id}
+                  >
+                    Edit Listing
+                  </Button>
+                ) : (
+                    " "
+                  )}
               </Card.Body>
             </Card>
             <Card className="map">
@@ -79,12 +92,12 @@ export default function ListingDetail() {
                     className="donateRequest align-self-right"
                     variant="dark"
                   >
-                    Donate/Request
+                    {(listing.postType === "Request") ? "Donate" : "Request"}
                   </Button>
-                </h2>
                 {/* This is the download link */}
                 {mapRender && <Print listing={listing} />}
                 {/* ------------------------- */}
+                </h2>
                 <Table striped bordered hover>
                   <thead>
                     <tr>
