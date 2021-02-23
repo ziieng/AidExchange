@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Font,
 } from "@react-pdf/renderer";
+import { Table } from "react-bootstrap";
 
 // Register font
 Font.register({
@@ -18,26 +19,14 @@ Font.register({
 
 // Create styles
 const styles = StyleSheet.create({
-  content: {
-    flexDirection: "row",
-    backgroundColor: "#E4E4E4",
-    margin: 10,
-    padding: 10,
-  },
-
-  line: {
-    borderBottom: "grey",
-    borderBottomWidth: 1,
-  },
-
   heading: {
     // flexDirection: "row",
-    backgroundColor: "#5C415D",
+    backgroundColor: "#5c415d",
     height: "2cm",
     textAlign: "center",
-    color: "#AEA0AE",
-    borderBottom: "red",
-    borderBottomWidth: 5,
+    color: "white",
+    borderBottom: "#AEA0AE",
+    borderBottomWidth: 3,
     // margin: 20,
     paddingTop: 10,
   },
@@ -52,18 +41,43 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "left",
     fontWeight: "semibold",
-    margin: 10,
+    marginLeft: 40,
+    marginTop: 15,
+    marginRight: 40,
+    marginBottom: 5,
     // fontFamily: "Roboto",
   },
   subtitle: {
     fontSize: 16,
-    margin: 10,
+    marginLeft: 40,
+    marginTop: 5,
+    marginRight: 40,
+    marginBottom: 5,
   },
   date: {
     fontSize: 11,
     textAlign: "center",
-    color: "#AEA0AE",
+    color: "white",
+    // paddingTop: 5,
+    // color: "#AEA0AE",
   },
+  content: {
+    flexDirection: "row",
+    backgroundColor: "#E4E4E4",
+    // margin: 20,
+    padding: 10,
+    marginLeft: 40,
+    marginTop: 5,
+    marginRight: 40,
+    marginBottom: 5,
+  },
+
+  line: {
+    border: 2 | "solid",
+    borderColor: "grey",
+    // borderBottomWidth: 1,
+  },
+
   pageNumber: {
     position: "absolute",
     fontSize: 12,
@@ -95,14 +109,38 @@ const MyDocument = (props) => (
       <Text style={styles.title}> Hello {props.displayName}</Text>
 
       <Text style={styles.subtitle}>
-        {props.postType}ed item's list for: {props.title}{" "}
+        {props.postType}ed items for: {props.title}{" "}
       </Text>
+      {/* <Text style={styles.content}>
+        {
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Item Description</th>
+                <th>Quantity ${props.postType}ed</th>
+              </tr>
+            </thead>
+            <tbody>
+              $
+              {props.contents.map((line, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{line.item}</td>
+                    <td>{line.quantity}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        }
+      </Text> */}
 
       <Text style={styles.content}>
         {props.contents.map((line, i) => {
           return (
-            <Text style={styles.line} key={i}>
-              {line.quantity + "--" + line.item + "\n "}{" "}
+            <Text style={{ borderBottomWidth: 2, border: "solid" }} key={i}>
+              {" "}
+              {line.quantity + "--" + line.item + "\n "}
             </Text>
           );
         })}
@@ -144,8 +182,8 @@ const Print = (props) => {
               src={icon}
               width="35"
               height="35"
-                style={{ float: "right", marginBottom: "1%" }}
-                alt="PDF icon to print a packing list"
+              style={{ float: "right", marginBottom: "1%" }}
+              alt="PDF icon to print a packing list"
             />
           )
         }
