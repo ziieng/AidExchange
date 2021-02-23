@@ -37,8 +37,8 @@ Explore the [Project Page](https://github.com/ziieng/AidExchange)
 ### Built With:
 
 <!-- * This app is build upon [Node.js](https://nodejs.org/en/), [React](https://reactjs.org/), and the [Heroku](https://dashboard.heroku.com/apps) application. -->
-<!-- Firebase Authentication  -->
-<!-- React-pdf/renderer -->
+<!-- [Firebase Authentication](https://react-firebase-js.com)  -->
+<!-- [React-pdf/renderer](https://react-pdf.org/) -->
 
 ## Getting Started:
 
