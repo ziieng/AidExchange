@@ -70,33 +70,54 @@ export default function editProfile() {
 
   const handleFileChange = e => {
     if (e.target.files[0]) {
-      setImage(e.target.files[0]);
+      let file = e.target.files[0]
+      //file extension validation from https://www.geeksforgeeks.org/file-type-validation-while-uploading-it-using-javascript/
+      var allowedExtensions =
+        /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+      if (!allowedExtensions.exec(file.name)) {
+        alert('Invalid file type');
+        e.target.value = "";
+        return false;
+      }
+      else {
+        let size = Math.round((file.size / 1024))
+        if (size >= 500) {
+          alert("File too large, please select an image smaller than 500KB.")
+          e.target.value = "";
+          return false
+        }
+        setImage(file);
+      }
+
     }
   };
 
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        const done = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(done);
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then(url => {
-            setAvatar(url);
-          });
-      }
-    );
+    if (image !== null) {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          const done = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(done);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+              setAvatar(url);
+            });
+        }
+      );
+    }
   };
 
   function addLink() {
@@ -168,9 +189,9 @@ export default function editProfile() {
               src={avatar}
               alt={"user profile image for " + displayName}
             /></Form.Label>
-            <br />
+            <br /><Form.Label>Select New Avatar (.jpg, .jpeg, .png, or .gif)</Form.Label><br />
             <InputGroup>
-              <Form.File id="avatarFile" onChange={handleFileChange} label="Select New Avatar Image" />
+              <Form.File id="avatarFile" className="form-control" onChange={handleFileChange} />
               <InputGroup.Append>
                 <Button id='find' variant="outline-secondary" onClick={handleUpload}>Upload <FaUpload /></Button>
               </InputGroup.Append>
