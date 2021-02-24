@@ -43,7 +43,8 @@ export default function editProfile() {
         if (userData.links !== []) {
           setLinks(userData.links)
           if (res.data.location) {
-            setLocation(location)
+            let locationArray = res.data.location.coordinates
+            setLocation({ "lat": locationArray[1], "lng": locationArray[0] })
           }
         }
       })
@@ -193,7 +194,7 @@ export default function editProfile() {
             <InputGroup>
               <Form.File id="avatarFile" className="form-control" onChange={handleFileChange} />
               <InputGroup.Append>
-                <Button id='find' variant="outline-secondary" onClick={handleUpload}>Upload <FaUpload /></Button>
+                <Button id='find' variant="dark" onClick={handleUpload}>Upload <FaUpload /></Button>
               </InputGroup.Append>
             </InputGroup>
             <br />
@@ -224,13 +225,13 @@ export default function editProfile() {
               </div>)
             })}
             {linkError && <Alert variant="warning">Links that don't have BOTH a label and a URL won't be saved.</Alert>}
-            <Button id="newLink" type="button" disabled={loading} onClick={addLink}>Add Link</Button>
+            <Button id="newLink" type="button" variant="dark" disabled={loading} onClick={addLink}>Add Link</Button>
             <br />
             <br />
             <Form.Label className="font-weight-bold" >Default Post Location:</Form.Label>
             <br />
             <InputGroup className="mb-3">
-              <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="location" />
+              <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="New location? Search by address." />
               <InputGroup.Append>
                 <Button id='find' variant="outline-secondary" onClick={handleSearch}>Find <FaSearchLocation /></Button>
               </InputGroup.Append>
@@ -241,7 +242,7 @@ export default function editProfile() {
               {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
             </div>
             <br />
-            <Button id="submit" type="submit" disabled={loading} >Save Changes</Button>
+            <Button id="submit" type="submit" variant="dark" disabled={loading} >Save Changes</Button>
 
           </Form>
         </Card>
