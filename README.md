@@ -8,49 +8,60 @@ Explore the [Project Page](https://github.com/ziieng/AidExchange)
 
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [JavaScript](#JavaScript)
-  * [Assets](#Assets)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+- [About the Project](#about-the-project)
+  - [JavaScript](#JavaScript)
+  - [Assets](#Assets)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
 ## About the Project:
+
 <!-- The focus of this project was to  -->
 
 <!-- ![Project Gif](gif.gif) -->
 
 ### JavaScript:
+
 <!-- * [App.js](https://github.com/ziieng/AidExchange/blob/main/src/App.js) -->
 
 ### Assets:
+
 <!-- * [src](https://github.com/ziieng/AidExchange/tree/main/src) -->
 
 ### Built With:
+
 <!-- * This app is build upon [Node.js](https://nodejs.org/en/), [React](https://reactjs.org/), and the [Heroku](https://dashboard.heroku.com/apps) application. -->
+<!-- [Firebase Authentication](https://react-firebase-js.com)  -->
+<!-- [React-pdf/renderer](https://react-pdf.org/) -->
 
 ## Getting Started:
+
 To get a local copy up and running follow the steps below.
 
 ### Prerequisites:
+
 None.
 
 ### Installation:
+
 1. Clone the Repository:
+
 ```sh
 git clone git@github.com:ziieng/AidExchange.git
 ```
 
 ## Roadmap:
-Currently no known issues, but track track [open issues](https://github.com/ziieng/AidExchange/issues ) for proposed features (and known issues) in the future.
 
+Currently no known issues, but track track [open issues](https://github.com/ziieng/AidExchange/issues) for proposed features (and known issues) in the future.
 
 ## Contributing:
+
 Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
@@ -60,7 +71,9 @@ Any contributions you make are **greatly appreciated**.
 5. Open a Pull Request
 
 ## Contact:
+
 Project Link: [https://github.com/ziieng/AidExchange](https://github.com/ziieng/AidExchange)
 
-## Acknowledgements: 
-* University of Washington Coding Bootcamp for providing me with the skills and knowledge to create this project. 
+## Acknowledgements:
+
+- University of Washington Coding Bootcamp for providing me with the skills and knowledge to create this project.
