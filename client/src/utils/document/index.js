@@ -20,14 +20,12 @@ Font.register({
 // Create styles
 const styles = StyleSheet.create({
   heading: {
-    // flexDirection: "row",
     backgroundColor: "#5c415d",
     height: "2cm",
     textAlign: "center",
     color: "white",
     borderBottom: "#AEA0AE",
     borderBottomWidth: 3,
-    // margin: 20,
     paddingTop: 10,
   },
 
@@ -45,7 +43,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginRight: 40,
     marginBottom: 5,
-    // fontFamily: "Roboto",
   },
   subtitle: {
     fontSize: 16,
@@ -58,13 +55,10 @@ const styles = StyleSheet.create({
     fontSize: 11,
     textAlign: "center",
     color: "white",
-    // paddingTop: 5,
-    // color: "#AEA0AE",
   },
   content: {
     flexDirection: "row",
     backgroundColor: "#E4E4E4",
-    // margin: 20,
     padding: 10,
     marginLeft: 40,
     marginTop: 5,
@@ -76,7 +70,6 @@ const styles = StyleSheet.create({
   line: {
     border: 2 | "solid",
     borderColor: "grey",
-    // borderBottomWidth: 1,
   },
 
   pageNumber: {
@@ -188,7 +181,7 @@ const Print = (props) => {
               src={icon}
               width="35"
               height="35"
-              style={{ float: "right", marginBottom: "1%" }}
+              style={{ float: "right", marginBottom: "1%", marginRight: '2%' }}
               alt="PDF icon to print a packing list"
             />
           )

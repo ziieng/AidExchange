@@ -64,7 +64,7 @@ export default function ProfileDetail(props) {
               <>
                 {user.links.map((link, i) => {
                   return (
-                    <Card.Link key={i} href={link.url}>
+                    <Card.Link target='_blank' rel="noreferrer" key={i} href={link.url}>
                       {link.label}
                     </Card.Link>
                   );
