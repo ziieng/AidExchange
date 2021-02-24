@@ -21,7 +21,7 @@ export default function login() {
         try {
             setError("")
             setLoading(true)
-            setMessage("Welcome to AidExchange!")
+            setMessage("Welcome to AidExchange")
             await fire.auth().signInWithEmailAndPassword(email, password)
             history.push("/")
         } catch {
@@ -34,7 +34,6 @@ export default function login() {
     function togglePasswordVisiblity(e) {
         e.preventDefault()
         setShowPassword(showpassword => !showpassword)
-        // setShowPassword(true)
         console.log(showpassword)
     }
 
@@ -44,7 +43,7 @@ export default function login() {
                 <Col sm md='auto' lg xl='6' className="align-items-center my-4 p-5 bg-light rounded">
 
                     <h1 className="text-center mb-4">Sign In</h1>
-                    {message && <Alert variant="success">{message}</Alert>}
+                    {message && <Alert variant="success">{message} </Alert>}
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form className="login text-center" onSubmit={handleSubmit}>
                         <Form.Group className="">
