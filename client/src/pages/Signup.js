@@ -9,6 +9,8 @@ export default function signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [showpassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [displayName, setDisplay] = useState("");
     const [acctType, setAcctType] = useState("");
     const [error, setError] = useState("");
@@ -44,6 +46,12 @@ export default function signup() {
         setLoading(false)
     }
 
+    function togglePasswordVisiblity(e) {
+        e.preventDefault();
+        setShowPassword(showpassword => !showpassword)
+        console.log(showpassword)
+    }
+
     return (
         <>
             <Container className=' d-flex justify-content-center'>
@@ -62,11 +70,13 @@ export default function signup() {
                         </Form.Group>
                         <Form.Group className="">
 
-                            <Form.Control type="password" onChange={({ target }) => setPassword(target.value)} className="form-control" name="password" placeholder="Password" />
+                            <Form.Control type={showpassword ? "text" : "password"} onChange={({ target }) => setPassword(target.value)} className="form-control" name="password" placeholder="Password" />
+                            <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  signuppassword-icon`} onClick={togglePasswordVisiblity} />
                         </Form.Group>
                         <Form.Group className="">
 
-                            <Form.Control type="password" onChange={({ target }) => setPasswordConfirm(target.value)} className="form-control" name="passwordConfirm" placeholder="Confirm Password" />
+                            <Form.Control type={showConfirmPassword ? "text" : "password"} onChange={({ target }) => setPasswordConfirm(target.value)} className="form-control" name="passwordConfirm" placeholder="Confirm Password" />
+                            <i className={`fa ${showConfirmPassword ? "fa-eye-slash" : "fa-eye"}  signuppassword-icon2`} onClick={() => { setShowConfirmPassword(showConfirmPassword => !showConfirmPassword) }} />
                         </Form.Group>
                         <Form.Group >
 

@@ -11,7 +11,9 @@ export default function login() {
     const [password, setPassword] = useState();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showpassword, setShowPassword] = useState(false);
     const history = useHistory()
+    const [message, setMessage] = useState('');
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -19,6 +21,7 @@ export default function login() {
         try {
             setError("")
             setLoading(true)
+            setMessage("Welcome to AidExchange!")
             await fire.auth().signInWithEmailAndPassword(email, password)
             history.push("/")
         } catch {
@@ -28,13 +31,20 @@ export default function login() {
         setLoading(false)
     }
 
+    function togglePasswordVisiblity(e) {
+        e.preventDefault()
+        setShowPassword(showpassword => !showpassword)
+        // setShowPassword(true)
+        console.log(showpassword)
+    }
+
     return (
         <>
             <Container className="d-flex justify-content-center">
                 <Col sm md='auto' lg xl='6' className="align-items-center my-4 p-5 bg-light rounded">
 
                     <h1 className="text-center mb-4">Sign In</h1>
-
+                    {message && <Alert variant="success">{message}</Alert>}
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form className="login text-center" onSubmit={handleSubmit}>
                         <Form.Group className="">
@@ -43,7 +53,8 @@ export default function login() {
                         </Form.Group>
                         <Form.Group className="">
 
-                            <Form.Control type="password" className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="password" />
+                            <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="password" />
+                            <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
                         </Form.Group>
                         <Button type="submit" className=" justify-content-center" disabled={loading} >Login</Button>
 
