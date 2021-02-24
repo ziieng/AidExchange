@@ -23,14 +23,16 @@ function App() {
   });
 
   return (
+
     <div
       style={{
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
+        justifyContent: "space-between"
       }}
     >
+
       <Router>
         {!isLoggedIn ? (
           <>
@@ -51,6 +53,7 @@ function App() {
             </Switch>
           </>
         ) : (
+
           <>
             {
               // If they are signed in, they can see any page that *isn't* login or signup
@@ -80,6 +83,7 @@ function App() {
             </Switch>
           </>
         )}
+
         <Footer />
       </Router>
     </div>
