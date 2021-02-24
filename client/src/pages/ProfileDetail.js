@@ -48,67 +48,67 @@ export default function ProfileDetail(props) {
   return (
     <>
       <TopNav />
-        <Card className="profileDetails">
-          <Card.Body>
-            <Card.Img
-              className="userImage"
-              variant="top"
+      <Card className="profileDetails">
+        <Card.Body>
+          <Card.Img
+            className="userImage"
+            variant="top"
             src={user.avatar}
-              alt={"user profile image for " + user.displayName}
-            />
-            <Card.Title>{user.displayName}</Card.Title>
+            alt={"user profile image for " + user.displayName}
+          />
+          <Card.Title>{user.displayName}</Card.Title>
           <Card.Subtitle>
             {city} <br />
           </Card.Subtitle>
-            {user.links ? (
-              <>
-                {user.links.map((link, i) => {
-                  return (
-                    <Card.Link key={i} href={link.url}>
-                      {link.label}
-                    </Card.Link>
-                  );
-                })}
-              </>
-            ) : (
+          {user.links ? (
+            <>
+              {user.links.map((link, i) => {
+                return (
+                  <Card.Link key={i} href={link.url}>
+                    {link.label}
+                  </Card.Link>
+                );
+              })}
+            </>
+          ) : (
               <Card.Subtitle>(No links provided)</Card.Subtitle>
             )}
-            {user.description ? (
-              <Card.Text>
-                {user.description} <br></br>
-              </Card.Text>
-            ) : (
+          {user.description ? (
+            <Card.Text>
+              {user.description} <br></br>
+            </Card.Text>
+          ) : (
               <Card.Text>
                 (No description provided) <br></br>
               </Card.Text>
             )}
-            {id === uid ? (
-              <Button
-                className="editProfile"
-                variant="dark"
-                href="/editprofile"
-              >
-                Edit Profile
-              </Button>
-            ) : (
+          {id === uid ? (
+            <Button
+              className="editProfile"
+              variant="dark"
+              href="/editprofile"
+            >
+              Edit Profile
+            </Button>
+          ) : (
               " "
             )}
-          </Card.Body>
-        </Card>
-        <Card id='orgListing'>
+        </Card.Body>
+      </Card>
+      <Card id='orgListing' className="ml-5">
         <h2>Listings:</h2>
         {userPosts.length ? (
           <>
             {userPosts.map((post) => {
               return <>
-              <Listing key={post._id} value={post} />
+                <Listing key={post._id} value={post} />
               </>
             })}
           </>
         ) : (
-          <h3>No Listings to Display</h3>
-        )}
-        </Card>
+            <h3>No Listings to Display</h3>
+          )}
+      </Card>
     </>
   );
 }
