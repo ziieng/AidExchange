@@ -24,6 +24,7 @@ footer {
   width: 100% !important;
   padding-top: 20px;
   color: #5c415d;
+  align-self: flex-end;
 }
 
 /* END Footer */
@@ -231,3 +232,27 @@ footer {
 }
 
 /* END NewListing */
+
+/* Start Password-icon */
+.password-icon {
+  position: absolute;
+  top: 187px;
+  right: 55px;
+  cursor: pointer;
+}
+
+.signuppassword-icon {
+  position: absolute;
+  top: 207px;
+  right: 40px;
+  cursor: pointer;
+}
+
+.signuppassword-icon2 {
+  position: absolute;
+  top: 262px;
+  right: 40px;
+  cursor: pointer;
+}
+
+/* End Password-icon */

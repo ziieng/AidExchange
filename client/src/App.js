@@ -23,26 +23,37 @@ function App() {
   });
 
   return (
-    <Router>
-      {!isLoggedIn ? (
-        <>
-          {
-            // If they're not signed in, they can only see login or signup
-          }
-          <Header />
-          <Switch>
-            <Route path="/Signup">
-              <Signup />
-            </Route>
-            <Route path="/ForgotPassword">
-              <ForgotPassword />
-            </Route>
-            <Route path="/">
-              <Login />
-            </Route>
-          </Switch>
-        </>
-      ) : (
+
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between"
+      }}
+    >
+
+      <Router>
+        {!isLoggedIn ? (
+          <>
+            {
+              // If they're not signed in, they can only see login or signup
+            }
+            <Header />
+            <Switch>
+              <Route path="/Signup">
+                <Signup />
+              </Route>
+              <Route path="/ForgotPassword">
+                <ForgotPassword />
+              </Route>
+              <Route path="/">
+                <Login />
+              </Route>
+            </Switch>
+          </>
+        ) : (
+
           <>
             {
               // If they are signed in, they can see any page that *isn't* login or signup
@@ -72,8 +83,10 @@ function App() {
             </Switch>
           </>
         )}
-      <Footer />
-    </Router>
+
+        <Footer />
+      </Router>
+    </div>
   );
 }
 
