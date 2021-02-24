@@ -68,8 +68,9 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 40,
     marginTop: 5,
-    marginRight: 40,
+    marginRight: 50,
     marginBottom: 5,
+    fontSize: 14,
   },
 
   line: {
@@ -136,11 +137,16 @@ const MyDocument = (props) => (
       </Text> */}
 
       <Text style={styles.content}>
+        <Text> Quantity {"    "} Description</Text>
+        <Text>
+          {"\n"}
+          ------------------------------------------------------- {"\n"}{" "}
+        </Text>
         {props.contents.map((line, i) => {
           return (
             <Text style={{ borderBottomWidth: 2, border: "solid" }} key={i}>
               {" "}
-              {line.quantity + "--" + line.item + "\n "}
+              {line.quantity + "            " + line.item + "\n "}
             </Text>
           );
         })}
