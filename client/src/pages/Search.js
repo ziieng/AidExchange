@@ -20,8 +20,6 @@ export default function Search() {
                 <Card.Body>
                     <Form>
                         <h2> Filter: </h2>
-                        <Button className='clear' variant="dark">Clear</Button>
-                        <Button className='apply' variant="dark">Apply</Button>
                         {['checkbox'].map((type) => (
                             <div key={`default-${type}`} className="mb-3">
                                 <Form.Check
@@ -39,7 +37,10 @@ export default function Search() {
                                     id={`default-${type}`}
                                     label={`Food ${type}`}
                                 />
-
+                                <div className='btnFormat'>
+                                    <Button className='clear' variant="dark">Clear</Button>
+                                    <Button className='apply' variant="dark">Apply</Button>
+                                </div>
                             </div>
                         ))}
                     </Form>

@@ -60,17 +60,18 @@ export default function ProfileDetail(props) {
           <Card.Subtitle>
             {city} <br />
           </Card.Subtitle>
-          {user.links ? (
-            <>
-              {user.links.map((link, i) => {
-                return (
-                  <Card.Link key={i} href={link.url}>
-                    {link.label}
-                  </Card.Link>
-                );
-              })}
-            </>
-          ) : (
+
+            {user.links ? (
+              <>
+                {user.links.map((link, i) => {
+                  return (
+                    <Card.Link target='_blank' rel="noreferrer" key={i} href={link.url}>
+                      {link.label}
+                    </Card.Link>
+                  );
+                })}
+              </>
+            ) : (
               <Card.Subtitle>(No links provided)</Card.Subtitle>
             )}
           {user.description ? (
