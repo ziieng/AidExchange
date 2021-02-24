@@ -53,7 +53,7 @@ export default function login() {
                         </Form.Group>
                         <Form.Group className="">
 
-                            <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="password" />
+                            <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
                             <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
                         </Form.Group>
                         <Button type="submit" className=" justify-content-center" disabled={loading} >Login</Button>
