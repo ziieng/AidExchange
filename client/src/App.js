@@ -23,7 +23,7 @@ function App() {
   });
 
   return (
-    <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <Router>
         {!isLoggedIn ? (
           <>
@@ -49,25 +49,26 @@ function App() {
                 // If they are signed in, they can see any page that *isn't* login or signup
               }
               <Switch>
-              <Route exact path="/newlisting">
-                <ListingForm version="New" />
-              </Route>
-              <Route path="/editlisting/:id">
-                <ListingForm version="Edit" />
-              </Route>
-              <Route path="/listing/:id">
-                <ListingDetail />
-              </Route>
-              <Route path="/profile/:id">
-                <ProfileDetail />
-              </Route>
-              <Route path="/editprofile">
-                <EditProfile />
-              </Route>
-              <Route path="/search">
-                <Search />
-                <Route path="/">
-                  <Dashboard />
+                <Route exact path="/newlisting">
+                  <ListingForm version="New" />
+                </Route>
+                <Route path="/editlisting/:id">
+                  <ListingForm version="Edit" />
+                </Route>
+                <Route path="/listing/:id">
+                  <ListingDetail />
+                </Route>
+                <Route path="/profile/:id">
+                  <ProfileDetail />
+                </Route>
+                <Route path="/editprofile">
+                  <EditProfile />
+                </Route>
+                <Route path="/search">
+                  <Search />
+                  <Route path="/">
+                    <Dashboard />
+                  </Route>
                 </Route>
               </Switch>
             </>
@@ -75,7 +76,7 @@ function App() {
         <Footer />
       </Router>
     </div>
-  );
+  )
 }
 
 export default App;
