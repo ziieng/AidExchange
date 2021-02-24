@@ -23,7 +23,14 @@ function App() {
   });
 
   return (
-    <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
       <Router>
         {!isLoggedIn ? (
           <>
@@ -44,11 +51,11 @@ function App() {
             </Switch>
           </>
         ) : (
-            <>
-              {
-                // If they are signed in, they can see any page that *isn't* login or signup
-              }
-              <Switch>
+          <>
+            {
+              // If they are signed in, they can see any page that *isn't* login or signup
+            }
+            <Switch>
               <Route exact path="/newlisting">
                 <ListingForm version="New" />
               </Route>
@@ -66,12 +73,13 @@ function App() {
               </Route>
               <Route path="/search">
                 <Search />
-                <Route path="/">
-                  <Dashboard />
-                </Route>
-              </Switch>
-            </>
-          )}
+              </Route>
+              <Route path="/">
+                <Dashboard />
+              </Route>
+            </Switch>
+          </>
+        )}
         <Footer />
       </Router>
     </div>
