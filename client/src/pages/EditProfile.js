@@ -43,7 +43,8 @@ export default function editProfile() {
         if (userData.links !== []) {
           setLinks(userData.links)
           if (res.data.location) {
-            setLocation(location)
+            let locationArray = res.data.location.coordinates
+            setLocation({ "lat": locationArray[1], "lng": locationArray[0] })
           }
         }
       })
@@ -70,33 +71,54 @@ export default function editProfile() {
 
   const handleFileChange = e => {
     if (e.target.files[0]) {
-      setImage(e.target.files[0]);
+      let file = e.target.files[0]
+      //file extension validation from https://www.geeksforgeeks.org/file-type-validation-while-uploading-it-using-javascript/
+      var allowedExtensions =
+        /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+      if (!allowedExtensions.exec(file.name)) {
+        alert('Invalid file type');
+        e.target.value = "";
+        return false;
+      }
+      else {
+        let size = Math.round((file.size / 1024))
+        if (size >= 500) {
+          alert("File too large, please select an image smaller than 500KB.")
+          e.target.value = "";
+          return false
+        }
+        setImage(file);
+      }
+
     }
   };
 
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        const done = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(done);
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then(url => {
-            setAvatar(url);
-          });
-      }
-    );
+    if (image !== null) {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          const done = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(done);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+              setAvatar(url);
+            });
+        }
+      );
+    }
   };
 
   function addLink() {
@@ -168,11 +190,11 @@ export default function editProfile() {
               src={avatar}
               alt={"user profile image for " + displayName}
             /></Form.Label>
-            <br />
+            <br /><Form.Label>Select New Avatar (.jpg, .jpeg, .png, or .gif)</Form.Label><br />
             <InputGroup>
-              <Form.File id="avatarFile" onChange={handleFileChange} label="Select New Avatar Image" />
+              <Form.File id="avatarFile" className="form-control" onChange={handleFileChange} />
               <InputGroup.Append>
-                <Button id='find' variant="outline-secondary" onClick={handleUpload}>Upload <FaUpload /></Button>
+                <Button id='find' variant="dark" onClick={handleUpload}>Upload <FaUpload /></Button>
               </InputGroup.Append>
             </InputGroup>
             <br />
@@ -203,13 +225,13 @@ export default function editProfile() {
               </div>)
             })}
             {linkError && <Alert variant="warning">Links that don't have BOTH a label and a URL won't be saved.</Alert>}
-            <Button id="newLink" type="button" disabled={loading} onClick={addLink}>Add Link</Button>
+            <Button id="newLink" type="button" variant="dark" disabled={loading} onClick={addLink}>Add Link</Button>
             <br />
             <br />
             <Form.Label className="font-weight-bold" >Default Post Location:</Form.Label>
             <br />
             <InputGroup className="mb-3">
-              <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="location" />
+              <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="New location? Search by address." />
               <InputGroup.Append>
                 <Button id='find' variant="outline-secondary" onClick={handleSearch}>Find <FaSearchLocation /></Button>
               </InputGroup.Append>
@@ -220,7 +242,7 @@ export default function editProfile() {
               {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
             </div>
             <br />
-            <Button id="submit" type="submit" disabled={loading} >Save Changes</Button>
+            <Button id="submit" type="submit" variant="dark" disabled={loading} >Save Changes</Button>
 
           </Form>
         </Card>
