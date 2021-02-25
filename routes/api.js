@@ -32,7 +32,7 @@ router.route("/search/reply?:uid")
 router.route("/addPost")
   .post(postController.createPost);
 
-// Mathces with "/api/NewListing/:id"
+// Matches with "/api/NewListing/:id"
 router.route("/NewListing/:id")
   .get(postController.findPostById)
   .put(postController.updatePost)
