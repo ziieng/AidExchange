@@ -4,6 +4,7 @@ import TopNav from '../Components/NavBar/navbar';
 import Listing from '../Components/Cards/listing'
 import GeoSearch from "../utils/GeoCodeSearch"
 import API from "../utils/API"
+import fire from "../firebase.js";
 import { FaSearchLocation } from "react-icons/fa"
 
 export default function Search() {
@@ -16,6 +17,7 @@ export default function Search() {
     const [filterClothing, setFilterClothing] = useState(true);
     const [filterEquipment, setFilterEquipment] = useState(true);
     const [filterFood, setFilterFood] = useState(true);
+    let uid = fire.auth().currentUser.uid;
 
     function handleAddrSearch() {
         if (addr !== "") {
@@ -25,12 +27,34 @@ export default function Search() {
                     console.log(coords)
                     setLocation(coords)
                     setAddrError(false)
-                    setLoading(false)
+                    postSearch(coords)
                 })
                 .catch()
         } else {
             setAddrError(true)
         }
+    }
+
+    function postSearch(coords) {
+        API.searchNear(coords)
+            .then((res) => {
+                console.log(res);
+                setListings(res.data);
+                doFilter(res.data)
+            })
+    }
+
+    function doFilter(array) {
+        console.log(array)
+        let activeCat = []
+        void (filterClothing && activeCat.push("Clothing"))
+        void (filterEquipment && activeCat.push("Equipment"))
+        void (filterFood && activeCat.push("Food"))
+        let shortList = array.filter(function (el) {
+            return activeCat.includes(el.category)
+        })
+        setLoading(false)
+        setFilteredListings(shortList)
     }
 
     function handleFilter(type) {
@@ -46,22 +70,16 @@ export default function Search() {
             case "Food":
                 setFilterFood(!filterFood)
                 break;
+            case "Reset":
+                setFilterClothing(true)
+                setFilterEquipment(true)
+                setFilterFood(true)
+                setFilteredListings(listings)
+                break
             default:
+                doFilter(listings)
                 break;
         }
-        let activeCat = []
-        void (filterClothing && activeCat.push("Clothing"))
-        void (filterEquipment && activeCat.push("Equipment"))
-        void (filterFood && activeCat.push("Food"))
-        let shortList = listings.filter((el) => activeCat.includes(el.category))
-        setFilteredListings(shortList)
-    }
-
-    function resetFilter() {
-        setFilterClothing(true)
-        setFilterEquipment(true)
-        setFilterFood(true)
-        handleFilter("")
     }
 
     return (
@@ -73,7 +91,7 @@ export default function Search() {
                     <InputGroup className="mb-3">
                         <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="location" />
                         <InputGroup.Append>
-                            <Button id='find' variant="outline-secondary" onClick={handleAddrSearch}>Find <FaSearchLocation /></Button>
+                            <Button id='find' variant="outline-secondary" onClick={handleAddrSearch} disabled={loading}>Find <FaSearchLocation /></Button>
                         </InputGroup.Append>
                     </InputGroup>
                     {addrError && <Alert variant="danger">Address not recognized.</Alert>}
@@ -82,46 +100,51 @@ export default function Search() {
             <Card className='filter' >
                 <Card.Body>
                     <Form>
-                        <h2> Categories: </h2>
+                        <h3> Categories to Display: </h3>
                         {/* <Button className='apply' variant="dark">Apply</Button> */}
                         <div id="filterArray" className="font-weight-bold mb-3">
                             <Form.Check
                                 type="switch"
                                 id="clothing-filter"
                                 label='Clothing'
+                                disabled={loading}
                                 checked={filterClothing}
-                                onClick={() => handleFilter("Clothing")}
+                                onChange={() => handleFilter("Clothing")}
                             />
                             <Form.Check
                                 type="switch"
                                 id="equipment-filter"
                                 label='Equipment'
+                                disabled={loading}
                                 checked={filterEquipment}
-                                onClick={() => handleFilter("Equipment")}
+                                onChange={() => handleFilter("Equipment")}
                             />
                             <Form.Check
                                 type="switch"
                                 id="food-filter"
                                 label='Food'
+                                disabled={loading}
                                 checked={filterFood}
-                                onClick={() => handleFilter("Food")}
+                                onChange={() => handleFilter("Food")}
                             />
                         </div>
-                        <Button size="sm" className='clear' variant="dark" onClick={resetFilter}>Reset</Button>
+                        <Button className='clear' variant="dark" onClick={() => handleFilter("Reset")} disabled={loading}>Reset</Button>
+                        <Button className='apply' variant="dark" onClick={() => handleFilter("Apply")} disabled={loading}>Apply</Button>
                     </Form>
                 </Card.Body>
             </Card>
             <Card className='data'>
                 <Card.Body>
                     <h2> Search Results: </h2>
-                    <Table striped bordered hover>
-                        <tbody>
-                            <tr>
-                                {/* < Listing />
-                                < Listing /> */}
-                            </tr>
-                        </tbody>
-                    </Table>
+                    {filteredListings.length ? (
+                        <>
+                            {filteredListings.map((post) => {
+                                return <Listing key={post._id} value={post} uid={uid} />;
+                            })}
+                        </>
+                    ) : (
+                            <h5>No Results to Display</h5>
+                        )}
                 </Card.Body>
             </Card>
         </>
