@@ -11,11 +11,13 @@ export default function Search() {
     const [addrError, setAddrError] = useState(false)
     const [location, setLocation] = useState({ "lat": 0, "lng": 0 })
     const [loading, setLoading] = useState(false);
+    const [listings, setListings] = useState([])
+    const [filteredListings, setFilteredListings] = useState([])
     const [filterClothing, setFilterClothing] = useState(true);
     const [filterEquipment, setFilterEquipment] = useState(true);
     const [filterFood, setFilterFood] = useState(true);
 
-    function handleSearch() {
+    function handleAddrSearch() {
         if (addr !== "") {
             setLoading(true)
             GeoSearch.coordsFromAddr(addr)
@@ -31,10 +33,35 @@ export default function Search() {
         }
     }
 
+    function handleFilter(type) {
+        switch (type) {
+            case "Clothing":
+                setFilterClothing(!filterClothing)
+                break;
+
+            case "Equipment":
+                setFilterEquipment(!filterEquipment)
+                break;
+
+            case "Food":
+                setFilterFood(!filterFood)
+                break;
+            default:
+                break;
+        }
+        let activeCat = []
+        void (filterClothing && activeCat.push("Clothing"))
+        void (filterEquipment && activeCat.push("Equipment"))
+        void (filterFood && activeCat.push("Food"))
+        let shortList = listings.filter((el) => activeCat.includes(el.category))
+        setFilteredListings(shortList)
+    }
+
     function resetFilter() {
         setFilterClothing(true)
         setFilterEquipment(true)
         setFilterFood(true)
+        handleFilter("")
     }
 
     return (
@@ -46,7 +73,7 @@ export default function Search() {
                     <InputGroup className="mb-3">
                         <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="location" />
                         <InputGroup.Append>
-                            <Button id='find' variant="outline-secondary" onClick={handleSearch}>Find <FaSearchLocation /></Button>
+                            <Button id='find' variant="outline-secondary" onClick={handleAddrSearch}>Find <FaSearchLocation /></Button>
                         </InputGroup.Append>
                     </InputGroup>
                     {addrError && <Alert variant="danger">Address not recognized.</Alert>}
@@ -55,32 +82,32 @@ export default function Search() {
             <Card className='filter' >
                 <Card.Body>
                     <Form>
-                        <h2> Category: </h2>
-                        <Button className='clear' variant="dark" onClick={resetFilter}>Reset</Button>
-                        <Button className='apply' variant="dark">Apply</Button>
-                        <div id="flterArray">
-                                <Form.Check
-                                type="checkbox"
+                        <h2> Categories: </h2>
+                        {/* <Button className='apply' variant="dark">Apply</Button> */}
+                        <div id="filterArray" className="font-weight-bold mb-3">
+                            <Form.Check
+                                type="switch"
                                 id="clothing-filter"
                                 label='Clothing'
                                 checked={filterClothing}
-                                onClick={setFilterClothing(!filterClothing)}
-                                />
-                                <Form.Check
-                                type="checkbox"
+                                onClick={() => handleFilter("Clothing")}
+                            />
+                            <Form.Check
+                                type="switch"
                                 id="equipment-filter"
                                 label='Equipment'
                                 checked={filterEquipment}
-                                onClick={setFilterEquipment(!filterEquipment)}
-                                />
-                                <Form.Check
-                                type="checkbox"
+                                onClick={() => handleFilter("Equipment")}
+                            />
+                            <Form.Check
+                                type="switch"
                                 id="food-filter"
                                 label='Food'
                                 checked={filterFood}
-                                onClick={setFilterFood(!filterFood)}
+                                onClick={() => handleFilter("Food")}
                             />
                         </div>
+                        <Button size="sm" className='clear' variant="dark" onClick={resetFilter}>Reset</Button>
                     </Form>
                 </Card.Body>
             </Card>
