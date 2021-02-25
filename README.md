@@ -22,23 +22,23 @@ Explore the [Project Page](https://github.com/ziieng/AidExchange)
 
 ## About the Project:
 
-<!-- The focus of this project was to  -->
+The focus of this project was to create a safe and secure platform for non-profit organizations to request, offer up, and exchange items of need.
 
 <!-- ![Project Gif](gif.gif) -->
 
 ### JavaScript:
 
-<!-- * [App.js](https://github.com/ziieng/AidExchange/blob/main/src/App.js) -->
+* [App.js](https://github.com/ziieng/AidExchange/blob/main/client/src/App.js)
+* [server.js](https://github.com/ziieng/AidExchange/blob/main/server.js)
 
 ### Assets:
 
-<!-- * [src](https://github.com/ziieng/AidExchange/tree/main/src) -->
+* [src](https://github.com/ziieng/AidExchange/tree/main/client/src)
+* [css](https://github.com/ziieng/AidExchange/blob/main/client/src/App.css)
 
 ### Built With:
 
-<!-- * This app is build upon [Node.js](https://nodejs.org/en/), [React](https://reactjs.org/), and the [Heroku](https://dashboard.heroku.com/apps) application. -->
-<!-- [Firebase Authentication](https://react-firebase-js.com)  -->
-<!-- [React-pdf/renderer](https://react-pdf.org/) -->
+* This app is build upon [Node.js](https://nodejs.org/en/), [React](https://reactjs.org/), [Firebase Authentication](https://react-firebase-js.com), [React-pdf/renderer](https://react-pdf.org/), [MongoDB](https://www.mongodb.com/), [React-Bootstrap](https://react-bootstrap.netlify.app/), and deployed on [Heroku](https://dashboard.heroku.com/apps).
 
 ## Getting Started:
 

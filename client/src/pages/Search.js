@@ -128,8 +128,10 @@ export default function Search() {
                                 onChange={() => handleFilter("Food")}
                             />
                         </div>
+                     <div className='btnFormat'>
                         <Button className='clear' variant="dark" onClick={() => handleFilter("Reset")} disabled={loading}>Reset</Button>
                         <Button className='apply' variant="dark" onClick={() => handleFilter("Apply")} disabled={loading}>Apply</Button>
+                     </div>
                     </Form>
                 </Card.Body>
             </Card>

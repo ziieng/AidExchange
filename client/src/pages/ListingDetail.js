@@ -88,8 +88,9 @@ export default function ListingDetail() {
                 <h2>
                   {" "}
                   Contents:{" "}
+                  <div>
                   <Button
-                    className="donateRequest align-self-right"
+                    className="donateRequest"
                     variant="dark"
                   >
                     {(listing.postType === "Request") ? "Donate" : "Request"}
@@ -97,6 +98,7 @@ export default function ListingDetail() {
                 {/* This is the download link */}
                 {mapRender && <Print listing={listing} />}
                 {/* ------------------------- */}
+                </div>
                 </h2>
                 <Table striped bordered hover>
                   <thead>
