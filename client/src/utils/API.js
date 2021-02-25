@@ -1,5 +1,14 @@
 import axios from "axios";
 
+function fixLocation(data) {
+  let fixedLocation = data.location;
+  if (fixedLocation.lat) {
+    fixedLocation = [fixedLocation.lng, fixedLocation.lat]
+  }
+  data.location = { type: "Point", coordinates: fixedLocation };
+  return data
+}
+
 export default {
   // Get all listings
   getUserListing: function (params) {
@@ -20,26 +29,17 @@ export default {
     return axios.post("/api/user", userData);
   },
   updateUser: function (userData) {
-    let fixedLocation = userData.location;
-    if (fixedLocation.lat) {
-      fixedLocation = [fixedLocation.lng, fixedLocation.lat]
-    }
-    userData.location = { type: "Point", coordinates: fixedLocation };
+    fixLocation(userData)
     return axios.put("/api/user/" + userData.userId, userData);
   },
   // Saves a NewListing to the database
   updateListing: function (id, editData) {
-    let fixedLocation = editData.location;
-    if (fixedLocation.lat) {
-      fixedLocation = [fixedLocation.lng, fixedLocation.lat]
-    }
-    editData.location = { type: "Point", coordinates: fixedLocation };
-    return axios.put("/api/put/" + id, editData);
+    fixLocation(editData)
+    return axios.put("/api/post/" + id, editData);
   },
   // Saves a NewListing to the database
   addNewListing: function (newListData) {
-    let fixedLocation = newListData.location;
-    newListData.location = { type: "Point", coordinates: fixedLocation };
+    fixLocation(newListData)
     return axios.post("/api/addPost", newListData);
   },
 };
