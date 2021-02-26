@@ -16,13 +16,13 @@ export default function TopNav() {
   }
   return (
     <Navbar className="navbar navbar-expand-lg navbar-dark" expand="lg">
-      <Navbar.Brand href="#home">
+      <Navbar.Brand href="/">
         <img
           src="../icon.png"
           width="150"
           height="40"
           className="d-inline-block align-top"
-          alt="React Bootstrap logo"
+          alt="AidExchange logo"
         />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

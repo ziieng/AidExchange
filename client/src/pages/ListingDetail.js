@@ -92,6 +92,7 @@ export default function ListingDetail() {
                   <Button
                     className="donateRequest"
                     variant="dark"
+                      href={"/reply/" + id}
                   >
                     {(listing.postType === "Request") ? "Donate" : "Request"}
                   </Button>
