@@ -34,6 +34,8 @@ function addrFromCoords(geoPoint) {
             case "country":
               country = response.results[0].address_components[i].long_name;
               break;
+            default:
+              break;
           }
         }
       }
@@ -70,7 +72,5 @@ function coordsFromAddr(addr) {
     return null
   }
 }
-
-const GeoSearch = { addrFromCoords: addrFromCoords, coordsFromAddr: coordsFromAddr }
-
-export { GeoSearch as default };
+let GeoSearch = { addrFromCoords: addrFromCoords, coordsFromAddr: coordsFromAddr }
+export default GeoSearch
