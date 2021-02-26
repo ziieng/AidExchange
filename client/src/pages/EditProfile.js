@@ -14,7 +14,6 @@ export default function editProfile() {
   const [acctType, setAcctType] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  const [progress, setProgress] = useState(0);
   const [avatar, setAvatar] = useState("");
   const [links, setLinks] = useState([{ label: "", url: "" }]);
   const [addr, setAddr] = useState("")
@@ -99,12 +98,6 @@ export default function editProfile() {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
-        snapshot => {
-          const done = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setProgress(done);
-        },
         error => {
           console.log(error);
         },
