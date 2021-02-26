@@ -96,13 +96,14 @@ export default function ListingDetail() {
                   <h2 className="float-left">
                     Contents:
                   </h2><div className="input-group justify-content-end align-items-center">
-                    {/* This is the download link */}
-                    {mapRender && <Print listing={listing} />}
-                    {/* ------------------------- */}
                     <Button
                         variant="dark"
                         href={"/reply/" + id}
+                      className="mx-1"
                     >{(listing.postType === "Request") ? "Donate" : "Request"}</Button>
+                    {/* This is the download link */}
+                    {mapRender && <Print listing={listing} />}
+                    {/* ------------------------- */}
                   </div>
                 </row>
                 <Table className="bg-light" striped bordered hover>
