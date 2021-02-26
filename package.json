@@ -1,7 +1,7 @@
 {
   "name": "aidexchange",
   "version": "1.0.0",
-  "description": "Project 3",
+  "description": "A secure platform for community members to find and offer Mutual Aid, utilizing the full MERN stack.",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
