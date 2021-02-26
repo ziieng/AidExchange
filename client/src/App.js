@@ -11,6 +11,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import ListingDetail from "./pages/ListingDetail";
 import ListingForm from "./pages/ListingForm";
+import ReplyForm from "./pages/ReplyForm";
 import ProfileDetail from "./pages/ProfileDetail";
 import EditProfile from "./pages/EditProfile";
 import Search from "./pages/Search";
@@ -68,6 +69,9 @@ function App() {
               <Route path="/listing/:id">
                 <ListingDetail />
               </Route>
+                <Route path="/reply/:id">
+                  <ReplyForm />
+                </Route>
               <Route path="/profile/:id">
                 <ProfileDetail />
               </Route>
@@ -87,7 +91,7 @@ function App() {
         <Footer />
       </Router>
     </div>
-  );
+  )
 }
 
 export default App;

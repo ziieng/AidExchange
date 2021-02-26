@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav } from 'react-bootstrap'
 import fire from '../../firebase.js';
 
 export default function TopNav() {
@@ -16,15 +16,23 @@ export default function TopNav() {
   }
   return (
     <Navbar className="navbar navbar-expand-lg navbar-dark" expand="lg">
-      <Navbar.Brand href="">AidExchange</Navbar.Brand>
+      <Navbar.Brand href="/">
+        <img
+          src="../icon.png"
+          width="150"
+          height="40"
+          className="d-inline-block align-top"
+          alt="AidExchange logo"
+        />
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-      <Nav className="justify-content-end" style={{ width: "100%" }}>
-        <Nav.Link href='/'>Dashboard</Nav.Link>
-        <Nav.Link href={'/profile/' + fire.auth().currentUser.uid}>Profile</Nav.Link>
-        <Nav.Link href='/Search'>Search</Nav.Link>
-        <Nav.Link onClick={logout}>Logout</Nav.Link>
-      </Nav>
+        <Nav className="justify-content-end" style={{ width: "100%" }}>
+          <Nav.Link href='/'>Dashboard</Nav.Link>
+          <Nav.Link href={'/profile/' + fire.auth().currentUser.uid}>Profile</Nav.Link>
+          <Nav.Link href='/Search'>Search</Nav.Link>
+          <Nav.Link onClick={logout}>Logout</Nav.Link>
+        </Nav>
       </Navbar.Collapse>
     </Navbar >
   );

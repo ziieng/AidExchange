@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useHistory } from "react-router-dom";
 import fire from '../firebase.js';
 
-import { Alert, Button, Col, Container, Form } from "react-bootstrap"
+import { Alert, Button, Col, Container, Form, InputGroup } from "react-bootstrap"
 
 
 
@@ -21,7 +21,7 @@ export default function login() {
         try {
             setError("")
             setLoading(true)
-            setMessage("Welcome to AidExchange!")
+            setMessage("Welcome to AidExchange")
             await fire.auth().signInWithEmailAndPassword(email, password)
             history.push("/")
         } catch {
@@ -34,7 +34,6 @@ export default function login() {
     function togglePasswordVisiblity(e) {
         e.preventDefault()
         setShowPassword(showpassword => !showpassword)
-        // setShowPassword(true)
         console.log(showpassword)
     }
 
@@ -44,7 +43,7 @@ export default function login() {
                 <Col sm md='auto' lg xl='6' className="align-items-center my-4 p-5 bg-light rounded">
 
                     <h1 className="text-center mb-4">Sign In</h1>
-                    {message && <Alert variant="success">{message}</Alert>}
+                    {message && <Alert variant="success">{message} </Alert>}
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form className="login text-center" onSubmit={handleSubmit}>
                         <Form.Group className="">
@@ -52,9 +51,16 @@ export default function login() {
                             <Form.Control type="text" className="" name="username" onChange={({ target }) => setEmail(target.value)} placeholder="Email" />
                         </Form.Group>
                         <Form.Group className="">
-
-                            <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
-                            <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
+                            <Form.Group >
+                                <InputGroup>
+                                    <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
+                                    <InputGroup.Prepend>
+                                        <InputGroup.Text>
+                                            <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
+                                        </InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                </InputGroup>
+                            </Form.Group>
                         </Form.Group>
                         <Button type="submit" className=" justify-content-center" disabled={loading} >Login</Button>
 

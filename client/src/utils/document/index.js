@@ -154,7 +154,7 @@ const Print = (props) => {
               src={icon}
               width="35"
               height="35"
-              style={{ float: "right", marginBottom: "1%" }}
+              style={{ float: "right", marginBottom: "1%", marginRight: '2%' }}
               alt="PDF icon to print a packing list"
             />
           )

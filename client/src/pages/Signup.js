@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
-import { Alert, Container, Form, Button, Col } from "react-bootstrap"
+import { Alert, Container, Form, Button, Col, InputGroup } from "react-bootstrap"
 import API from "../utils/API"
 import fire from "../firebase";
 
@@ -68,16 +68,28 @@ export default function signup() {
 
                             <Form.Control type="text" onChange={({ target }) => setDisplay(target.value)} className="form-control" name="displayName" placeholder="Display Name" />
                         </Form.Group>
-                        <Form.Group className="">
-
-                            <Form.Control type={showpassword ? "text" : "password"} onChange={({ target }) => setPassword(target.value)} className="form-control" name="password" placeholder="Password" />
-                            <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  signuppassword-icon`} onClick={togglePasswordVisiblity} />
+                        <Form.Group >
+                            <InputGroup>
+                                <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
+                                <InputGroup.Prepend>
+                                    <InputGroup.Text>
+                                        <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
+                                    </InputGroup.Text>
+                                </InputGroup.Prepend>
+                            </InputGroup>
                         </Form.Group>
-                        <Form.Group className="">
 
-                            <Form.Control type={showConfirmPassword ? "text" : "password"} onChange={({ target }) => setPasswordConfirm(target.value)} className="form-control" name="passwordConfirm" placeholder="Confirm Password" />
-                            <i className={`fa ${showConfirmPassword ? "fa-eye-slash" : "fa-eye"}  signuppassword-icon2`} onClick={() => { setShowConfirmPassword(showConfirmPassword => !showConfirmPassword) }} />
+                        <Form.Group >
+                            <InputGroup>
+                                <Form.Control type={showConfirmPassword ? "text" : "password"} onChange={({ target }) => setPasswordConfirm(target.value)} className="form-control" name="passwordConfirm" placeholder="Confirm Password" />
+                                <InputGroup.Prepend>
+                                    <InputGroup.Text>
+                                        <i className={`fa ${showConfirmPassword ? "fa-eye-slash" : "fa-eye"}  signuppassword-icon2`} onClick={() => { setShowConfirmPassword(showConfirmPassword => !showConfirmPassword) }} />
+                                    </InputGroup.Text>
+                                </InputGroup.Prepend>
+                            </InputGroup>
                         </Form.Group>
+
                         <Form.Group >
 
                             <select onChange={({ target }) => setAcctType(target.value)} className="form-select form-select-lg mb-3 form-control" name="acctType" >
