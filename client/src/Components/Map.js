@@ -33,7 +33,7 @@ class SimpleMap extends Component {
         <GoogleMapReact defaultCenter={{ lat: 47.568326599490476, lng: -122.64486808604016 }}
           bootstrapURLKeys={{ key: process.env.REACT_APP_FIREBASE_API_KEY }}
           center={this.state.center}
-          defaultZoom={10}
+          defaultZoom={12}
         >
           <Marker lat={this.props.coords.lat} lng={this.props.coords.lng} />
           {(this.props.extra !== "") ? (<>
