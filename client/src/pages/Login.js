@@ -46,13 +46,13 @@ export default function login() {
                     {message && <Alert variant="success">{message} </Alert>}
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form className="login text-center" onSubmit={handleSubmit}>
-                        <Form.Group className="">
+                        <Form.Group >
 
-                            <Form.Control type="text" className="" name="username" onChange={({ target }) => setEmail(target.value)} placeholder="Email" />
+                            <Form.Control type="text" name="username" onChange={({ target }) => setEmail(target.value)} placeholder="Email" />
                         </Form.Group>
-                        <Form.Group className="">
+                        <Form.Group >
 
-                            <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
+                            <Form.Control type={showpassword ? "text" : "password"} name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
                             <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
                         </Form.Group>
                         <Button type="submit" className=" justify-content-center" disabled={loading} >Login</Button>
