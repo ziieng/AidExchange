@@ -24,12 +24,12 @@ export default function Search() {
             setLoading(true)
             GeoSearch.coordsFromAddr(addr)
                 .then((coords) => {
-                    console.log(coords)
                     setLocation(coords)
                     setAddrError(false)
                     postSearch(coords)
                 })
-                .catch()
+                .catch(
+                    setAddrError(true))
         } else {
             setAddrError(true)
         }
@@ -38,14 +38,15 @@ export default function Search() {
     function postSearch(coords) {
         API.searchNear(coords)
             .then((res) => {
-                console.log(res);
                 setListings(res.data);
                 doFilter(res.data)
             })
+            .catch(
+                setListings([])
+            )
     }
 
     function doFilter(array) {
-        console.log(array)
         let activeCat = []
         void (filterClothing && activeCat.push("Clothing"))
         void (filterEquipment && activeCat.push("Equipment"))
@@ -62,11 +63,9 @@ export default function Search() {
             case "Clothing":
                 setFilterClothing(!filterClothing)
                 break;
-
             case "Equipment":
                 setFilterEquipment(!filterEquipment)
                 break;
-
             case "Food":
                 setFilterFood(!filterFood)
                 break;
@@ -75,9 +74,11 @@ export default function Search() {
                 setFilterEquipment(true)
                 setFilterFood(true)
                 setFilteredListings(listings)
-                break
-            default:
+                break;
+            case "Apply":
                 doFilter(listings)
+                break;
+            default:
                 break;
         }
     }
@@ -128,10 +129,10 @@ export default function Search() {
                                 onChange={() => handleFilter("Food")}
                             />
                         </div>
-                     <div className='btnFormat'>
-                        <Button className='clear' variant="dark" onClick={() => handleFilter("Reset")} disabled={loading}>Reset</Button>
-                        <Button className='apply' variant="dark" onClick={() => handleFilter("Apply")} disabled={loading}>Apply</Button>
-                     </div>
+                        <div className='btnFormat'>
+                            <Button className='clear' variant="dark" onClick={() => handleFilter("Reset")} disabled={loading}>Reset</Button>
+                            <Button className='apply' variant="dark" onClick={() => handleFilter("Apply")} disabled={loading}>Apply</Button>
+                        </div>
                     </Form>
                 </Card.Body>
             </Card>
