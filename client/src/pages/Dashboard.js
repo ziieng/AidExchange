@@ -31,7 +31,7 @@ export default function Dashboard() {
   return (
     <>
       <NavBar />
-      <Container>
+      <Container >
         <Col md={{ span: 6, offset: 3 }}>
         <Row className='welcome'>
           <h1> Welcome to AidExchange!</h1>
