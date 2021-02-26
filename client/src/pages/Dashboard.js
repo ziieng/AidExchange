@@ -32,6 +32,12 @@ export default function Dashboard() {
     <>
       <NavBar />
       <Container>
+        <Row className='welcome'>
+          <h1> Welcome to AidExchange!</h1>
+          <br></br>
+          <h5> This is your main dashboard! 
+            <br> </br>You can view all of your current listings a well as your current reservations</h5>
+        </Row>
         <Row className="mt-5 w-100">
           <h2>
             My Listings{" "}
