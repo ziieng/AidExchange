@@ -241,7 +241,6 @@ footer {
   color: #f1faee;
 
 }
-
 /* END NewListing */
 
 /* Start ReplyForm */
@@ -250,27 +249,3 @@ footer {
   height: 40px;
 }
 /* End ReplyForm */
-
-/* Start Password-icon */
-.password-icon {
-  position: absolute;
-  top: 187px;
-  right: 55px;
-  cursor: pointer;
-}
-
-.signuppassword-icon {
-  position: absolute;
-  top: 207px;
-  right: 40px;
-  cursor: pointer;
-}
-
-.signuppassword-icon2 {
-  position: absolute;
-  top: 262px;
-  right: 40px;
-  cursor: pointer;
-}
-
-/* End Password-icon */

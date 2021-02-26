@@ -9,7 +9,6 @@ import {
   StyleSheet,
   Font,
 } from "@react-pdf/renderer";
-import { Table } from "react-bootstrap";
 
 // Register font
 Font.register({
@@ -105,29 +104,6 @@ const MyDocument = (props) => (
       <Text style={styles.subtitle}>
         {props.postType}ed items for: {props.title}{" "}
       </Text>
-      {/* <Text style={styles.content}>
-        {
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Item Description</th>
-                <th>Quantity ${props.postType}ed</th>
-              </tr>
-            </thead>
-            <tbody>
-              $
-              {props.contents.map((line, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{line.item}</td>
-                    <td>{line.quantity}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-        }
-      </Text> */}
 
       <Text style={styles.content}>
         <Text> Quantity {"    "} Description</Text>
@@ -159,7 +135,6 @@ const Print = (props) => {
   return (
     <div>
       <PDFDownloadLink
-        // key={listing.userId}
         document={
           <MyDocument
             postType={props.listing.postType}
@@ -171,8 +146,6 @@ const Print = (props) => {
         }
         fileName="example.pdf"
       >
-        {/* <img src="pdficon.png" /> */}
-
         {({ blob, url, loading, error }) =>
           loading ? (
             "Loading document..."
