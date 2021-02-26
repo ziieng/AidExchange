@@ -86,18 +86,18 @@ export default function Search() {
     return (
         <>
             < TopNav />
-            <Card className='searchForm'>
+            <div className='searchForm'>
                 <Card.Body>
-                    <h3> Enter an address, city, or zip code to search nearby</h3>
+                    <h4> Search by address, city, or zip code:</h4>
                     <InputGroup className="mb-3">
-                        <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="location" />
+                        <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="Location" />
                         <InputGroup.Append>
                             <Button id='find' variant="outline-secondary" onClick={handleAddrSearch} disabled={loading}>Find <FaSearchLocation /></Button>
                         </InputGroup.Append>
                     </InputGroup>
                     {addrError && <Alert variant="danger">Address not recognized.</Alert>}
                 </Card.Body>
-            </Card>
+            </div>
             <Card className='filter' >
                 <Card.Body>
                     <Form>
@@ -136,7 +136,7 @@ export default function Search() {
                     </Form>
                 </Card.Body>
             </Card>
-            <Card className='data'>
+            <div className='data'>
                 <Card.Body>
                     <h2> Search Results: </h2>
                     {filteredListings.length ? (
@@ -149,7 +149,7 @@ export default function Search() {
                             <h5>No Results to Display</h5>
                         )}
                 </Card.Body>
-            </Card>
+            </div>
         </>
     );
 }
