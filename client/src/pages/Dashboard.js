@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Listing from "../Components/Cards/listing";
 import Reservation from "../Components/Cards/reservation";
 import fire from "../firebase.js";
-import { Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import NavBar from "../Components/NavBar/navbar";
 import API from "../utils/API";
 
@@ -32,12 +32,16 @@ export default function Dashboard() {
     <>
       <NavBar />
       <Container>
+        <Col md={{ span: 6, offset: 3 }}>
         <Row className='welcome'>
           <h1> Welcome to AidExchange!</h1>
-          <br></br>
-          <h5> This is your main dashboard! 
-            <br> </br>You can view all of your current listings a well as your current reservations</h5>
         </Row>
+        <Row className='dashboardDescrip'>
+          <br></br>
+          <h5> This is your main dashboard!
+            <br></br>Here, you can view all of your current listings & reservations.</h5>
+        </Row>
+        </Col>
         <Row className="mt-5 w-100">
           <h2>
             My Listings{" "}

@@ -9,7 +9,11 @@ export default function Reservation(props) {
     return (
         <Card className='reservations m-1'>
             <h5 className="px-2 pt-2 pb-0">
-                <Link id='reservationName' to={"./listing/" + post._id}>{post.title}</Link>
+                <img
+                    className="postIcon"
+                    src={post.postBy.avatar}
+                    alt={"user profile image for " + post.postBy.displayName}
+                /> <Link id='reservationName' to={"./listing/" + post._id}>{post.title}</Link>
                 <br></br>
                 <Badge variant="light">{post.status}</Badge>
             </h5>

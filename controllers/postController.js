@@ -5,6 +5,7 @@ module.exports = {
   //calls for populating the Dashboard
   findPostByUser: function (req, res) {
     db.Post.find({ userId: req.query.uid })
+      .populate("postBy")
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
@@ -13,7 +14,11 @@ module.exports = {
       { $unwind: "$replies" },
       { $match: { "replies.userId": req.query.uid } },
     ])
-      .then((dbModel) => res.json(dbModel))
+      .then((dbModel) => {
+        db.Post.populate(dbModel, { path: "postBy" })
+          .then((newModel) => res.json(newModel))
+          .catch((err) => res.status(422).json(err))
+      })
       .catch((err) => res.status(422).json(err));
   },
   //search page
@@ -22,6 +27,22 @@ module.exports = {
       .populate("postBy")
       .sort({ date: -1 })
       .then((dbModel) => res.json(dbModel[0]))
+      .catch((err) => res.status(422).json(err));
+  },
+  searchNear: function (req, res) {
+    console.log(req.body)
+    db.Post.find(
+      {
+        location: {
+          $near: {
+            $maxDistance: 1750000,
+            $geometry: req.body.location
+          }
+        }
+      }
+    )
+      .populate("postBy")
+      .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   findPostById: function (req, res) {
@@ -52,6 +73,4 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-
-  //GENERATE PDF FOR RESERVED ITEMS
 };

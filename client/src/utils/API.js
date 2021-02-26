@@ -1,5 +1,16 @@
 import axios from "axios";
 
+function fixLocation(coords) {
+  //re-format location to fit DB schema
+  let fixedLocation = coords;
+  if (fixedLocation.lat) {
+    //format the {lat:x,lng:x} point used by Google's API into the [lng, lat] used by GeoJSON
+    fixedLocation = [fixedLocation.lng, fixedLocation.lat]
+  }
+  coords = { type: "Point", coordinates: fixedLocation };
+  return coords
+}
+
 export default {
   // Get all listings
   getUserListing: function (params) {
@@ -20,26 +31,22 @@ export default {
     return axios.post("/api/user", userData);
   },
   updateUser: function (userData) {
-    let fixedLocation = userData.location;
-    if (fixedLocation.lat) {
-      fixedLocation = [fixedLocation.lng, fixedLocation.lat]
-    }
-    userData.location = { type: "Point", coordinates: fixedLocation };
+    userData.location = fixLocation(userData.location)
     return axios.put("/api/user/" + userData.userId, userData);
   },
   // Saves a NewListing to the database
   updateListing: function (id, editData) {
-    let fixedLocation = editData.location;
-    if (fixedLocation.lat) {
-      fixedLocation = [fixedLocation.lng, fixedLocation.lat]
-    }
-    editData.location = { type: "Point", coordinates: fixedLocation };
-    return axios.put("/api/put/" + id, editData);
+    editData.location = fixLocation(editData.location)
+    return axios.put("/api/post/" + id, editData);
   },
   // Saves a NewListing to the database
   addNewListing: function (newListData) {
-    let fixedLocation = newListData.location;
-    newListData.location = { type: "Point", coordinates: fixedLocation };
+    newListData.location = fixLocation(newListData.location)
     return axios.post("/api/addPost", newListData);
+  },
+  searchNear: function (coords) {
+    coords = fixLocation(coords)
+    return axios.post("/api/post", { location: coords });
+    // return axios.get("/api/post")
   },
 };
