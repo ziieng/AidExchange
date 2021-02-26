@@ -17,7 +17,9 @@ export default function login() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-
+        if (!email || !password) {
+            return setError("Login Failed")
+        }
         try {
             setError("")
             setLoading(true)
@@ -25,7 +27,7 @@ export default function login() {
             await fire.auth().signInWithEmailAndPassword(email, password)
             history.push("/")
         } catch {
-            setError("Password or email incorrect.")
+            setError("Password or Email incorrect.")
         }
 
         setLoading(false)
@@ -46,11 +48,11 @@ export default function login() {
                     {message && <Alert variant="success">{message} </Alert>}
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form className="login text-center" onSubmit={handleSubmit}>
-                        <Form.Group className="">
+                        <Form.Group >
 
-                            <Form.Control type="text" className="" name="username" onChange={({ target }) => setEmail(target.value)} placeholder="Email" />
+                            <Form.Control type="text" name="username" onChange={({ target }) => setEmail(target.value)} placeholder="Email" />
                         </Form.Group>
-                        <Form.Group className="">
+                        <Form.Group className="required">
                             <Form.Group >
                                 <InputGroup>
                                     <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
