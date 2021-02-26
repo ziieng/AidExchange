@@ -135,6 +135,7 @@ const Print = (props) => {
   return (
     <div>
       <PDFDownloadLink
+        className="d-inline-block"
         document={
           <MyDocument
             postType={props.listing.postType}
@@ -144,9 +145,9 @@ const Print = (props) => {
             status={props.listing.status}
           />
         }
-        fileName="example.pdf"
+        fileName="AidExchange Transaction.pdf"
       >
-        {({ blob, url, loading, error }) =>
+        {({ loading }) =>
           loading ? (
             "Loading document..."
           ) : (
@@ -154,7 +155,7 @@ const Print = (props) => {
               src={icon}
               width="35"
               height="35"
-              style={{ float: "right", marginBottom: "1%", marginRight: '2%' }}
+                style={props.iconStyle}
               alt="PDF icon to print a packing list"
             />
           )
