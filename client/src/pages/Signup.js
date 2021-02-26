@@ -38,9 +38,7 @@ export default function signup() {
                 .catch((error) => {
                     var errorCode = error.code;
                     var errorMessage = error.message;
-                    console.log(errorCode, errorMessage)
-                    setError(errorMessage)
-                    // ..
+                    setError(errorMessage);
                 });
         }
         else {
@@ -55,7 +53,6 @@ export default function signup() {
     function togglePasswordVisiblity(e) {
         e.preventDefault();
         setShowPassword(showpassword => !showpassword)
-        console.log(showpassword)
     }
 
     return (
