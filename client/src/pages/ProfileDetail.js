@@ -96,7 +96,7 @@ export default function ProfileDetail(props) {
             )}
         </Card.Body>
       </Card>
-      <Card id='orgListing' className="ml-5">
+      <div id='orgListing' className="ml-5">
         <h2>Listings:</h2>
         {userPosts.length ? (
           <>
@@ -109,7 +109,7 @@ export default function ProfileDetail(props) {
         ) : (
             <h3>No Listings to Display</h3>
           )}
-      </Card>
+      </div>
     </>
   );
 }
