@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useHistory } from "react-router-dom";
 import fire from '../firebase.js';
 
-import { Alert, Button, Col, Container, Form } from "react-bootstrap"
+import { Alert, Button, Col, Container, Form, InputGroup } from "react-bootstrap"
 
 
 
@@ -50,10 +50,17 @@ export default function login() {
 
                             <Form.Control type="text" name="username" onChange={({ target }) => setEmail(target.value)} placeholder="Email" />
                         </Form.Group>
-                        <Form.Group >
-
-                            <Form.Control type={showpassword ? "text" : "password"} name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
-                            <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
+                        <Form.Group className="">
+                            <Form.Group >
+                                <InputGroup>
+                                    <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
+                                    <InputGroup.Prepend>
+                                        <InputGroup.Text>
+                                            <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
+                                        </InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                </InputGroup>
+                            </Form.Group>
                         </Form.Group>
                         <Button type="submit" className=" justify-content-center" disabled={loading} >Login</Button>
 
