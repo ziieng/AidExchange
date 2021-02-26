@@ -31,7 +31,12 @@ export default function Dashboard() {
   return (
     <>
       <NavBar />
-      <Container>
+      <Container style={{
+        minHeight: "80vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "start"
+      }}>
         <Col md={{ span: 6, offset: 3 }}>
         <Row className='welcome'>
           <h1> Welcome to AidExchange!</h1>
