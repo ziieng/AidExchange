@@ -19,7 +19,9 @@ const userSchema = new Schema({
   acctType: { type: String, default: "Individual", required: true },
   avatar: { type: String, default: "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" },
   description: String,
-  location: { type: pointSchema, required: true, default: [-122.34962616663027, 47.630067400113475] },
+  location: {
+    type: pointSchema, required: true, default: { type: "Point", coordinates: [-122.34962616663027, 47.630067400113475] }
+  },
   links: Array,
   userId: { type: String, required: true },
   createDate: { type: Date, default: Date.now }
