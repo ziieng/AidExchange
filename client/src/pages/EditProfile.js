@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Button, Form, Card, Alert } from 'react-bootstrap'
+import { Container, Button, Form, Card, Alert, InputGroup } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
-import fire from '../firebase.js';
+import fire, { storage } from '../firebase.js';
 import { useHistory } from "react-router-dom";
+import MyMapComponent from "../Components/Map";
+import GeoSearch from "../utils/GeoCodeSearch"
+import { FaSearchLocation, FaUpload } from "react-icons/fa"
 
 export default function editProfile() {
   // Setting our component's initial state
   const [displayName, setDisplayName] = useState("");
   const [acctType, setAcctType] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
   const [avatar, setAvatar] = useState("");
   const [links, setLinks] = useState([{ label: "", url: "" }]);
-  // const [location, setLocation] = useState("");
+  const [addr, setAddr] = useState("")
+  const [addrError, setAddrError] = useState(false)
+  const [location, setLocation] = useState({ "lat": 0, "lng": 0 })
+  const [mapRender, setMapRender] = useState(false)
   const [error, setError] = useState("");
   const [linkError, setLinkError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,10 +40,79 @@ export default function editProfile() {
         setDescription(userData.description)
         setAvatar(userData.avatar)
         if (userData.links !== []) {
-        setLinks(userData.links)
+          setLinks(userData.links)
+          if (res.data.location) {
+            let locationArray = res.data.location.coordinates
+            setLocation({ "lat": locationArray[1], "lng": locationArray[0] })
+          }
         }
       })
+      .then(() => {
+        setMapRender(true)
+      })
   }
+
+  function handleSearch() {
+    if (addr !== "") {
+      setMapRender(false)
+      GeoSearch.coordsFromAddr(addr)
+        .then((coords) => {
+          console.log(coords)
+          setLocation(coords)
+          setAddrError(false)
+          setMapRender(true)
+        })
+        .catch()
+    } else {
+      setAddrError(true)
+    }
+  }
+
+  const handleFileChange = e => {
+    if (e.target.files[0]) {
+      let file = e.target.files[0]
+      //file extension validation from https://www.geeksforgeeks.org/file-type-validation-while-uploading-it-using-javascript/
+      var allowedExtensions =
+        /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+      if (!allowedExtensions.exec(file.name)) {
+        alert('Invalid file type');
+        e.target.value = "";
+        return false;
+      }
+      else {
+        let size = Math.round((file.size / 1024))
+        if (size >= 500) {
+          alert("File too large, please select an image smaller than 500KB.")
+          e.target.value = "";
+          return false
+        }
+        setImage(file);
+      }
+
+    }
+  };
+
+  const handleUpload = () => {
+    if (image !== null) {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        error => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+              setAvatar(url);
+            });
+        }
+      );
+    }
+  };
 
   function addLink() {
     setLinks([...links, { label: "", url: "" }])
@@ -71,11 +147,12 @@ export default function editProfile() {
         acctType: acctType,
         description: description,
         avatar: avatar,
+        location: location,
         links: scrubbedLinks
       })
         .then(data => {
           console.log(data)
-          history.push('/profile/' + fire.auth().currentUser.uid)
+          history.push('/profile/' + uid)
         })
         .catch((error) => {
           var errorCode = error.code;
@@ -101,6 +178,19 @@ export default function editProfile() {
             <br />
             <Form.Control className="form-control-lg" type="text" id="displayName" onChange={({ target }) => setDisplayName(target.value)} name="displayName" value={displayName} />
             <br />
+            <Form.Label className="font-weight-bold" >Avatar Image:<img
+              style={{ height: "80px", width: "80px" }}
+              src={avatar}
+              alt={"user profile image for " + displayName}
+            /></Form.Label>
+            <br /><Form.Label>Select New Avatar (.jpg, .jpeg, .png, or .gif)</Form.Label><br />
+            <InputGroup>
+              <Form.File id="avatarFile" className="form-control" onChange={handleFileChange} />
+              <InputGroup.Append>
+                <Button id='find' variant="dark" onClick={handleUpload}>Upload <FaUpload /></Button>
+              </InputGroup.Append>
+            </InputGroup>
+            <br />
             <Form.Label className="font-weight-bold">Account Type:</Form.Label>
             <Form.Control as="select" className="form-control-lg" onChange={({ target }) => setAcctType(target.value)} value={acctType} name="type" >
               <option value="Individual">Personal User</option>
@@ -119,19 +209,33 @@ export default function editProfile() {
                 <div className="col-6">
                   <Form.Label className="font-weight-bold" >Link {i + 1} Label:</Form.Label>
                   <Form.Control className="form-control form-control-lg" type="text" id={labelId} data-box="label" data-i={i} name={labelId} onChange={handleLinkChange} value={links[i].label} placeholder="Website" />
-                <br />
-              </div>
+                  <br />
+                </div>
                 <div className="col-6">
                   <Form.Label className="font-weight-bold" >Link {i + 1} URL:</Form.Label>
                   <Form.Control className="form-control form-control-lg" type="text" id={urlId} data-box="url" data-i={i} name={urlId} onChange={handleLinkChange} value={links[i].url} placeholder="http://myradsite.com" />
-              </div>
+                </div>
               </div>)
             })}
             {linkError && <Alert variant="warning">Links that don't have BOTH a label and a URL won't be saved.</Alert>}
-            <Button id="newLink" type="button" disabled={loading} onClick={addLink}>Add Link</Button>
-
+            <Button id="newLink" type="button" variant="dark" disabled={loading} onClick={addLink}>Add Link</Button>
             <br />
-            <Button id="submit" type="submit" disabled={loading} >Save Changes</Button>
+            <br />
+            <Form.Label className="font-weight-bold" >Default Post Location:</Form.Label>
+            <br />
+            <InputGroup className="mb-3">
+              <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="New location? Search by address." />
+              <InputGroup.Append>
+                <Button id='find' variant="outline-secondary" onClick={handleSearch}>Find <FaSearchLocation /></Button>
+              </InputGroup.Append>
+            </InputGroup>
+            {addrError && <Alert variant="danger">Address not recognized.</Alert>}
+            <br />
+            <div className="listMap" style={{ height: "300px", width: "300px" }}>
+              {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
+            </div>
+            <br />
+            <Button id="submit" type="submit" variant="dark" disabled={loading} >Save Changes</Button>
 
           </Form>
         </Card>

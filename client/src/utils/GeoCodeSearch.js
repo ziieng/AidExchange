@@ -8,9 +8,12 @@ Geocode.setLanguage("en");
 Geocode.setLocationType("ROOFTOP");
 
 // Get address from latitude & longitude.
-export function addrFromCoords(geoPoint) {
-  let lat = geoPoint.coords[1];
-  let lng = geoPoint.coords[0];
+function addrFromCoords(geoPoint) {
+  console.log(geoPoint)
+  if (geoPoint !== "" && geoPoint !== [0, 0]) {
+    return new Promise((resolve, reject) => {
+      let lat = geoPoint[1];
+      let lng = geoPoint[0];
   Geocode.fromLatLng(lat, lng).then(
     (response) => {
       const address = response.results[0].formatted_address;
@@ -31,31 +34,43 @@ export function addrFromCoords(geoPoint) {
             case "country":
               country = response.results[0].address_components[i].long_name;
               break;
+            default:
+              break;
           }
         }
       }
-      return { city, state, country, address };
-    },
-    (error) => {
-      return error;
+      let output = { city, state, country, address }
+      resolve(output);
+    })
+    .catch((error) => {
+      console.error(error)
+      reject(error)
     }
   );
+    })
+  } else {
+    return null
+  }
 }
 
 // Get latitude & longitude from address.
-export function coordsFromAddr(addr) {
+function coordsFromAddr(addr) {
   if (addr !== "") {
+    return new Promise((resolve, reject) => {
     Geocode.fromAddress(addr).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
         let output = { lat: lat, lng: lng };
-        return output;
+        resolve(output);
       },
       (error) => {
-        console.error(error);
-      }
-    );
+        console.error(error)
+        reject(error)
+      })
+    })
+  } else {
+    return null
   }
 }
-
-export default { addrFromCoords, coordsFromAddr };
+let GeoSearch = { addrFromCoords: addrFromCoords, coordsFromAddr: coordsFromAddr }
+export default GeoSearch

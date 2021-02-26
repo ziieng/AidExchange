@@ -40,7 +40,7 @@ const postSchema = new Schema({
   userId: { type: String, required: true }, //pull in ID from user posting it
   title: { type: String, required: true },
   category: String,
-  status: { type: String, required: true, default: "open" },
+  status: { type: String, required: true, default: "Open" },
   contents: Array,
   postType: { type: String, required: true }, //supply or request
   description: String, // do we want to add descriptions?
@@ -58,6 +58,8 @@ postSchema.virtual("postBy", {
   foreignField: "userId",
   justOne: true,
 });
+
+postSchema.index({ location: "2dsphere" })
 
 const Post = mongoose.model("Post", postSchema);
 
