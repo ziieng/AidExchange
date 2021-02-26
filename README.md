@@ -18,6 +18,7 @@ Explore the [Project Page](https://github.com/ziieng/AidExchange)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Contact](#contact)
+- [License](#License)
 - [Acknowledgements](#acknowledgements)
 
 ## About the Project:
@@ -75,6 +76,10 @@ Any contributions you make are **greatly appreciated**.
 ## Contact:
 
 Project Link: [https://github.com/ziieng/AidExchange](https://github.com/ziieng/AidExchange)
+
+## License:
+
+This project is licensed under the permissive open source MIT license.
 
 ## Acknowledgements:
 
