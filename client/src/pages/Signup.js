@@ -43,11 +43,11 @@ export default function signup() {
                     // ..
                 });
         }
-        if (password !== passwordConfirm) {
-            return setError("Password and passwordConfirm must match.")
-        }
         else {
             return setError("Signup Failed! input field can't be blank.")
+        }
+        if (password !== passwordConfirm) {
+            return setError("Password and passwordConfirm must match.")
         }
         setLoading(false)
     }
