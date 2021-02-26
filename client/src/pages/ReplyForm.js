@@ -25,7 +25,6 @@ export default function replyForm() {
     const [loading, setLoading] = useState(false);
     let uid = fire.auth().currentUser.uid
     let { id } = useParams()
-    let history = useHistory();
 
     useEffect(() => {
         loadListing()
@@ -45,21 +44,6 @@ export default function replyForm() {
                         lat: post.location.coordinates[1],
                         lng: post.location.coordinates[0],
                     })
-                }
-            })
-            .then(() => {
-                setMapRender(true)
-            })
-    }
-
-    function loadUserLocation() {
-        API.getUser(uid)
-            .then(res => {
-                console.log(res)
-                if (res.data.location) {
-                    setLocation({ "lat": res.data.location.coordinates[1], "lng": res.data.location.coordinates[0] })
-                } else {
-                    setLocation({ "lat": 0, "lng": 0 })
                 }
             })
             .then(() => {
@@ -206,21 +190,7 @@ export default function replyForm() {
                             </InputGroup>
                             <br />
                         </>}
-                        <br />
-                        <Form.Label className="font-weight-bold" >Location:</Form.Label>
-                        <br />
-                        <InputGroup className="mb-3">
-                            <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="location" />
-                            <InputGroup.Append>
-                                <Button id='find' variant="outline-secondary" onClick={handleSearch}>Find <FaSearchLocation /></Button>
-                            </InputGroup.Append>
-                        </InputGroup>
-                        {addrError && <Alert variant="danger">Address not recognized.</Alert>}
-                        <br />
-                        <div className="listMap" style={{ height: "300px", width: "300px" }}>
-                            {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
-                        </div>
-                        <br />
+                    <br />
                         <Button id="submit" type="submit" to="/" disabled={loading}>Submit</Button>
                     </Form>
 
