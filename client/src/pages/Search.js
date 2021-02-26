@@ -28,8 +28,10 @@ export default function Search() {
                     setAddrError(false)
                     postSearch(coords)
                 })
-                .catch(
-                    setAddrError(true))
+                .catch(() => {
+                    setAddrError(true)
+                    setLoading(false)
+                })
         } else {
             setAddrError(true)
         }
