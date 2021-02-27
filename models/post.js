@@ -17,10 +17,10 @@ const pointSchema = new Schema({
 const replySchema = new Schema(
   {
     userId: { type: String, required: true }, //pull in ID from user posting it
-    message: String, // let them say hi I guess
-    replyType: { type: String, required: true }, //give or take
+    contactInfo: { type: Schema.Types.Mixed, required: true }, // for poster to reach them
+    replyType: { type: String, required: true }, //donation or request
     contents: Array, //if they're only requesting part
-    status: { type: String, required: true, default: "pending" },
+    status: { type: String, required: true, default: "Pending" },
     location: { type: pointSchema, required: true },
     createDate: { type: Date, default: Date.now },
   },

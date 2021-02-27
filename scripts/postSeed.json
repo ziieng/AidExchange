@@ -66,7 +66,7 @@
       "replies": [
           {
               "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
-              "replyType": "Give",
+              "replyType": "Donation",
               "status": "Pending",
               "location": {
                 "type": "Point",
@@ -74,6 +74,10 @@
                   -122.119356981056,
                   47.6748134413339
                   ]
+              },
+              "contactInfo": {
+                "method": "Text",
+                "detail": "555-555-5555"
               },
               "createDate": "2021-02-15 12:00:57.963Z"
           }
@@ -109,8 +113,12 @@
       "replies": [
           {
               "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
-              "replyType": "Give",
+              "replyType": "Donation",
               "status": "Pending",
+              "contactInfo": {
+                "method": "Text",
+                "detail": "555-555-5555"
+              },
               "location": {
                 "type": "Point",
                 "coordinates": [

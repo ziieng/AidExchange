@@ -4,20 +4,18 @@ import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
 import fire from '../firebase.js';
 import { useHistory, useParams } from "react-router-dom";
-import MyMapComponent from "../Components/Map";
-import GeoSearch from "../utils/GeoCodeSearch"
-import { FaSearchLocation } from "react-icons/fa"
 
 export default function replyForm() {
     // Setting our component's initial state
     const [original, setOriginal] = useState({})
+    const [myReply, setMyReply] = useState({})
     const [contentList, setContentList] = useState([{ item: "", quantity: "" }]);
     const selectedItem = useRef()
     const [contents, setContents] = useState([]);
+    const [contactMethod, setContactMethod] = useState("");
+    const [contactDetail, setContactDetail] = useState("");
     const [postType, setPostType] = useState("Donation");
     const [description, setDescription] = useState("");
-    const [addr, setAddr] = useState("")
-    const [addrError, setAddrError] = useState(false)
     const [location, setLocation] = useState({ "lat": 0, "lng": 0 })
     const [mapRender, setMapRender] = useState(false)
     const [error, setError] = useState("");
@@ -25,6 +23,7 @@ export default function replyForm() {
     const [loading, setLoading] = useState(false);
     let uid = fire.auth().currentUser.uid
     let { id } = useParams()
+    let history = useHistory();
 
     useEffect(() => {
         loadListing()
@@ -45,6 +44,26 @@ export default function replyForm() {
                         lng: post.location.coordinates[0],
                     })
                 }
+                if (post.replies[0]) {
+                    let mine = post.replies.filter(function (row) {
+                        return row.userId === uid
+                    })
+                    if (mine[0]) {
+                        setMyReply(mine[0])
+                        setContents(mine[0].contents)
+                        let shortList = post.contents.filter((el) => {
+                            for (let n = 0; n < mine[0].contents.length; n++) {
+                                if (el.item === mine[0].contents[n].item) {
+                                    return false
+                                }
+                            }
+                            return true
+                        })
+                        setContentList(shortList)
+                        setContactMethod(mine[0].contactInfo.method)
+                        setContactDetail(mine[0].contactInfo.detail)
+                    }
+                }
             })
             .then(() => {
                 setMapRender(true)
@@ -53,7 +72,6 @@ export default function replyForm() {
 
     function addItem() {
         let index = selectedItem.current.selectedIndex
-        console.log(selectedItem.current.selectedIndex)
         setContents([...contents, { item: contentList[index].item, quantity: "" }])
         setContentError(true)
         let newContentList = contentList
@@ -63,28 +81,12 @@ export default function replyForm() {
 
     function handleContentChange(e) {
         let updatedContents = [...contents];
-        updatedContents[e.target.dataset.i][e.target.dataset.box] = e.target.value;
+        updatedContents[e.target.dataset.i].quantity = e.target.value;
         setContents(updatedContents);
         updatedContents = contents.filter(function (row) {
-            return row.item === "" || row.quantity === ""
+            return row.quantity === ""
         })
         if (updatedContents.length > 0) { setContentError(true) } else { setContentError(false) }
-    }
-
-    function handleSearch() {
-        if (addr !== "") {
-            setMapRender(false)
-            GeoSearch.coordsFromAddr(addr)
-                .then((coords) => {
-                    console.log(coords)
-                    setLocation(coords)
-                    setAddrError(false)
-                    setMapRender(true)
-                })
-                .catch()
-        } else {
-            setAddrError(true)
-        }
     }
 
     function handleFormSubmit(event) {
@@ -92,7 +94,7 @@ export default function replyForm() {
         setLoading(true)
         let scrubbedContents = []
         contents.map((line) => {
-            if (line.item !== "" && line.quantity !== "") {
+            if (line.quantity !== "") {
                 scrubbedContents.push(line)
             }
             return line
@@ -100,35 +102,35 @@ export default function replyForm() {
         if (scrubbedContents !== [] && location !== { "lat": 0, "lng": 0 }) {
             let postObj = {
                 userId: uid,
-                status: "open",
-                postType: postType,
+                status: "Pending",
+                replyType: postType,
                 contents: scrubbedContents,
-                location: location,
-                description: description,
+                contactInfo: { method: contactMethod, detail: contactDetail },
+                location: location
             }
-            // if (version === "Edit") {
-            //     API.updateListing(id, postObj)
-            //         .then(() => {
-            //             history.push('/listing/' + id)
-            //         })
-            //         .catch((error) => {
-            //             var errorCode = error.code;
-            //             var errorMessage = error.message;
-            //             console.log(errorCode, errorMessage)
-            //             setError(errorMessage)
-            //         });
-            // } else if (version === "New") {
-            //     API.addNewListing(postObj)
-            //         .then(data => {
-            //             history.push('/listing/' + data.data._id)
-            //         })
-            //         .catch((error) => {
-            //             var errorCode = error.code;
-            //             var errorMessage = error.message;
-            //             console.log(errorCode, errorMessage)
-            //             setError(errorMessage)
-            //         });
-            // }
+            if (myReply) {
+                API.updateReply(id, postObj)
+                    .then(() => {
+                        history.push('/listing/' + id)
+                    })
+                    .catch((error) => {
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.log(errorCode, errorMessage)
+                        setError(errorMessage)
+                    });
+            } else {
+                API.addNewReply(id, postObj)
+                    .then(() => {
+                        history.push('/listing/' + id)
+                    })
+                    .catch((error) => {
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.log(errorCode, errorMessage)
+                        setError(errorMessage)
+                    });
+            }
         } else {
             setError("Title, Category, Location, and Contents required!")
         }
@@ -145,7 +147,7 @@ export default function replyForm() {
                         className="tinyIcon"
                         src={original.postBy.avatar}
                         alt={"user profile image for " + original.postBy.displayName}
-                    /><a href={"/profile/" + original.postBy.userId}>
+                /><a className="linkStyle" href={"/profile/" + original.postBy.userId}>
                             {original.postBy.displayName}
                         </a></h5>
 
@@ -180,18 +182,32 @@ export default function replyForm() {
                         })}
                         {contentError && <Alert variant="warning">Rows that don't have a specified {postType.toLowerCase()} won't be saved.</Alert>}
                         {contentList[0] && <>
+                        <Form.Label className="font-weight-bold" >Items {original.postType}ed:</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select" className="form-control-lg" ref={selectedItem} name="itemOption" >
                                     {contentList.map((row, i) => {
                                         return <option key={i}>{row.item}</option>
                                     })}
                                 </Form.Control>
-                                <Button id="newItem" type="button" disabled={loading} onClick={addItem}>Add Item</Button>
+                            <InputGroup.Append>
+                                <Button id="newItem" type="button" variant="dark" disabled={loading} onClick={addItem}>Add Item</Button>
+                            </InputGroup.Append>
                             </InputGroup>
                             <br />
                         </>}
+                    <Form.Label className="font-weight-bold">What is the best way for {original.postBy.displayName} to contact you?</Form.Label>
+                    <InputGroup>
+                        <Form.Control as="select" className="form-control-lg col-lg-4" onChange={({ target }) => setContactMethod(target.value)} value={contactMethod} name="contactMethod" >
+                            <option value="Email">Email:</option>
+                            <option value="Text or Call">Text or Call:</option>
+                            <option value="Call">Call:</option>
+                            <option value="Text">Text:</option>
+                        </Form.Control>
+                        <Form.Control className="form-control form-control-lg col-lg-8" type="text" name="contactDetail" value={contactDetail} onChange={({ target }) => setContactDetail(target.value)} placeholder="any" />
+                    </InputGroup>
+                    {error && <Alert variant="danger">{error}</Alert>}
                     <br />
-                        <Button id="submit" type="submit" to="/" disabled={loading}>Submit</Button>
+                    <Button id="submit" variant="dark" type="submit" to="/" disabled={loading}>Submit</Button>
                     </Form>
 
                 </Container>
