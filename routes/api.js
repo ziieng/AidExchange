@@ -28,6 +28,11 @@ router.route("/search/post?:uid")
 router.route("/search/reply?:uid")
   .get(postController.findReplyByUser);
 
+// Matches with "/api/post"
+router.route("/reply/:id")
+  .post(postController.addReply)
+  .put(postController.updateReply)
+
 // Matches with "/api/addPost"
 router.route("/addPost")
   .post(postController.createPost);

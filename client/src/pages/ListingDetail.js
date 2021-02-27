@@ -92,7 +92,7 @@ export default function ListingDetail() {
             <br></br>
             <Row>
               <div className="contents">
-                <row className="d-flex">
+                <div className="d-flex">
                   <h2 className="float-left">
                     Contents:
                   </h2><div className="input-group justify-content-end align-items-center">
@@ -105,7 +105,7 @@ export default function ListingDetail() {
                     {mapRender && <Print listing={listing} />}
                     {/* ------------------------- */}
                   </div>
-                </row>
+                </div>
                 <Table className="bg-light" striped bordered hover>
                     <thead>
                       <tr>

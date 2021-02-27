@@ -25,7 +25,11 @@ Explore the [Project Page](https://github.com/ziieng/AidExchange)
 
 The focus of this project was to create a safe and secure platform for non-profit organizations to request, offer up, and exchange items of need.
 
+<<<<<<< HEAD
 AidExchange is a full-stack collaboration project that aims to help the process of finding items by mutual aid. As member, user can put items for donation, request and reserved items of their interest. User can search items by location to narrow down their scope and download a pdf receipt as confirmation.
+=======
+AidExchange is a full-stack collaboration project that aims to help the process of finding items by mutual aid. As member, user can put items for donation, request and reserved items of their interest. User can search for listings by location to narrow down their scope and download a pdf receipt as confirmation.
+>>>>>>> develop
 
 ![Project Gif](./client/public/gif.gif)
 
