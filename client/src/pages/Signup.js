@@ -55,10 +55,6 @@ export default function signup() {
                 setError(errList.join(" "))
             }
         }
-        if (password !== passwordConfirm) {
-            return setError("Password and passwordConfirm must match.")
-        }
-        setLoading(false)
     }
 
     function togglePasswordVisiblity(e) {
