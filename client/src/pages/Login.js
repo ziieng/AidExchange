@@ -18,25 +18,25 @@ export default function login() {
     async function handleSubmit(e) {
         e.preventDefault()
         if (!email || !password) {
-            return setError("Login Failed")
+            return setError("Email or password missing.")
         }
         try {
             setError("")
             setLoading(true)
-            setMessage("Welcome to AidExchange")
+            setMessage("Hmm...")
             await fire.auth().signInWithEmailAndPassword(email, password)
+            setMessage("Welcome!")
             history.push("/")
         } catch {
+            setMessage("")
             setError("Password or Email incorrect.")
         }
-
         setLoading(false)
     }
 
     function togglePasswordVisiblity(e) {
         e.preventDefault()
         setShowPassword(showpassword => !showpassword)
-
     }
 
     return (

@@ -18,6 +18,7 @@ Explore the [Project Page](https://github.com/ziieng/AidExchange)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Contact](#contact)
+- [License](#License)
 - [Acknowledgements](#acknowledgements)
 
 ## About the Project:
@@ -26,7 +27,7 @@ The focus of this project was to create a safe and secure platform for non-profi
 
 AidExchange is a full-stack collaboration project that aims to help the process of finding items by mutual aid. As member, user can put items for donation, request and reserved items of their interest. ??(User can search items by location to narrow down their scope) and download a pdf receipt as confirmation.
 
-<!-- ![Project Gif](gif.gif) -->
+![Project Gif](./client/public/gif.gif)
 
 ### JavaScript:
 
@@ -75,6 +76,10 @@ Any contributions you make are **greatly appreciated**.
 ## Contact:
 
 Project Link: [https://github.com/ziieng/AidExchange](https://github.com/ziieng/AidExchange)
+
+## License:
+
+This project is licensed under the permissive open source MIT license.
 
 ## Acknowledgements:
 
