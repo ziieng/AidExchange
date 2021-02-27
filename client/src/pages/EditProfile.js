@@ -16,7 +16,7 @@ export default function editProfile() {
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
   const [avatar, setAvatar] = useState("");
-  const [avatarReminder, setAvatarReminder] = useState(false);
+  const [imageError, setimageError] = useState("");
   const [links, setLinks] = useState([{ label: "", url: "" }]);
   const [addr, setAddr] = useState("")
   const [addrError, setAddrError] = useState(false)
@@ -80,18 +80,19 @@ export default function editProfile() {
         /(\.jpg|\.jpeg|\.png|\.gif)$/i;
 
       if (!allowedExtensions.exec(file.name)) {
-        alert('Invalid file type');
+        setimageError('Invalid file type');
         e.target.value = "";
         return false;
       }
       else {
         let size = Math.round((file.size / 1024))
         if (size >= 500) {
-          alert("File too large, please select an image smaller than 500KB.")
+          setimageError("File too large, please select an image smaller than 500KB.")
           e.target.value = "";
           return false
         }
         setImage(file);
+        setimageError("")
       }
 
     }
@@ -110,7 +111,8 @@ export default function editProfile() {
 
         },
         error => {
-          console.log(error);
+          setimageError(error)
+          console.error(error);
         },
         () => {
           storage
@@ -119,7 +121,6 @@ export default function editProfile() {
             .getDownloadURL()
             .then(url => {
               setAvatar(url);
-              setAvatarReminder(true)
             });
         }
       );
@@ -193,11 +194,11 @@ export default function editProfile() {
             <Form.Label className="font-weight-bold" >Avatar Image:<img
               style={{ height: "80px", width: "80px" }}
               src={avatar}
-              alt={"user profile image for " + displayName}
+              alt={"user profile image preview for " + displayName}
             />  <img
                 style={{ height: "40px", width: "40px" }}
                 src={avatar}
-                alt={"user profile image for " + displayName}
+                alt={"smaller user profile image preview for " + displayName}
           /></Form.Label>
             <br /><Form.Label>Select New Avatar (.jpg, .jpeg, .png, or .gif)</Form.Label><br />
             <InputGroup>
@@ -207,6 +208,7 @@ export default function editProfile() {
               </InputGroup.Append>
             </InputGroup>
             {(progress === 100) && <Alert variant="warning">You must click "Save Changes" at the bottom of this screen for image change to take effect.</Alert>}
+            {imageError && <Alert variant="danger">{imageError}</Alert>}
             <br />
             <Form.Label className="font-weight-bold">Account Type:</Form.Label>
             <Form.Control as="select" className="form-control-lg" onChange={({ target }) => setAcctType(target.value)} value={acctType} name="type" >
