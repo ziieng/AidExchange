@@ -34,15 +34,25 @@ export default {
     userData.location = fixLocation(userData.location)
     return axios.put("/api/user/" + userData.userId, userData);
   },
-  // Saves a NewListing to the database
+  // Updates existing post
   updateListing: function (id, editData) {
     editData.location = fixLocation(editData.location)
     return axios.put("/api/post/" + id, editData);
   },
-  // Saves a NewListing to the database
+  // Saves a new post
   addNewListing: function (newListData) {
     newListData.location = fixLocation(newListData.location)
     return axios.post("/api/addPost", newListData);
+  },
+  // Updates existing reply
+  updateReply: function (id, editData) {
+    editData.location = fixLocation(editData.location)
+    return axios.put("/api/reply/" + id, editData);
+  },
+  // Saves a new reply
+  addNewReply: function (id, newListData) {
+    newListData.location = fixLocation(newListData.location)
+    return axios.post("/api/reply/" + id, newListData);
   },
   searchNear: function (coords) {
     coords = fixLocation(coords)

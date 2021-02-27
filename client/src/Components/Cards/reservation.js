@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Reservation(props) {
     let post = props.value
-    let contentList = props.value.contents
+    let contentList = post.replies.contents
 
     return (
         <Card className='reservations m-1'>
@@ -13,7 +13,7 @@ export default function Reservation(props) {
                     className="postIcon"
                     src={post.postBy.avatar}
                     alt={"user profile image for " + post.postBy.displayName}
-                /> <Link id='reservationName' to={"./listing/" + post._id}>{post.title}</Link>
+                /> <Link className="linkStyle" to={"./listing/" + post._id}>{post.title}</Link>
                 <br></br>
                 <Badge variant="light">{post.status}</Badge>
             </h5>
@@ -37,7 +37,7 @@ export default function Reservation(props) {
                                 (and {contentList.length - 2} more)
                     </>
                     )}
-                <Button className="float-right">Edit</Button>
+                <Button variant="dark" href={"/reply/" + post._id} className="float-right">Edit</Button>
             </ul>
         </Card>
     )

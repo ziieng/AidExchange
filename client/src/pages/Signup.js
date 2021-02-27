@@ -9,7 +9,7 @@ export default function signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
-    const [showpassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [displayName, setDisplay] = useState("");
     const [acctType, setAcctType] = useState("");
@@ -59,7 +59,7 @@ export default function signup() {
 
     function togglePasswordVisiblity(e) {
         e.preventDefault();
-        setShowPassword((showpassword) => !showpassword)
+        setShowPassword((showPassword) => !showPassword)
     }
 
     return (
@@ -79,10 +79,10 @@ export default function signup() {
                         </Form.Group>
                         <Form.Group >
                             <InputGroup>
-                                <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
+                                <Form.Control type={showPassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
                                 <InputGroup.Prepend>
                                     <InputGroup.Text>
-                                        <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
+                                        <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
                             </InputGroup>

@@ -185,7 +185,6 @@ export default function editProfile() {
       <Container>
         <Card className="mb-5 mt-5 py-3 px-4 bg-light rounded w-50">
           <h1 className="text-center">Edit User Profile</h1>
-          {error && <Alert variant="danger">{error}</Alert>}
           <Form className="" onSubmit={handleFormSubmit} >
             <Form.Label className="font-weight-bold" >Display Name:</Form.Label>
             <br />
@@ -253,6 +252,8 @@ export default function editProfile() {
             <div className="listMap" style={{ height: "300px", width: "300px" }}>
               {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
             </div>
+            <br />
+            {error && <Alert variant="danger">{error}</Alert>}
             <br />
             <Button id="submit" type="submit" variant="dark" disabled={loading} >Save Changes</Button>
 
