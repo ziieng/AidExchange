@@ -6,8 +6,8 @@
     "location": {
       "type": "Point",
       "coordinates": [
-        -122.64726742191527,
-        47.56972503575317
+        -122.647267421915,
+        47.5697250357532
       ]
     },
     "links": [
@@ -16,6 +16,7 @@
         "url": "https://pes.pemibaker.org/home"
       }
     ],
+    "avatar": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png",
     "userId": "pKBPUYXbTqPBC77qqakGKN81VpH2",
     "createDate": "2021-02-13 06:00:57.963Z"
   },
@@ -26,10 +27,11 @@
     "location": {
       "type": "Point",
       "coordinates": [
-        -122.64486808604016,
-        47.568326599490476
+        -122.64486808604,
+        47.5683265994905
       ]
     },
+    "avatar": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png",
     "links": [],
     "userId": "AK3qqdL3icMxIV8CoRUbIA9txSA3",
     "createDate": "2021-02-13 20:04:23.514Z"
@@ -41,10 +43,11 @@
     "location": {
       "type": "Point",
       "coordinates": [
-        -122.6408131243296,
-        47.590346866879834
+        -122.64081312433,
+        47.5903468668798
       ]
     },
+    "avatar": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png",
     "links": [],
     "userId": "0hgAYjhP8kM2TFthZCoh17McAAp2",
     "createDate": "2021-02-13 20:04:51.600Z"
@@ -56,10 +59,11 @@
     "location": {
       "type": "Point",
       "coordinates": [
-        -122.32635129049062,
-        47.62097507908694
+        -122.326351290491,
+        47.6209750790869
       ]
     },
+    "avatar": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png",
     "links": [
       {
         "label": "Website",
@@ -78,7 +82,14 @@
     "email": "aidtwo@test.com",
     "displayName": "Redmond Mutual Aid",
     "acctType": "Organization",
-    "location": {},
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.34962616663027,
+        47.630067400113475
+      ]
+    },
+    "avatar": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png",
     "links": [],
     "userId": "cJujjRExZEWJokfvTAH6rsiclmB2",
     "createDate": "2021-02-13 20:13:06.702Z"
@@ -90,8 +101,8 @@
     "location": {
       "type": "Point",
       "coordinates": [
-        -122.11935698105621,
-        47.67481344133391
+        -122.119356981056,
+        47.6748134413339
       ]
     },
     "links": [
@@ -107,7 +118,14 @@
     "email": "userthree@test.com",
     "displayName": "Glinda Goodwitch",
     "acctType": "Individual",
-    "location": {},
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.34962616663027,
+        47.630067400113475
+      ]
+    },
+    "avatar": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png",
     "links": [],
     "userId": "r6YrNeeXb8egM124vOzYJAu6csl1",
     "createDate": "2021-02-13 20:15:02.921Z"
@@ -116,16 +134,31 @@
     "email": "test@test.com",
     "displayName": "Panopto",
     "acctType": "Individual",
-    "location": {},
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.6269768,
+        47.5650067
+      ]
+    },
     "links": [],
     "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
-    "createDate": "2021-02-12 20:15:02.921Z"
+    "createDate": "2021-02-12 20:15:02.921Z",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/aidexchange-bf872.appspot.com/o/images%2Fgoose.png?alt=media&token=e753b26f-b21f-484e-b268-49b747f0994e",
+    "description": "Mess with the honk, you get the bonk"
   },
   {
     "email": "test@gmail.com",
     "displayName": "Tester",
     "acctType": "Individual",
-    "location": {},
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.6269768,
+        47.5650067
+      ]
+    },
+    "avatar": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png",
     "links": [],
     "userId": "sqV9MWEunGXGb7CuvCfB3b2fSBC2",
     "createDate": "2021-02-11 21:15:02.921Z"

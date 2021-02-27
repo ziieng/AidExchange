@@ -14,7 +14,9 @@ export default function editProfile() {
   const [acctType, setAcctType] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
   const [avatar, setAvatar] = useState("");
+  const [avatarReminder, setAvatarReminder] = useState(false);
   const [links, setLinks] = useState([{ label: "", url: "" }]);
   const [addr, setAddr] = useState("")
   const [addrError, setAddrError] = useState(false)
@@ -48,7 +50,9 @@ export default function editProfile() {
         }
       })
       .then(() => {
+        if (location !== { "lat": 0, "lng": 0 }) {
         setMapRender(true)
+        }
       })
   }
 
@@ -98,6 +102,13 @@ export default function editProfile() {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
+        snapshot => {
+          const done = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(done);
+
+        },
         error => {
           console.log(error);
         },
@@ -108,6 +119,7 @@ export default function editProfile() {
             .getDownloadURL()
             .then(url => {
               setAvatar(url);
+              setAvatarReminder(true)
             });
         }
       );
@@ -182,7 +194,11 @@ export default function editProfile() {
               style={{ height: "80px", width: "80px" }}
               src={avatar}
               alt={"user profile image for " + displayName}
-            /></Form.Label>
+            />  <img
+                style={{ height: "40px", width: "40px" }}
+                src={avatar}
+                alt={"user profile image for " + displayName}
+          /></Form.Label>
             <br /><Form.Label>Select New Avatar (.jpg, .jpeg, .png, or .gif)</Form.Label><br />
             <InputGroup>
               <Form.File id="avatarFile" className="form-control" onChange={handleFileChange} />
@@ -190,6 +206,7 @@ export default function editProfile() {
                 <Button id='find' variant="dark" onClick={handleUpload}>Upload <FaUpload /></Button>
               </InputGroup.Append>
             </InputGroup>
+            {(progress === 100) && <Alert variant="warning">You must click "Save Changes" at the bottom of this screen for image change to take effect.</Alert>}
             <br />
             <Form.Label className="font-weight-bold">Account Type:</Form.Label>
             <Form.Control as="select" className="form-control-lg" onChange={({ target }) => setAcctType(target.value)} value={acctType} name="type" >
