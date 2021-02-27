@@ -69,7 +69,7 @@ export default function Dashboard() {
         </Row>
         <Row className="mt-5 w-100">
           <h2>
-            My Reservations{" "}
+            My Replies{" "}
             <Link to="./Search" className="btn ml-2 text-white">
               Search For Items
             </Link>

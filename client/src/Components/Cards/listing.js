@@ -12,7 +12,7 @@ export default function Listing(props) {
           className="postIcon"
           src={post.postBy.avatar}
           alt={"user profile image for " + post.postBy.displayName}
-        /> <Link id="listingName" to={"/listing/" + post._id}>
+        /> <Link className="linkStyle" to={"/listing/" + post._id}>
           {post.title}
         </Link>
         <br></br>
@@ -33,7 +33,7 @@ export default function Listing(props) {
           </>
         )}
         {post.userId === props.uid ? (
-          <Button className="float-right" href={"/editlisting/" + post._id}>
+          <Button variant="dark" className="float-right" href={"/editlisting/" + post._id}>
             Edit
           </Button>
         ) : (

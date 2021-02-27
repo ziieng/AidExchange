@@ -92,12 +92,12 @@ footer {
   float: right;
 }
 
-#listingName {
-  color: #AEA0AE !important;
+.linkStyle {
+  color: #6B4B6C !important;
 }
 
-#listingName:hover {
-  color: #5C415D !important;
+.linkStyle:hover {
+  color: #533B54 !important;
   text-decoration: none !important;
 }
 
@@ -127,15 +127,6 @@ footer {
   margin: 0 auto;
   float: left;
   margin-top: 10px;
-}
-
-#reservationName {
-  color: #AEA0AE !important;
-}
-
-#reservationName:hover {
-  color: #5C415D !important;
-  text-decoration: none !important;
 }
 
 .float-right {
