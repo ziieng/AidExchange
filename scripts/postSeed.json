@@ -1,141 +1,143 @@
 [
   {
-    "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
-    "title": "Nurse's Office Emergency Clothes",
-    "category": [
-      "Clothing"
-    ],
-    "contents": [
-      {
-        "item": "gloves - kid size",
-        "quantity": "any"
+      "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
+      "title": "Nurse's Office Emergency Clothes",
+      "category": "Clothing",
+      "contents": [
+          {
+              "item": "gloves - kid size",
+              "quantity": "any"
+          }, 
+          {
+              "item": "shoes - kids size 5",
+              "quantity": 5
+          }, 
+          {
+              "item": "shoes - kids size 6",
+              "quantity": 5
+          }, 
+          {
+              "item": "underwear - kids size 10/12",
+              "quantity": "any"
+          }, 
+          {
+              "item": "underwear - kids size 14/16",
+              "quantity": "any"
+          }, 
+          {
+              "item": "sweatpants - kids size 10/12",
+              "quantity": "any"
+          }, 
+          {
+              "item": "sweatpants - kids size 14/16",
+              "quantity": "any"
+          }
+      ],
+      "postType": "Request",
+      "status": "Open",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          -122.119356981056,
+          47.6748134413339
+          ]
       },
-      {
-        "item": "shoes - kids size 5",
-        "quantity": 5
-      },
-      {
-        "item": "shoes - kids size 6",
-        "quantity": 5
-      },
-      {
-        "item": "underwear - kids size 10/12",
-        "quantity": "any"
-      },
-      {
-        "item": "underwear - kids size 14/16",
-        "quantity": "any"
-      },
-      {
-        "item": "sweatpants - kids size 10/12",
-        "quantity": "any"
-      },
-      {
-        "item": "sweatpants - kids size 14/16",
-        "quantity": "any"
-      }
-    ],
-    "postType": "Request",
-    "status": "Open",
-    "location": {
-      "type": "Point",
-      "coordinates": [
-        -122.11935698105621,
-        47.67481344133391
-      ]
-    },
-    "createDate": "2021-02-14 06:00:57.963Z"
+      "createDate": "2021-02-14 06:00:57.963Z"
   },
   {
-    "userId": "mEOfYqMX14eTKymODesyqTTZ8Fh2",
-    "title": "Food Distribution Supplies",
-    "category": [
-      "Food"
-    ],
-    "contents": [
-      {
-        "item": "takeout boxes - all sizes",
-        "quantity": "any"
-      },
-      {
-        "item": "coffee cups - 12 oz, paper, insulated",
-        "quantity": "any"
-      },
-      {
-        "item": "disposable spoons and forks",
-        "quantity": "any"
-      }
-    ],
-    "postType": "Request",
-    "replies": [
-      {
-        "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
-        "replyType": "Give",
-        "status": "Pending",
-        "location": {
-          "type": "Point",
-          "coordinates": [
-            -122.11935698105621,
-            47.67481344133391
+      "userId": "mEOfYqMX14eTKymODesyqTTZ8Fh2",
+      "title": "Food Distribution Supplies",
+      "category": "Food",
+      "contents": [
+          {
+              "item": "takeout boxes - all sizes",
+              "quantity": "any"
+          }, 
+          {
+              "item": "coffee cups - 12 oz, paper, insulated",
+              "quantity": "any"
+          }, 
+          {
+              "item": "disposable spoons and forks",
+              "quantity": "any"
+          }
+      ],
+      "postType": "Request",
+      "replies": [
+          {
+              "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
+              "replyType": "Donation",
+              "status": "Pending",
+              "location": {
+                "type": "Point",
+                "coordinates": [
+                  -122.119356981056,
+                  47.6748134413339
+                  ]
+              },
+              "contactInfo": {
+                "method": "Text",
+                "detail": "555-555-5555"
+              },
+              "createDate": "2021-02-15 12:00:57.963Z"
+          }
+      ],
+      "status": "Open",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          -122.119356981056,
+          47.6748134413339
           ]
-        },
-        "createDate": "2021-02-15 12:00:57.963Z"
-      }
-    ],
-    "status": "Open",
-    "location": {
-      "type": "Point",
-      "coordinates": [
-        -122.11935698105621,
-        47.67481344133391
-      ]
-    },
-    "createDate": "2021-02-14 12:00:57.963Z"
+      },
+      "createDate": "2021-02-14 12:00:57.963Z"
   },
   {
-    "userId": "n8ly3uMNuqPHOe2ipXt0YV6oXTn1",
-    "title": "Winter Emergency Supplies",
-    "category": [
-      "Equipment"
-    ],
-    "contents": [
-      {
-        "item": "sub-zero rated sleeping bags",
-        "quantity": "any"
-      },
-      {
-        "item": "chemical hand warmers",
-        "quantity": "any"
-      },
-      {
-        "item": "propane tanks - camping size",
-        "quantity": "any"
-      }
-    ],
-    "replies": [
-      {
-        "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
-        "replyType": "Give",
-        "status": "Pending",
-        "location": {
-          "type": "Point",
-          "coordinates": [
-            -71.70313323289052,
-            43.76513732361775
+      "userId": "n8ly3uMNuqPHOe2ipXt0YV6oXTn1",
+      "title": "Winter Emergency Supplies",
+      "category": "Equipment",
+      "contents": [
+          {
+              "item": "sub-zero rated sleeping bags",
+              "quantity": "any"
+          }, 
+          {
+              "item": "chemical hand warmers",
+              "quantity": "any"
+          }, 
+          {
+              "item": "propane tanks - camping size",
+              "quantity": "any"
+          }
+      ],
+      "replies": [
+          {
+              "userId": "N50PVGZTSNc7YqlW6OCHQLW5rVI2",
+              "replyType": "Donation",
+              "status": "Pending",
+              "contactInfo": {
+                "method": "Text",
+                "detail": "555-555-5555"
+              },
+              "location": {
+                "type": "Point",
+                "coordinates": [
+                  -71.7031332328905,
+                  43.7651373236178
+                  ]
+              },
+              "createDate": "2021-02-15 12:00:57.963Z"
+          }
+      ],
+      "postType": "Request",
+      "status": "Open",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          -122.326351290491,
+          47.6209750790869
           ]
-        },
-        "createDate": "2021-02-15 12:00:57.963Z"
-      }
-    ],
-    "postType": "Request",
-    "status": "Open",
-    "location": {
-      "type": "Point",
-      "coordinates": [
-        -122.32635129049062,
-        47.62097507908694
-      ]
-    },
-    "createDate": "2021-02-14 12:00:57.963Z"
+      },
+      "createDate": "2021-02-14 12:00:57.963Z"
   }
 ]

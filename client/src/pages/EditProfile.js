@@ -14,7 +14,9 @@ export default function editProfile() {
   const [acctType, setAcctType] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
   const [avatar, setAvatar] = useState("");
+  const [imageError, setimageError] = useState("");
   const [links, setLinks] = useState([{ label: "", url: "" }]);
   const [addr, setAddr] = useState("")
   const [addrError, setAddrError] = useState(false)
@@ -48,7 +50,9 @@ export default function editProfile() {
         }
       })
       .then(() => {
+        if (location !== { "lat": 0, "lng": 0 }) {
         setMapRender(true)
+        }
       })
   }
 
@@ -76,18 +80,19 @@ export default function editProfile() {
         /(\.jpg|\.jpeg|\.png|\.gif)$/i;
 
       if (!allowedExtensions.exec(file.name)) {
-        alert('Invalid file type');
+        setimageError('Invalid file type');
         e.target.value = "";
         return false;
       }
       else {
         let size = Math.round((file.size / 1024))
         if (size >= 500) {
-          alert("File too large, please select an image smaller than 500KB.")
+          setimageError("File too large, please select an image smaller than 500KB.")
           e.target.value = "";
           return false
         }
         setImage(file);
+        setimageError("")
       }
 
     }
@@ -98,8 +103,16 @@ export default function editProfile() {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
+        snapshot => {
+          const done = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(done);
+
+        },
         error => {
-          console.log(error);
+          setimageError(error)
+          console.error(error);
         },
         () => {
           storage
@@ -172,7 +185,6 @@ export default function editProfile() {
       <Container>
         <Card className="mb-5 mt-5 py-3 px-4 bg-light rounded w-50">
           <h1 className="text-center">Edit User Profile</h1>
-          {error && <Alert variant="danger">{error}</Alert>}
           <Form className="" onSubmit={handleFormSubmit} >
             <Form.Label className="font-weight-bold" >Display Name:</Form.Label>
             <br />
@@ -181,8 +193,12 @@ export default function editProfile() {
             <Form.Label className="font-weight-bold" >Avatar Image:<img
               style={{ height: "80px", width: "80px" }}
               src={avatar}
-              alt={"user profile image for " + displayName}
-            /></Form.Label>
+              alt={"user profile image preview for " + displayName}
+            />  <img
+                style={{ height: "40px", width: "40px" }}
+                src={avatar}
+                alt={"smaller user profile image preview for " + displayName}
+          /></Form.Label>
             <br /><Form.Label>Select New Avatar (.jpg, .jpeg, .png, or .gif)</Form.Label><br />
             <InputGroup>
               <Form.File id="avatarFile" className="form-control" onChange={handleFileChange} />
@@ -190,6 +206,8 @@ export default function editProfile() {
                 <Button id='find' variant="dark" onClick={handleUpload}>Upload <FaUpload /></Button>
               </InputGroup.Append>
             </InputGroup>
+            {(progress === 100) && <Alert variant="warning">You must click "Save Changes" at the bottom of this screen for image change to take effect.</Alert>}
+            {imageError && <Alert variant="danger">{imageError}</Alert>}
             <br />
             <Form.Label className="font-weight-bold">Account Type:</Form.Label>
             <Form.Control as="select" className="form-control-lg" onChange={({ target }) => setAcctType(target.value)} value={acctType} name="type" >
@@ -234,6 +252,8 @@ export default function editProfile() {
             <div className="listMap" style={{ height: "300px", width: "300px" }}>
               {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
             </div>
+            <br />
+            {error && <Alert variant="danger">{error}</Alert>}
             <br />
             <Button id="submit" type="submit" variant="dark" disabled={loading} >Save Changes</Button>
 

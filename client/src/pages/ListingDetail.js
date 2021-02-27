@@ -91,26 +91,22 @@ export default function ListingDetail() {
             </Row>
             <br></br>
             <Row>
-              <Card className="contents">
-                <Card.Body>
-                  <h2>
-                    {" "}
-                  Contents:{" "}
-                    <div>
-                      <Button
-                        className="donateRequest"
+              <div className="contents">
+                <div className="d-flex">
+                  <h2 className="float-left">
+                    Contents:
+                  </h2><div className="input-group justify-content-end align-items-center">
+                    <Button
                         variant="dark"
                         href={"/reply/" + id}
-                      >
-                        {(listing.postType === "Request") ? "Donate" : "Request"}
-                      </Button>
-                      {/* This is the download link */}
-
-                      {mapRender && <Print listing={listing} />}
-                      {/* ------------------------- */}
-                    </div>
-                  </h2>
-                  <Table striped bordered hover>
+                      className="mx-1"
+                    >{(listing.postType === "Request") ? "Donate" : "Request"}</Button>
+                    {/* This is the download link */}
+                    {mapRender && <Print listing={listing} />}
+                    {/* ------------------------- */}
+                  </div>
+                </div>
+                <Table className="bg-light" striped bordered hover>
                     <thead>
                       <tr>
                         <th>Item Description</th>
@@ -128,8 +124,7 @@ export default function ListingDetail() {
                       })}
                     </tbody>
                   </Table>
-                </Card.Body>
-              </Card>
+              </div>
             </Row>
           </Col>
         </Container>

@@ -9,7 +9,7 @@ export default function signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
-    const [showpassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [displayName, setDisplay] = useState("");
     const [acctType, setAcctType] = useState("");
@@ -18,44 +18,48 @@ export default function signup() {
     const history = useHistory();
 
 
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
-        setLoading(true)
-        if (email !== "" && password !== "" && password === passwordConfirm && displayName.length > 3 && acctType !== "") {
-            fire.auth().createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Signed in 
-                    var uid = userCredential.user.uid;
-                    //send all boxes and UID to the MongoDB
-                    API.addUser({
-                        email: email,
-                        displayName: displayName,
-                        acctType: acctType,
-                        userId: uid
-                    })
-                    history.push("/")
-                })
-                .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    console.log(errorCode, errorMessage)
-                    setError(errorMessage)
-                    // ..
-                });
+        setLoading(true);
+        if (password !== passwordConfirm) {
+            setError("Password and Confirm Password fields must match.")
         }
         else {
-            return setError("Signup Failed! input field can't be blank.")
+            if (email !== "" && password !== "" && displayName.length >= 3 && acctType !== "") {
+                fire.auth().createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        // Signed in 
+                        var uid = userCredential.user.uid;
+                        //send all boxes and UID to the MongoDB
+                        API.addUser({
+                            email: email,
+                            displayName: displayName,
+                            acctType: acctType,
+                            userId: uid
+                        })
+                        history.push("/")
+                    })
+                    .catch((error) => {
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.error(errorCode, errorMessage)
+                        setError(errorMessage)
+                        // ..
+                    });
+            } else {
+                let errList = ["Signup failed: "]
+                void ((email === "") && errList.push("Email address can't be blank."))
+                void ((displayName.length < 3) && errList.push("Display Name must be at least 3 characters long."))
+                void ((password === "") && errList.push("Password can't be blank."))
+                void ((acctType === "") && errList.push("Please choose an account type. (You can change it later.)"))
+                setError(errList.join(" "))
+            }
         }
-        if (password !== passwordConfirm) {
-            return setError("Password and passwordConfirm must match.")
-        }
-        setLoading(false)
     }
 
     function togglePasswordVisiblity(e) {
         e.preventDefault();
-        setShowPassword(showpassword => !showpassword)
-        console.log(showpassword)
+        setShowPassword((showPassword) => !showPassword)
     }
 
     return (
@@ -64,7 +68,6 @@ export default function signup() {
                 <Col sm md='auto' lg xl='6' className="align-items-center mb-5 mt-5 py-3 px-4 bg-light rounded">
                     <h1 className="text-center mb-4">Create New Account</h1>
 
-                    {error && <Alert variant="danger">{error}</Alert>}
                     <Form className="login text-center" onSubmit={handleSubmit}>
                         <Form.Group className="">
 
@@ -76,10 +79,10 @@ export default function signup() {
                         </Form.Group>
                         <Form.Group >
                             <InputGroup>
-                                <Form.Control type={showpassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
+                                <Form.Control type={showPassword ? "text" : "password"} className="" name="password" onChange={({ target }) => setPassword(target.value)} placeholder="Password" />
                                 <InputGroup.Prepend>
                                     <InputGroup.Text>
-                                        <i className={`fa ${showpassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
+                                        <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}  password-icon`} onClick={togglePasswordVisiblity} />
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
                             </InputGroup>
@@ -99,12 +102,14 @@ export default function signup() {
                         <Form.Group >
 
                             <select onChange={({ target }) => setAcctType(target.value)} className="form-select form-select-lg mb-3 form-control" name="acctType" >
-                                <option value="">Type</option>
+                                <option value="">Account Type</option>
                                 <option value="Individual">Personal User</option>
                                 <option value="Charity">501(c)(3) Organizer</option>
                                 <option value="Organization">Non-501 Organizer</option>
                             </select>
                         </Form.Group>
+
+                        {error && <Alert variant="danger">{error}</Alert>}
 
                         <Button id="createBtn" type="submit" disabled={loading}>Sign Up</Button>
 

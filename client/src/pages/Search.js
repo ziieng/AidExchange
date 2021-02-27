@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, InputGroup, Alert, FormControl, Button, Table, Form } from 'react-bootstrap';
+import { Card, InputGroup, Alert, Button, Form } from 'react-bootstrap';
 import TopNav from '../Components/NavBar/navbar';
 import Listing from '../Components/Cards/listing'
 import GeoSearch from "../utils/GeoCodeSearch"
@@ -28,8 +28,11 @@ export default function Search() {
                     setAddrError(false)
                     postSearch(coords)
                 })
-                .catch(
-                    setAddrError(true))
+                .catch((err) => {
+                    console.error(err)
+                    setAddrError(true)
+                    setLoading(false)
+                })
         } else {
             setAddrError(true)
         }
@@ -41,8 +44,10 @@ export default function Search() {
                 setListings(res.data);
                 doFilter(res.data)
             })
-            .catch(
+            .catch(() => {
                 setListings([])
+                setLoading(false)
+            }
             )
     }
 

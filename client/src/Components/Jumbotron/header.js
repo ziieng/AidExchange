@@ -5,7 +5,7 @@ export default function Header(props) {
     return (
         <Jumbotron className="jumbotron jumbotron-fluid">
             <Container className="container">
-                <Image src='../brand.png'></Image>
+                <Image className="img-fluid splashBrand" src='../brand.png'></Image>
                 <hr className='underline'></hr>
             </Container>
         </Jumbotron>

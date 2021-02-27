@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the booksController
+// Defining methods for the postController
 module.exports = {
   //calls for populating the Dashboard
   findPostByUser: function (req, res) {
@@ -51,17 +51,11 @@ module.exports = {
       .then((dbModel) => res.json(dbModel[0]))
       .catch((err) => res.status(422).json(err));
   },
-  reservePost: function (req, res) {
-    db.Post.create(req.body)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
-  },
   createPost: function (req, res) {
     db.Post.create(req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-
   updatePost: function (req, res) {
     db.Post.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((dbModel) => res.json(dbModel))
@@ -73,4 +67,25 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+  addReply: function (req, res) {
+    db.Post.findOne({ _id: req.params.id })
+      .then((dbModel) => {
+        dbModel.replies.push(req.body)
+        dbModel.save()
+      })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  updateReply: function (req, res) {
+    db.Post.findOne({ _id: req.params.id })
+      .then((dbModel) => {
+        let replyArr = dbModel.replies
+        let spliceInd = replyArr.findIndex((el) => el.userId === req.body.userId)
+        dbModel.replies.splice(spliceInd, 1, req.body)
+        dbModel.save()
+      })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  }
+
 };
