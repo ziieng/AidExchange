@@ -27,7 +27,7 @@ The focus of this project was to create a safe and secure platform for non-profi
 
 AidExchange is a full-stack collaboration project that aims to help the process of finding items by mutual aid. As member, user can put items for donation, request and reserved items of their interest. ??(User can search items by location to narrow down their scope) and download a pdf receipt as confirmation.
 
-<!-- ![Project Gif](gif.gif) -->
+![Project Gif](./client/public/gif.gif)
 
 ### JavaScript:
 
