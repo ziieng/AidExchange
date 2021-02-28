@@ -18,13 +18,18 @@ export default function Reservation(props) {
                 <Badge variant="light">{post.status}</Badge>
             </h5>
             <ul className="pt-0">
-                    {contentList.map((line, index) => {
-                        return (
-                            <li key={index}>
-                                {line.quantity} -- {line.item}
-                            </li>
-                        )
-                    })}
+                {contentList.map((line, index) => {
+                    return (
+                        <li key={index}>
+                            {line.quantity} -- {line.item}
+                        </li>
+                    )
+                })}
+                {post.postBy.userId === props.uid ? (
+                    <Card.Text>Contact via {post.replies.contactInfo.method}: {post.replies.contactInfo.detail}</Card.Text>
+                ) : (
+                        " "
+                    )}
                 <Button as={Link} variant="dark" to={"/reply/" + post._id} className="float-right">Edit</Button>
             </ul>
         </Card>

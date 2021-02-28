@@ -159,7 +159,7 @@ export default function editListing(props) {
             <Container className="mb-5 mt-5 py-3 px-4 bg-light rounded w-50">
                 <h1 className="text-center">{version} Listing</h1>
 
-                <Form className="" onSubmit={handleFormSubmit} >
+                <Form autocomplete="off" className="" onSubmit={handleFormSubmit} >
                     <Form.Label className="font-weight-bold" >Title:</Form.Label>
                     <br />
                     {error && <Alert variant="danger">{error}</Alert>}

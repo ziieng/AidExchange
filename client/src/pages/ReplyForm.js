@@ -3,7 +3,7 @@ import { Container, Button, Form, Alert, InputGroup } from 'react-bootstrap'
 import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
 import fire from '../firebase.js';
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 
 export default function replyForm() {
     // Setting our component's initial state
@@ -147,9 +147,9 @@ export default function replyForm() {
                         className="tinyIcon"
                         src={original.postBy.avatar}
                         alt={"user profile image for " + original.postBy.displayName}
-                /><a className="linkStyle" href={"/profile/" + original.postBy.userId}>
+                /><Link className="linkStyle" to={"/profile/" + original.postBy.userId}>
                             {original.postBy.displayName}
-                        </a></h5>
+                    </Link></h5>
 
                     <Form className="" onSubmit={handleFormSubmit} >
                         <br />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Table, Button, Container, Row, Col } from "react-bootstrap";
 import TopNav from "../Components/NavBar/navbar";
 import API from "../utils/API";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Print from "../utils/document";
 import MyMapComponent from "../Components/Map";
 import fire from "../firebase.js";
@@ -64,7 +64,7 @@ export default function ListingDetail() {
                   />
                   <Card.Title>{listing.title}</Card.Title>
                   <Card.Subtitle>
-                    <Card.Link href={"/profile/" + listing.postBy.userId}>
+                    <Card.Link as={Link} to={"/profile/" + listing.postBy.userId}>
                       {listing.postBy.displayName}
                     </Card.Link>
                   </Card.Subtitle>
@@ -102,7 +102,7 @@ export default function ListingDetail() {
                       className="mx-1"
                     >{(listing.postType === "Request") ? "Donate" : "Request"}</Button>
                     {/* This is the download link */}
-                    {mapRender && <Print listing={listing} />}
+                    {myReply && <Print listing={listing} />}
                     {/* ------------------------- */}
                   </div>
                 </div>
@@ -126,6 +126,17 @@ export default function ListingDetail() {
                   </Table>
               </div>
             </Row>
+            {/* <Row>
+              {replies.length ? (
+                <>
+                  {replies.map((reply, i) => {
+                    return <Reservation key={i} value={post} />;
+                  })}
+                </>
+              ) : (
+                  <h5>No Results to Display</h5>
+                )}
+            </Row> */}
           </Col>
         </Container>
         )}
