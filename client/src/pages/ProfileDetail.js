@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
-import TopNav from "../Components/NavBar/navbar";
 import { useParams } from "react-router-dom";
 import API from "../utils/API";
 import fire from "../firebase.js";
@@ -47,7 +46,6 @@ export default function ProfileDetail(props) {
   }
   return (
     <>
-      <TopNav />
       <Card className="profileDetails col-11 col-lg-6">
         <Card.Body>
           <Card.Img
