@@ -51,8 +51,21 @@ footer {
   width: 100%;
 }
 
-.navbar:hover {
-  color: #f1faee;
+/* unvisited link */
+.navLinkStyle a:link {
+  color: #ffffff !important;
+}
+/* visited link */
+.navLinkStyle a:visited {
+  color: #ffffff !important;
+}
+/* mouse over link */
+.navLinkStyle a:hover {
+  color: #f2f4f2 !important;
+}
+/* selected link */
+.navLinkStyle a:active {
+  color: gainsboro !important;
 }
 
 /* END NavBar */
@@ -61,7 +74,6 @@ footer {
 
 .profileDetails {
   max-height: fit-content !important;
-  width: 80% !important;
   text-align: left;
   margin: 0 auto;
   float: left;
@@ -69,8 +81,10 @@ footer {
 }
 
 .userImage {
-  max-width: 20% !important;
-  max-height: 20% !important;
+  width: 20% !important;
+  height: auto !important;
+  min-height: 80px !important;
+  max-height: 300px !important;
   float: left;
 }
 
@@ -162,43 +176,6 @@ footer {
 
 /* END ListingDetails */
 
-/* START Search */
-
-.searchForm {
-  margin-top: 10px;
-  border: none !important;
-  width: 60%;
-}
-
-.filter {
-  max-height: fit-content !important;
-  width: 50% !important;
-  text-align: left;
-  margin: 0 auto;
-  float: left;
-  margin-top: 10px;
-}
-
-.clear {
-  margin-right: 2%;
-  margin-bottom: 2%;
-}
-
-.apply {
-  margin-bottom: 2%;
-}
-
-.data {
-  max-height: 50% !important;
-  width: 50% !important;
-  align-content: center;
-  margin: 0 auto;
-  float: right;
-  margin-top: 10px;
-  border: none !important;
-}
-
-/* END Search */
 
 /* START NewListing */
 
@@ -218,7 +195,6 @@ footer {
 }
 /* END NewListing */
 
-/* END NewListing */
 
 /* START Dashboard */
 

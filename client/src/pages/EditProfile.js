@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Button, Form, Card, Alert, InputGroup } from 'react-bootstrap'
-import NavBar from '../Components/NavBar/navbar'
+import { Container, Button, Form, Alert, InputGroup } from 'react-bootstrap'
 import API from "../utils/API"
 import fire, { storage } from '../firebase.js';
 import { useHistory } from "react-router-dom";
@@ -180,10 +179,7 @@ export default function editProfile() {
   }
 
   return (
-    <>
-      <NavBar />
-      <Container>
-        <Card className="mb-5 mt-5 py-3 px-4 bg-light rounded w-50">
+      <Container className="my-5 py-3 px-4 bg-light col-lg-6 rounded card">
           <h1 className="text-center">Edit User Profile</h1>
           <Form className="" onSubmit={handleFormSubmit} >
             <Form.Label className="font-weight-bold" >Display Name:</Form.Label>
@@ -249,7 +245,7 @@ export default function editProfile() {
             </InputGroup>
             {addrError && <Alert variant="danger">Address not recognized.</Alert>}
             <br />
-            <div className="listMap" style={{ height: "300px", width: "300px" }}>
+          <div className="listMap" style={{ height: "300px", width: "100%" }}>
               {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
             </div>
             <br />
@@ -257,9 +253,7 @@ export default function editProfile() {
             <br />
             <Button id="submit" type="submit" variant="dark" disabled={loading} >Save Changes</Button>
 
-          </Form>
-        </Card>
-      </Container>
-    </>
+        </Form>
+    </Container>
   )
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Card, Table, Button, Container, Row, Col } from "react-bootstrap";
-import TopNav from "../Components/NavBar/navbar";
 import API from "../utils/API";
 import { useParams, Link } from "react-router-dom";
 import Print from "../utils/document";
@@ -48,8 +47,6 @@ export default function ListingDetail() {
 
   return (
     <>
-      <TopNav />
-
       {!mapRender ? (<h3>Loading....</h3>) :
         (<Container className="d-flex justify-content-center">
           <Col>
@@ -100,7 +97,7 @@ export default function ListingDetail() {
                         variant="dark"
                         href={"/reply/" + id}
                       className="mx-1"
-                    >{(listing.postType === "Request") ? "Donate" : "Request"}</Button>
+                    >{myReply && "Edit/"}{(listing.postType === "Request") ? "Donate" : "Request"}</Button>
                     {/* This is the download link */}
                     {myReply && <Print listing={listing} />}
                     {/* ------------------------- */}

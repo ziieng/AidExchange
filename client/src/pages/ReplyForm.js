@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Container, Button, Form, Alert, InputGroup } from 'react-bootstrap'
-import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
 import fire from '../firebase.js';
 import { useHistory, useParams, Link } from "react-router-dom";
@@ -139,7 +138,6 @@ export default function replyForm() {
 
     return (
         <>
-            <NavBar />
             {mapRender &&
                 <Container className="mb-5 mt-5 py-3 px-4 bg-light rounded w-50">
                     <h3 className="text-center">Replying to:<br />"{original.title}"</h3>

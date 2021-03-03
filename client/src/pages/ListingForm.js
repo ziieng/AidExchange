@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Button, Form, Alert, InputGroup } from 'react-bootstrap'
-import NavBar from '../Components/NavBar/navbar'
 import API from "../utils/API"
 import fire from '../firebase.js';
 import { useHistory, useParams } from "react-router-dom";
@@ -155,8 +154,7 @@ export default function editListing(props) {
 
     return (
         <>
-            <NavBar />
-            <Container className="mb-5 mt-5 py-3 px-4 bg-light rounded w-50">
+            <Container className="mb-5 mt-5 py-3 px-4 bg-light rounded col-lg-6">
                 <h1 className="text-center">{version} Listing</h1>
 
                 <Form autocomplete="off" className="" onSubmit={handleFormSubmit} >

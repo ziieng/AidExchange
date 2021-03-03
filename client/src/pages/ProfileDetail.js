@@ -48,7 +48,7 @@ export default function ProfileDetail(props) {
   return (
     <>
       <TopNav />
-      <Card className="profileDetails">
+      <Card className="profileDetails col-11 col-lg-6">
         <Card.Body>
           <Card.Img
             className="userImage"
@@ -96,7 +96,7 @@ export default function ProfileDetail(props) {
             )}
         </Card.Body>
       </Card>
-      <div id='orgListing' className="ml-5">
+      <div id='orgListing' className="ml-lg-5 col-11">
         <h2>Listings:</h2>
         {userPosts.length ? (
           <>
