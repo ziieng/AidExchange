@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Card, InputGroup, Alert, Button, Form } from 'react-bootstrap';
-import TopNav from '../Components/NavBar/navbar';
+import { Card, InputGroup, Alert, Button, Form, Container, Col, Row } from 'react-bootstrap';
 import Listing from '../Components/Cards/listing'
 import GeoSearch from "../utils/GeoCodeSearch"
 import API from "../utils/API"
@@ -19,7 +18,8 @@ export default function Search() {
     const [filterFood, setFilterFood] = useState(true);
     let uid = fire.auth().currentUser.uid;
 
-    function handleAddrSearch() {
+    function handleAddrSearch(event) {
+        event.preventDefault()
         if (addr !== "") {
             setLoading(true)
             GeoSearch.coordsFromAddr(addr)
@@ -90,71 +90,79 @@ export default function Search() {
 
     return (
         <>
-            < TopNav />
-            <div className='searchForm'>
-                <Card.Body>
-                    <h4> Search by address, city, or zip code:</h4>
-                    <InputGroup className="mb-3">
-                        <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="Location" />
-                        <InputGroup.Append>
-                            <Button id='find' variant="outline-secondary" onClick={handleAddrSearch} disabled={loading}>Find <FaSearchLocation /></Button>
-                        </InputGroup.Append>
-                    </InputGroup>
-                    {addrError && <Alert variant="danger">Address not recognized.</Alert>}
-                </Card.Body>
-            </div>
-            <Card className='filter' >
-                <Card.Body>
-                    <Form>
-                        <h3> Categories to Display: </h3>
-                        {/* <Button className='apply' variant="dark">Apply</Button> */}
-                        <div id="filterArray" className="font-weight-bold mb-3">
-                            <Form.Check
-                                type="switch"
-                                id="clothing-filter"
-                                label='Clothing'
-                                disabled={loading}
-                                checked={filterClothing}
-                                onChange={() => handleFilter("Clothing")}
-                            />
-                            <Form.Check
-                                type="switch"
-                                id="equipment-filter"
-                                label='Equipment'
-                                disabled={loading}
-                                checked={filterEquipment}
-                                onChange={() => handleFilter("Equipment")}
-                            />
-                            <Form.Check
-                                type="switch"
-                                id="food-filter"
-                                label='Food'
-                                disabled={loading}
-                                checked={filterFood}
-                                onChange={() => handleFilter("Food")}
-                            />
-                        </div>
-                        <div className='btnFormat'>
-                            <Button className='clear' variant="dark" onClick={() => handleFilter("Reset")} disabled={loading}>Reset</Button>
-                            <Button className='apply' variant="dark" onClick={() => handleFilter("Apply")} disabled={loading}>Apply</Button>
-                        </div>
-                    </Form>
-                </Card.Body>
-            </Card>
-            <div className='data'>
-                <Card.Body>
-                    <h2> Search Results: </h2>
-                    {filteredListings.length ? (
-                        <>
-                            {filteredListings.map((post) => {
-                                return <Listing key={post._id} value={post} uid={uid} />;
-                            })}
-                        </>
-                    ) : (
-                            <h5>No Results to Display</h5>
-                        )}
-                </Card.Body>
-            </div>
+            <Container fluid style={{
+                minHeight: "85vh"
+            }}>
+                <Row>
+                    <div className='searchForm w-100 p-3'>
+                        <Form onSubmit={handleAddrSearch}>
+                            <h4> Search by address, city, or zip code:</h4>
+                            <InputGroup className="mb-1">
+                                <Form.Control className="form-control form-control-lg" type="text" id="location" onChange={({ target }) => setAddr(target.value)} name="location" placeholder="Location" />
+                                <InputGroup.Append>
+                                    <Button id='find' type="submit" variant="outline-secondary" disabled={loading}>Find <FaSearchLocation /></Button>
+                                </InputGroup.Append>
+                            </InputGroup>
+                            {addrError && <Alert variant="danger">Address not recognized.</Alert>}
+                        </Form>
+                    </div></Row>
+                <Row className="w-100">
+                    <Col className="col-md-4 col-12">
+                        <Card className='sticky-top' >
+                            <Card.Body>
+                                <Form>
+                                    <h5> Categories to Display: </h5>
+                                    {/* <Button className='apply' variant="dark">Apply</Button> */}
+                                    <div id="filterArray" className="font-weight-bold mb-3">
+                                        <Form.Check
+                                            type="switch"
+                                            id="clothing-filter"
+                                            label='Clothing'
+                                            disabled={loading}
+                                            checked={filterClothing}
+                                            onChange={() => handleFilter("Clothing")}
+                                        />
+                                        <Form.Check
+                                            type="switch"
+                                            id="equipment-filter"
+                                            label='Equipment'
+                                            disabled={loading}
+                                            checked={filterEquipment}
+                                            onChange={() => handleFilter("Equipment")}
+                                        />
+                                        <Form.Check
+                                            type="switch"
+                                            id="food-filter"
+                                            label='Food'
+                                            disabled={loading}
+                                            checked={filterFood}
+                                            onChange={() => handleFilter("Food")}
+                                        />
+                                    </div>
+                                    <div className='btn-toolbar'>
+                                        <Button className='mr-2' variant="dark" onClick={() => handleFilter("Reset")} disabled={loading}>Reset</Button>
+                                        <Button variant="dark" onClick={() => handleFilter("Apply")} disabled={loading}>Apply</Button>
+                                    </div>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col className='mt-0'>
+                        <Row><h2> Search Results: </h2></Row>
+                        <Row>
+                        {filteredListings.length ? (
+                            <>
+                                {filteredListings.map((post) => {
+                                    return <Listing key={post._id} value={post} uid={uid} />;
+                                })}
+                            </>
+                        ) : (
+                                <h5>No Results to Display</h5>
+                            )}
+                        </Row>
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 }
