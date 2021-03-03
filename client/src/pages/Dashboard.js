@@ -4,7 +4,6 @@ import Listing from "../Components/Cards/listing";
 import Reservation from "../Components/Cards/reservation";
 import fire from "../firebase.js";
 import { Col, Container, Row } from "react-bootstrap";
-import NavBar from "../Components/NavBar/navbar";
 import API from "../utils/API";
 
 export default function Dashboard() {
@@ -29,8 +28,6 @@ export default function Dashboard() {
   }
 
   return (
-    <>
-      <NavBar />
       <Container style={{
         minHeight: "80vh",
         display: "flex",
@@ -87,7 +84,6 @@ export default function Dashboard() {
               <h5>No Results to Display</h5>
             )}
         </Row>
-      </Container>
-    </>
+    </Container>
   );
 }

@@ -29,10 +29,10 @@ export default function TopNav() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="justify-content-end" style={{ width: "100%" }}>
-          <Nav.Link as={Link} to='/'>Dashboard</Nav.Link>
-          <Nav.Link as={Link} to={'/profile/' + fire.auth().currentUser.uid}>Profile</Nav.Link>
-          <Nav.Link as={Link} to='/Search'>Search</Nav.Link>
-          <Nav.Link as={Link} onClick={logout}>Logout</Nav.Link>
+          <Nav.Link className="navLinkStyle" as={Link} to='/'>Dashboard</Nav.Link>
+          <Nav.Link className="navLinkStyle" as={Link} to={'/profile/' + fire.auth().currentUser.uid}>Profile</Nav.Link>
+          <Nav.Link className="navLinkStyle" as={Link} to='/Search'>Search</Nav.Link>
+          <Nav.Link className="navLinkStyle" as={Link} to='/' onClick={logout}>Logout</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar >

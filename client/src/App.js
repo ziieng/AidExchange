@@ -15,6 +15,7 @@ import ReplyForm from "./pages/ReplyForm";
 import ProfileDetail from "./pages/ProfileDetail";
 import EditProfile from "./pages/EditProfile";
 import Search from "./pages/Search";
+import TopNav from "./Components/NavBar/navbar";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -59,6 +60,7 @@ function App() {
             {
               // If they are signed in, they can see any page that *isn't* login or signup
             }
+              <TopNav />
             <Switch>
               <Route exact path="/newlisting">
                 <ListingForm version="New" />
