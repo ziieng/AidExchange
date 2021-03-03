@@ -82,10 +82,10 @@ export default function ProfileDetail(props) {
               </Card.Text>
             )}
           {id === uid ? (
-            <Button
+            <Button as={Link}
               className="editProfile"
               variant="dark"
-              href="/editprofile"
+              to="/editprofile"
             >
               Edit Profile
             </Button>
