@@ -20,6 +20,7 @@ Explore the [Project Page](https://github.com/ziieng/AidExchange)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Contact](#contact)
+- [License](#License)
 - [Acknowledgements](#acknowledgements)
 
 ## About the Project:
@@ -103,6 +104,10 @@ Feel free to reach out to our team if you have any additional questions:
 
 Github repository for [AidExchange](https://github.com/ziieng/AidExchange)
 Live application deployed on Heroku, [here](https://aidexchange.herokuapp.com/)
+
+## License:
+
+This project is licensed under the permissive open source MIT license.
 
 ## Acknowledgements:
 
