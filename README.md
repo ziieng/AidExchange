@@ -1,6 +1,10 @@
-# AidExchange
+# AidExchange  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+AidExchange is here to help you help others (and yourself!) by providing a platform to request donations from your community and find requests that are near you. Our main focus is on Mutual Aid organizations and non-profits, but we also support individuals looking to reduce their spending in everyday life.
+
+<!-- ![Project Gif](gif.gif) -->
+
+
 
 Explore the [Project Page](https://github.com/ziieng/AidExchange)
 
@@ -9,8 +13,6 @@ Explore the [Project Page](https://github.com/ziieng/AidExchange)
 ## Table of Contents
 
 - [About the Project](#about-the-project)
-  - [JavaScript](#JavaScript)
-  - [Assets](#Assets)
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -23,45 +25,63 @@ Explore the [Project Page](https://github.com/ziieng/AidExchange)
 
 ## About the Project:
 
-The focus of this project was to create a safe and secure platform for non-profit organizations to request, offer up, and exchange items of need.
+The goal for this app is to help people find things they need, or donate things to others. The idea began with the individual’s perspective, but we expanded it to non-profit and mutual aid organizations for a bigger purpose. 
 
-AidExchange is a full-stack collaboration project that aims to help the process of finding items by mutual aid. As member, user can put items for donation, request and reserved items of their interest. User can search for listings by location to narrow down their scope and download a pdf receipt as confirmation.
+It provides a way for users to post lists of things they want to give away or have donated, so that others can find their requests.  The app’s search is location based and includes a map of where the request is located so people can find what they need and select those that are closest to their location. 
 
-![Project Gif](./client/public/gif.gif)
-
-### JavaScript:
-
-* [App.js](https://github.com/ziieng/AidExchange/blob/main/client/src/App.js)
-* [server.js](https://github.com/ziieng/AidExchange/blob/main/server.js)
-
-### Assets:
-
-* [src](https://github.com/ziieng/AidExchange/tree/main/client/src)
-* [css](https://github.com/ziieng/AidExchange/blob/main/client/src/App.css)
+We also added a way to print a list of the items a user has pledged to donate or take away, so they don’t forget to bring something with them.
 
 ### Built With:
 
-* This app is build upon [Node.js](https://nodejs.org/en/), [React](https://reactjs.org/), [Firebase Authentication](https://react-firebase-js.com), [React-pdf/renderer](https://react-pdf.org/), [MongoDB](https://www.mongodb.com/), [React-Bootstrap](https://react-bootstrap.netlify.app/), and deployed on [Heroku](https://dashboard.heroku.com/apps).
+* [Node.js](https://nodejs.org/en/)
+  * [Express](https://www.npmjs.com/package/express)
+  * [Axios](https://www.npmjs.com/package/axios)
+* [React](https://reactjs.org/)
+  * [React-Bootstrap](https://react-bootstrap.netlify.app/)
+  * [React-PDF](https://react-pdf.org/)
+  * [Google-Map-React](https://www.npmjs.com/package/google-map-react)
+* [Firebase Authentication](https://react-firebase-js.com)
+* [MongoDB](https://www.mongodb.com/)
+  * [mongoose](https://www.npmjs.com/package/mongoose)
 
 ## Getting Started:
 
 To get a local copy up and running follow the steps below.
 
 ### Prerequisites:
-
-None.
-
-### Installation:
-
-1. Clone the Repository:
+Clone the Repository:
 
 ```sh
 git clone git@github.com:ziieng/AidExchange.git
 ```
 
+### Installation:
+To install app dependencies, run this command in the /AidExchange folder:
+```
+npm i
+```
+
+To add the provided seed data, run this command after installation:
+```
+npm run seed
+```
+
 ## Roadmap:
 
-Currently no known issues, but track track [open issues](https://github.com/ziieng/AidExchange/issues) for proposed features (and known issues) in the future.
+AidExchange is just starting its development! We're looking to add many more features in the future.
+- Messaging system
+  - Let users coordinate meeting times/locations
+  - Email notifications on new messages
+  - Text messaging push notification regarding their request and listings.
+- Inventory management
+  - Automatically reduce quantities requested/offered when something is reserved or donated
+  - Give users a way to see their inventory levels
+- Improved Receipts
+  - Include address for meeting point, contact information for recipient
+  - Allow 501(c)(3) orgs to print receipts for tax-deductible donations
+- Improved Posts
+  - Include way to link an eCommerce listing for requested donations
+  - Add support for images on posts
 
 ## Contributing:
 
@@ -75,7 +95,19 @@ Any contributions you make are **greatly appreciated**.
 
 ## Contact:
 
-Project Link: [https://github.com/ziieng/AidExchange](https://github.com/ziieng/AidExchange)
+Feel free to reach out to our team if you have any additional questions:
+
+  * [Zii Engelhardt](https://github.com/ziieng/) (Gitkeeper, Database Structures, API Implementation)
+  * [Ali Schreck.](https://github.com/Alischrec) (Page Layouts, Design)
+  * [Metages Worku](https://github.com/Mgithub89) (Page Layouts, Firebase)
+  * [Carolina Yoedhana](https://github.com/CarolinaYo) (React-PDF, Firebase, Research)
+
+Github repository for [AidExchange](https://github.com/ziieng/AidExchange)
+Live application deployed on Heroku, [here](https://aidexchange.herokuapp.com/)
+
+## License:
+
+This project is licensed under the permissive open source MIT license.
 
 ## License:
 
@@ -83,4 +115,4 @@ This project is licensed under the permissive open source MIT license.
 
 ## Acknowledgements:
 
-- University of Washington Coding Bootcamp for providing me with the skills and knowledge to create this project.
+- University of Washington Coding Bootcamp for providing us with the skills and knowledge to create this project.
