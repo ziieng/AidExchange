@@ -24,6 +24,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 .splashBrand {
   max-width: 553px;
+      height: auto;
 }
 
 .underline {
