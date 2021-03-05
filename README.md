@@ -109,10 +109,6 @@ Live application deployed on Heroku, [here](https://aidexchange.herokuapp.com/)
 
 This project is licensed under the permissive open source MIT license.
 
-## License:
-
-This project is licensed under the permissive open source MIT license.
-
 ## Acknowledgements:
 
 - University of Washington Coding Bootcamp for providing us with the skills and knowledge to create this project.
