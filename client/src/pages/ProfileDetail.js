@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import API from "../utils/API";
 import fire from "../firebase.js";
 import Listing from "../Components/Cards/listing";
@@ -82,10 +82,10 @@ export default function ProfileDetail(props) {
               </Card.Text>
             )}
           {id === uid ? (
-            <Button
+            <Button as={Link}
               className="editProfile"
               variant="dark"
-              href="/editprofile"
+              to="/editprofile"
             >
               Edit Profile
             </Button>
