@@ -112,26 +112,22 @@ export default function Search() {
                             <Card.Body>
                                 <Form>
                                     <h5> Categories to Display: </h5>
-                                    {/* <Button className='apply' variant="dark">Apply</Button> */}
                                     <div id="filterArray" className="font-weight-bold mb-3">
-                                        <Form.Check
-                                            type="switch"
+                                        <Form.Switch
                                             id="clothing-filter"
                                             label='Clothing'
                                             disabled={loading}
                                             checked={filterClothing}
                                             onChange={() => handleFilter("Clothing")}
                                         />
-                                        <Form.Check
-                                            type="switch"
+                                        <Form.Switch
                                             id="equipment-filter"
                                             label='Equipment'
                                             disabled={loading}
                                             checked={filterEquipment}
                                             onChange={() => handleFilter("Equipment")}
                                         />
-                                        <Form.Check
-                                            type="switch"
+                                        <Form.Switch
                                             id="food-filter"
                                             label='Food'
                                             disabled={loading}

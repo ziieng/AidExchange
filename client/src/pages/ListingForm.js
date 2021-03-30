@@ -10,6 +10,7 @@ import { FaSearchLocation } from "react-icons/fa"
 export default function editListing(props) {
     const version = props.version
     // Setting our component's initial state
+    const [owner, setOwner] = useState("");
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [contents, setContents] = useState([{ item: "", quantity: "" }]);
@@ -20,7 +21,7 @@ export default function editListing(props) {
     const [location, setLocation] = useState({ "lat": 0, "lng": 0 })
     const [mapRender, setMapRender] = useState(false)
     const [error, setError] = useState("");
-    const [contentError, setContentError] = useState(true);
+    const [contentError, setContentError] = useState(false);
     const [loading, setLoading] = useState(false);
     let uid = fire.auth().currentUser.uid
     let { id } = useParams()
@@ -34,11 +35,19 @@ export default function editListing(props) {
         }
     }, [])
 
+    function ownerCheck(userId) {
+        setOwner(userId)
+        if (userId !== uid) {
+            setError("!! Only a post's creator can edit it. !!")
+        }
+    }
+
     function loadListing() {
         API.getListing(id)
             .then(res => {
                 console.log(res)
                 let post = res.data
+                ownerCheck(post.userId)
                 setTitle(post.title)
                 setCategory(post.category)
                 setContents(post.contents)
@@ -104,6 +113,9 @@ export default function editListing(props) {
 
     function handleFormSubmit(event) {
         event.preventDefault();
+        if (uid !== owner) {
+            setError("Only a post's creator can edit it.")
+        } else {
         setLoading(true)
         let scrubbedContents = []
         contents.map((line) => {
@@ -149,7 +161,8 @@ export default function editListing(props) {
         } else {
             setError("Title, Category, Location, and Contents required!")
         }
-        setLoading(false)
+            setLoading(false)
+        }
     }
 
     return (
@@ -157,10 +170,10 @@ export default function editListing(props) {
             <Container className="mb-5 mt-5 py-3 px-4 bg-light rounded col-lg-6">
                 <h1 className="text-center">{version} Listing</h1>
 
-                <Form autocomplete="off" className="" onSubmit={handleFormSubmit} >
+                <Form autoComplete="off" className="" onSubmit={handleFormSubmit} >
+                    {error && <Alert variant="danger">{error}</Alert>}
                     <Form.Label className="font-weight-bold" >Title:</Form.Label>
                     <br />
-                    {error && <Alert variant="danger">{error}</Alert>}
                     <Form.Control className=" form-control-lg" type="text" id="title" value={title} onChange={({ target }) => setTitle(target.value)} name="title" placeholder="Aid Request/Offer" />
                     <br />
                     <Form.Label className="font-weight-bold">Category:</Form.Label>
@@ -212,6 +225,7 @@ export default function editListing(props) {
                         {mapRender && <MyMapComponent isMarkerShown={true} coords={location} />}
                     </div>
                     <br />
+                    {error && <Alert variant="danger">{error}</Alert>}
                     <Button id="submit" type="submit" to="/" disabled={loading}>{(version === "New") ? "Submit" : "Update"}</Button>
                 </Form>
 

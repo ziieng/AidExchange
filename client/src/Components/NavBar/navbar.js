@@ -20,9 +20,9 @@ export default function TopNav() {
       <Navbar.Brand as={Link} to="/">
         <img
           src="../icon.png"
-          width="150"
+          width="134"
           height="40"
-          className="d-inline-block align-top"
+          className="d-inline-block rounded align-top"
           alt="AidExchange logo"
         />
       </Navbar.Brand>

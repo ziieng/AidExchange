@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from "react-router-dom";
 import fire from '../firebase.js';
-
 import { Alert, Button, Col, Container, Form, InputGroup } from "react-bootstrap"
 
 
@@ -42,7 +41,7 @@ export default function login() {
     return (
         <>
             <Container className="d-flex justify-content-center">
-                <Col sm md='auto' lg xl='6' className="align-items-center my-4 p-5 bg-light rounded">
+                <Col sm md='auto' lg xl='6' className="align-items-center my-4 p-5 cardBg">
 
                     <h1 className="text-center mb-4">Sign In</h1>
                     {message && <Alert variant="success">{message} </Alert>}
