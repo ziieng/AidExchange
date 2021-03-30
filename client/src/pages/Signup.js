@@ -65,7 +65,7 @@ export default function signup() {
     return (
         <>
             <Container className=' d-flex justify-content-center'>
-                <Col sm md='auto' lg xl='6' className="align-items-center mb-5 mt-5 py-3 px-4 bg-light rounded">
+                <Col sm md='auto' lg xl='6' className="align-items-center mb-5 mt-5 py-3 px-4 cardBg">
                     <h1 className="text-center mb-4">Create New Account</h1>
 
                     <Form className="login text-center" onSubmit={handleSubmit}>
