@@ -113,7 +113,7 @@ export default function editListing(props) {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        if (uid !== owner) {
+        if (version === "Edit" && uid !== owner) {
             setError("Only a post's creator can edit it.")
         } else {
         setLoading(true)

@@ -70,10 +70,10 @@ export default function ListingDetail() {
                   )}
 
                   {listing.userId === uid ? (
-                    <Button
+                    <Button as={Link}
                       className="editProfile"
                       variant="dark"
-                      href={"/editlisting/" + id}
+                      to={"/editlisting/" + id}
                     >
                       Edit Listing
                     </Button>
